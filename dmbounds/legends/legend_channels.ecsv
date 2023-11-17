@@ -1,0 +1,32 @@
+# %ECSV 0.9
+# %Part of https://github.com/moritzhuetten/DMbounds under the 
+# %Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License, see LICENSE.rst 
+# ---
+# datatype:
+# - {name: shortname  , unit:  , datatype: string , description: channel short name       }
+# - {name: latex      , unit:  , datatype: string , description: channel latex expression }
+# - {name: comment    , unit:  , datatype: string , description: comment/explanation      }
+# meta: !!omap
+# - {comment:        'Legend for channels names'}
+# schema : astropy −2.0
+
+shortname   latex               comment
+
+ee          e^{+}e^{-}          'lepton antilepton e'
+mumu        \mu^{+}\mu^{-}      'lepton antilepton mu'
+tautau      \tau^{+}\tau^{-}    'lepton antilepton tau'
+qq          q\bar{q}            'light quarks (up, down, strange)'
+bb          b\bar{b}            'quarks antiquark b'
+uu          u\bar{u}            'quarks antiquark u'
+tt          t\bar{t}            'quark antiquark t'
+cc          c\bar{c}            'quark antiquark c'
+WW          W^{+}W^{-}          'boson antiboson W'
+ZZ          ZZ                  'boson antiboson Z'
+gg          gg                  'gluon antigluon g'
+hh          hh                  ''
+gammagamma  \gamma\gamma        'gamma gamma line'
+Zgamma      Z\gamma             'Z gamma line'
+points      points              'specific benchmarks DM models'
+KK          \mathrm{KK}         'Kaluza-Klein DM'
+triplett    triplett            'Pure WIMP Triplett'
+quintuplett quintuplett         'Pure WIMP Quintuplett'
