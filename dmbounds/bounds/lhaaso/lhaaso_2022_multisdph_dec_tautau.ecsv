@@ -1,0 +1,53 @@
+# %ECSV 0.9
+# %Part of https://github.com/moritzhuetten/DMbounds under the 
+# %Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License, see LICENSE.rst 
+# ---
+# datatype:
+# - {name: mass      , unit: GeV     , datatype: float32 , description: DM mass              }
+# - {name: tau       , unit: s       , datatype: float32 , description: Lifetime             }
+# meta: !!omap
+# - {reference:        "Constraints on Heavy Decaying Dark Matter from 570 Days of LHAASO Observations"}
+# - {doi:              "10.1103/PhysRevLett.129.261103"}
+# - {arxiv:            "2210.15989"}
+# - {instrument:       "lhaaso"}
+# - {year:             "2022"}
+# - {source:           "multidsph"} 
+# - {channel:          "tautau"}
+# - {confidence        "0.95" }
+# - {dmfraction:       "1"}
+# - {obs_time:         "570d"}
+# - {figure:           "Fig.1"}
+# - {comment:          ""}
+# - {status:           ""}
+# schema : astropy −2.0
+
+mass tau
+2.040e+5  1.670e+26
+2.142e+5  3.581e+26
+2.249e+5  8.125e+26
+2.362e+5  1.859e+27
+2.510e+5  4.349e+27
+2.835e+5  8.375e+27
+3.363e+5  1.497e+28
+4.345e+5  2.634e+28
+6.113e+5  4.468e+28
+9.031e+5  6.269e+28
+1.334e+6  6.854e+28
+1.971e+6  6.830e+28
+2.912e+6  6.455e+28
+4.301e+6  5.789e+28
+6.354e+6  5.566e+28
+9.387e+6  5.203e+28
+1.387e+7  4.490e+28
+2.049e+7  3.530e+28
+3.027e+7  2.695e+28
+4.471e+7  1.996e+28
+6.605e+7  1.465e+28
+9.758e+7  1.090e+28
+1.442e+8  8.309e+27
+2.130e+8  6.489e+27
+3.146e+8  5.164e+27
+4.383e+8  4.293e+27
+6.866e+8  3.391e+27
+8.551e+8  3.020e+27
+
