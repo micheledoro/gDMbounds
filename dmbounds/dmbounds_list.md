@@ -7,5 +7,10 @@
 
 
 ## IACTS
-### CTA
+### (CTA)[https://github.com/micheledoro/gDMbounds/tree/main/dmbounds/bounds/cta]
+- Funk 2015 "Indirect detection of dark matter with γ rays" PNAS 2014 112 (40) 12264-12271 [doi](https://doi.org/10.1073/pnas.1308728111). Issue 
 - CTA 2021 GC
+
+## Other wavelengths
+### ASKAP
+- 
