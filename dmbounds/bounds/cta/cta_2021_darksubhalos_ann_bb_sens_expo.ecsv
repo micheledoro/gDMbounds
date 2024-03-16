@@ -1,0 +1,49 @@
+# %ECSV 0.9
+# %Part of https://github.com/moritzhuetten/DMbounds under the 
+# %Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License, see LICENSE.rst 
+# ---
+# datatype:
+# - {name: mass      , unit: GeV     , datatype: float32 , description: DM mass              }
+# - {name: sigmav    , unit: cm3s-1  , datatype: float32 , description: <sigmav>             }
+# meta: !!omap
+# - {reference:        "Sensitivity of the Cherenkov Telescope Array to dark subhalos"}
+# - {doi:              "10.1016/j.dark.2021.100845"}
+# - {arxiv:            "2101.10003"}
+# - {instrument:       "cta"}
+# - {year:             "2021"}
+# - {source:           "darksubhalos"}
+# - {channel:          "bb"}
+# - {confidence        "0.95" }
+# - {dmfraction:       "1"}
+# - {obs_time:         "100h"}
+# - {figure:           "Fig. 5"}
+# - {comment:          "sensitivity, EXPO"}
+# - {status:           ""}
+# schema : astropy −2.0
+
+mass sigmav
+
+5.76873e+1  3.44627e-23
+7.68461e+1  1.72307e-23
+1.05346e+2  9.59682e-24
+1.44416e+2  6.06057e-24
+1.97975e+2  4.35303e-24
+2.66258e+2  3.46988e-24
+3.73119e+2  2.91203e-24
+5.00972e+2  2.67219e-24
+6.99187e+2  2.47703e-24
+9.58493e+2  2.47703e-24
+1.31397e+3  2.47703e-24
+1.80128e+3  2.47703e-24
+2.55028e+3  2.62754e-24
+3.41762e+3  2.77157e-24
+4.74823e+3  3.09417e-24
+6.50506e+3  3.41829e-24
+8.97459e+3  3.97071e-24
+1.25805e+4  4.78842e-24
+1.74063e+4  5.87048e-24
+2.44856e+4  7.50535e-24
+3.45430e+4  9.86516e-24
+4.69483e+4  1.27455e-23
+6.73818e+4  1.71464e-23
+8.75450e+4  2.20462e-23
