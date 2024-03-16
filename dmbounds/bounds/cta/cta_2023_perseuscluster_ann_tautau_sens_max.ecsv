@@ -1,0 +1,63 @@
+# %ECSV 0.9
+# %Part of https://github.com/moritzhuetten/DMbounds under the 
+# %Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License, see LICENSE.rst 
+# ---
+# datatype:
+# - {name: mass      , unit: GeV     , datatype: float32 , description: DM mass              }
+# - {name: sigmav    , unit: cm3s-1  , datatype: float32 , description: <sigmav>             }
+# meta: !!omap
+# - {reference:        "Prospects for γ-ray observations of the Perseus galaxy cluster with the Cherenkov Telescope Array"}
+# - {doi:              "10.48550/arXiv.2309.03712"}
+# - {arxiv:            "2309.03712"}
+# - {instrument:       "cta"}
+# - {year:             "2023"}
+# - {source:           "perseuscluster"}
+# - {channel:          "tautau"}
+# - {confidence        "0.95" }
+# - {dmfraction:       "1"}
+# - {obs_time:         "300h"}
+# - {figure:           "Fig. 20"}
+# - {comment:          "sensitivity, Jfactor max"}
+# - {status:           ""}
+# schema : astropy −2.0
+
+mass sigmav
+5.39394e+1  8.52521e-25
+6.47224e+1  8.27300e-25
+7.85849e+1  7.97963e-25
+9.48541e+1  7.73833e-25
+1.14491e+2  7.90459e-25
+1.42150e+2  8.32621e-25
+1.71579e+2  8.73781e-25
+2.06711e+2  9.10003e-25
+2.55984e+2  9.64787e-25
+3.07375e+2  1.03262e-24
+3.73210e+2  1.11596e-24
+4.50474e+2  1.19831e-24
+5.43734e+2  1.30422e-24
+6.77633e+2  1.48164e-24
+8.41334e+2  1.67527e-24
+1.01551e+3  1.88401e-24
+1.22575e+3  2.15698e-24
+1.52473e+3  2.54479e-24
+1.89664e+3  2.99525e-24
+2.28929e+3  3.43734e-24
+2.73479e+3  3.94519e-24
+3.37316e+3  4.68069e-24
+4.07149e+3  5.45374e-24
+4.88444e+3  6.33118e-24
+5.99916e+3  7.75947e-24
+7.47650e+3  9.66567e-24
+9.06810e+3  1.12354e-23
+1.07155e+4  1.31575e-23
+1.30983e+4  1.72407e-23
+1.61862e+4  2.26683e-23
+1.99645e+4  2.98928e-23
+2.49748e+4  4.02548e-23
+3.08046e+4  5.33355e-23
+3.77459e+4  7.12535e-23
+4.65569e+4  9.46583e-23
+5.66199e+4  1.34905e-22
+6.82132e+4  1.97793e-22
+8.21804e+4  2.85914e-22
+9.58004e+4  3.74042e-22
