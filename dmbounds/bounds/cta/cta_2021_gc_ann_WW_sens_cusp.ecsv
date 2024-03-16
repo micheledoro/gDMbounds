@@ -1,0 +1,64 @@
+# %ECSV 0.9
+# %Part of https://github.com/moritzhuetten/DMbounds under the 
+# %Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License, see LICENSE.rst 
+# ---
+# datatype:
+# - {name: mass      , unit: GeV     , datatype: float32 , description: DM mass              }
+# - {name: sigmav    , unit: cm3s-1  , datatype: float32 , description: <sigmav>             }
+# meta: !!omap
+# - {reference:        "Sensitivity of the Cherenkov Telescope Array to a dark matter signal from the Galactic centre"}
+# - {doi:              "10.1088/1475-7516/2021/01/057"}
+# - {arxiv:            "2007.16129"}
+# - {instrument:       "cta"}
+# - {year:             "2021"}
+# - {source:           "gc"}
+# - {channel:          "WW"}
+# - {confidence        "0.95" }
+# - {dmfraction:       "1"}
+# - {obs_time:         "525h"}
+# - {figure:           "7"}
+# - {comment:          "cusp profile"}
+# - {status:           ""}
+# schema : astropy −2.0
+
+mass sigmav
+1.07333e+2  5.38215e-26
+1.25054e+2  3.77151e-26
+1.49258e+2  2.82047e-26
+1.78147e+2  2.26282e-26
+2.12628e+2  1.90593e-26
+2.53783e+2  1.66950e-26
+3.02904e+2  1.49841e-26
+3.61532e+2  1.36685e-26
+4.31507e+2  1.26893e-26
+5.15027e+2  1.18762e-26
+6.14712e+2  1.12512e-26
+7.33692e+2  1.08334e-26
+8.75700e+2  1.04876e-26
+1.04519e+3  1.04029e-26
+1.24749e+3  1.01255e-26
+1.48895e+3  1.02494e-26
+1.77714e+3  1.04311e-26
+2.12111e+3  1.06880e-26
+2.53166e+3  1.11302e-26
+3.02167e+3  1.15283e-26
+3.60653e+3  1.21030e-26
+4.30458e+3  1.27408e-26
+5.13775e+3  1.35581e-26
+6.13218e+3  1.44277e-26
+7.31908e+3  1.54363e-26
+8.73571e+3  1.66050e-26
+1.04265e+4  1.78622e-26
+1.24446e+4  1.94760e-26
+1.48533e+4  2.13218e-26
+1.77282e+4  2.35009e-26
+2.11596e+4  2.59728e-26
+2.52551e+4  2.92134e-26
+3.01433e+4  3.27697e-26
+3.59776e+4  3.74105e-26
+4.29412e+4  4.26508e-26
+5.12526e+4  4.88888e-26
+6.11727e+4  5.71866e-26
+7.30128e+4  6.65323e-26
+8.71447e+4  7.79301e-26
+9.67492e+4  8.48560e-26
