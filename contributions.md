@@ -2,6 +2,8 @@
 - Michele Doro (professor, Un. Padova)
 - Moritz Hütten (researcher, ICRR, now private)
 - Andrea Santarossa (BSc, Un. Padova)
+- Michela de Caria (MSc, Un. Padova)
+
 
 ## Break-down of contributions
 - Initial idea: Michele Doro
