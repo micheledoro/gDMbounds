@@ -1,0 +1,58 @@
+# %ECSV 0.9
+# %Part of https://github.com/moritzhuetten/DMbounds under the 
+# %Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License, see LICENSE.rst 
+# ---
+# datatype:
+# - {name: mass      , unit: TeV     , datatype: float32 , description: DM mass              }
+# - {name: tau       , unit: s       , datatype: float32 , description: Lifetime             }
+# meta: !!omap
+# - {reference:        "Expected LHAASO sensitivity to decaying dark matter signatures from dwarf galaxies gamma-ray emission"}
+# - {doi:              "10.1088/1674-1137/44/8/085001"}
+# - {arxiv:            "1910.05017"}
+# - {instrument:       "lhaaso"}
+# - {year:             "2020"}
+# - {source:           "multidsph-19"}
+# - {channel:          "tautau"}
+# - {confidence        "0.95" }
+# - {dmfraction:       "1"}
+# - {obs_time:         "1y"}
+# - {figure:           "Fig. 1"}
+# - {comment:          "sensitivity"}
+# - {status:           ""}
+# schema : astropy −2.0
+
+mass tau
+1.0733 7.8359e+25
+1.2328 1.2469e+26
+1.4160 1.8302e+26
+1.6264 2.4835e+26
+1.8681 3.2004e+26
+2.1458 3.9255e+26
+2.4647 4.5829e+26
+2.8310 5.2671e+26
+3.2517 6.0398e+26
+3.7350 7.0672e+26
+4.2901 8.4004e+26
+4.9277 1.0120e+27
+5.6600 1.1975e+27
+6.5012 1.3887e+27
+7.4674 1.5712e+27
+8.5772 1.7420e+27
+9.8520 1.8886e+27
+11.316 2.0156e+27
+12.998 2.1416e+27
+14.930 2.2499e+27
+17.149 2.3532e+27
+19.697 2.5742e+27
+22.625 2.9387e+27
+25.987 3.2729e+27
+29.849 3.6370e+27
+34.285 4.0326e+27
+39.381 4.4014e+27
+45.233 4.7079e+27
+51.956 4.9462e+27
+59.678 5.1386e+27
+68.547 5.1386e+27
+78.734 5.1271e+27
+90.436 4.9685e+27
+97.536 5.0133e+27
