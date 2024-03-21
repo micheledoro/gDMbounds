@@ -3,10 +3,6 @@
 - Moritz Hütten (researcher, ICRR, now private)
 - Andrea Santarossa (BSc, Un. Padova)
 - Michela de Caria (MSc, Un. Padova)
-<<<<<<< HEAD
-=======
-
->>>>>>> 8b377b76fb49706e85b75631220d2fcb5edbd0e1
 
 ## Break-down of contributions
 - Initial idea: Michele Doro
