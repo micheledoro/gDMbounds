@@ -62,6 +62,7 @@ ngc6388        'NGC 6388'
 m31            'M31'
 m33            'M32'
 wlm            'WLM'
+LMC            'LMC'
 
 # Galaxy Clusters
 abell2029      'Abell 2029'
