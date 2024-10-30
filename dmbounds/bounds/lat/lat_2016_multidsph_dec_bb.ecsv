@@ -6,6 +6,7 @@
 # - {name: mass      , unit: GeV     , datatype: float32 , description: DM mass              }
 # - {name: tau       , unit: s       , datatype: float32 , description: Lifetime             }
 # meta: !!omap
+# - {author}:          "Matthew G. Baring, Tathagata Ghosh, Farinaldo S. Queiroz, and Kuver Sinha" 
 # - {reference:        "New Limits on the Dark Matter Lifetime from Dwarf Spheroidal Galaxies using Fermi-LAT"}
 # - {doi:              "10.1103/PhysRevD.93.103009"}
 # - {arxiv:            "1510.00389"}

@@ -15,7 +15,7 @@
 # - {channel:          "bb"}
 # - {confidence        "0.95" }
 # - {dmfraction:       ""}
-# - {obs_time:         ""}
+# - {obs_time:         "700 d"}
 # - {figure:           "Fig. 2"}
 # - {comment:          ""}
 # - {status:           ""}
@@ -64,4 +64,3 @@ mass tau
 3.94e+5  3.14e+27
 5.59e+5  2.73e+27
 7.93e+5  2.36e+27
-1.39e+0  4.13e+23
