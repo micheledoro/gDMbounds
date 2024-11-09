@@ -1,0 +1,34 @@
+# %ECSV 0.9
+# %Part of https://github.com/moritzhuetten/DMbounds under the
+# %Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License, see LICENSE.rst
+# ---
+# datatype:
+# datatype:
+# - {name: mass      , unit: GeV     , datatype: float32 , description: DM mass              }
+# - {name: tau       , unit: s       , datatype: float32 , description: Lifetime             }
+# meta: !!omap
+# - {reference:        "CTA KSP paper in prep."}
+# - {doi:              ""}
+# - {arxiv:            ""}
+# - {instrument:       "cta"}
+# - {year:             "2024"}
+# - {source:           "UMi and CBe"}
+# - {channel:          "bb"}
+# - {confidence        "0.95" }
+# - {dmfraction:       "1"}
+# - {obs_time:         "600h"}
+# - {figure:           ""}
+# - {comment:          ""}
+# - {status:           ""}
+# schema : astropy −2.0
+
+mass tau
+70		2.81517318878264E+25
+100		9.67784553158954E+25
+200		4.75583484083096E+26
+500		1.70931373240979E+27
+1000		2.88756970539675E+27
+5000		5.186141097858E+27
+10000		6.24625676594068E+27
+50000		8.28175729476992E+27
+100000		8.58223371360383E+27
