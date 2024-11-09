@@ -8,7 +8,7 @@
 # meta: !!omap
 # - {reference:        "Cirelli+ "Gamma ray constraints on decaying dark matter" PHYSICAL REVIEW D 86, 083506 (2012)"}
 # - {doi:              "10.1103/PhysRevD.86.083506"}
-# - {arxiv:            "/1205.5283"}
+# - {arxiv:            "1205.5283"}
 # - {instrument:       "cta"}
 # - {year:             "2012"}
 # - {source:           "Fornax"}
