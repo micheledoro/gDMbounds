@@ -7,6 +7,8 @@
 # - {name: tau       , unit: s       , datatype: float32 , description: Lifetime             }
 # meta: !!omap
 # - {reference:        "Title of the paper"}
+# - {authors:          "List of authors (in case First Author plus 'and others'"}
+# - {journalref:       "Journal reference"}
 # - {doi:              "DOI of the paper"}
 # - {arxiv:            "arXiv ID of the paper"}
 # - {instrument:       "Instrument name"}
