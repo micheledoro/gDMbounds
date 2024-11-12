@@ -7,7 +7,7 @@
 # - {name: sigmav    , unit: cm3s-1  , datatype: float32 , description: <sigmav>             }
 # meta: !!omap
 # - {reference:        "Title of the paper"}
-# - {authors:          "List of authors (in case First Author plus 'and others'"}
+# - {authors:          "List of authors (in case First Author plus 'and others')"}
 # - {journalref:       "Journal reference"}
 # - {doi:              "DOI of the paper"}
 # - {arxiv:            "arXiv ID of the paper"}
