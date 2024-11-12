@@ -7,6 +7,8 @@
 # - {name: sigmav    , unit: cm3s-1  , datatype: float32 , description: <sigmav>             }
 # meta: !!omap
 # - {reference:        "Optimized dark matter searches in deep observations of Segue 1 with MAGIC"}
+# - {authors:          "The MAGIC collaboration (and others): J. Aleksić et al."}
+# - {journalref:       "Journal of Cosmology and Astroparticle Physics"}
 # - {doi:              "10.1088/1475-7516/2014/02/008"}
 # - {arxiv:            "1312.1535"}
 # - {instrument:       "magic"}
@@ -16,7 +18,7 @@
 # - {confidence        "0.95" }
 # - {dmfraction:       "1"}
 # - {obs_time:         "157.9h"}
-# - {figure:           "Fig. 5"}
+# - {figure:           "Fig. 16"}
 # - {comment:          ""}
 # - {status:           "old import"}
 # schema : astropy −2.0
