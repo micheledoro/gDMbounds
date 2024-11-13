@@ -7,6 +7,8 @@
 # - {name: sigmav    , unit: cm3s-1  , datatype: float32 , description: <sigmav>             }
 # meta: !!omap
 # - {reference:        "A search for dark matter in Triangulum II with the MAGIC telescopes."}
+# - {authors:          "MAGIC Collaboration: V. A. Acciari et al."}
+# - {journalref:       "Physics of the Dark Universe"}
 # - {doi:              "10.1016/j.dark.2020.100529"}
 # - {arxiv:            "2003.05260"}
 # - {instrument:       "magic"}
