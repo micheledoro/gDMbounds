@@ -7,6 +7,8 @@
 # - {name: tau       , unit: s       , datatype: float32 , description: Lifetime             }
 # meta: !!omap
 # - {reference:        "Searching for Dark Matter decay signals in the Galactic Halo with the MAGIC telescopes"}
+# - {authors:          "D. Ninci, T. Inada, J. Rico, D. Kerszberg, M. Doro, S. Lombardi, C. Maggio, M. Hütten, M.V. Acosta  on behalf of the MAGIC collaboration"}
+# - {journalref:       "Proceedings of 36th International Cosmic Ray Conference — PoS(ICRC2019)"}
 # - {doi:              "10.22323/1.358.0538"}
 # - {arxiv:            "https://pos.sissa.it/358/538/"}
 # - {instrument:       "magic"}
@@ -16,8 +18,8 @@
 # - {confidence        "0.95" }
 # - {dmfraction:       "1"}
 # - {obs_time:         "10h"}
-# - {figure:           "95% CL lower limit on the DM decay lifetime obtained with 10 hours of MAGIC GH observation"}
-# - {comment:          "Proceedings"}
+# - {figure:           "Fig 6: 95% CL lower limit on the DM decay lifetime obtained with 10 hours of MAGIC GH observation"}
+# - {comment:          ""}
 # - {status:           "Done"}
 # schema : astropy −2.0
 
