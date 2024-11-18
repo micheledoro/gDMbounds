@@ -7,6 +7,8 @@
 # - {name: sigmav    , unit: cm3s-1  , datatype: float32 , description: <sigmav>             }
 # meta: !!omap
 # - {reference:        "Combined searches for dark matter in dwarf spheroidal galaxies observed with the MAGIC telescopes, including new data from Coma Berenices and Draco"}
+# - {authors:          "MAGIC Collaboration: V. A. Acciari  et al."}
+# - {journalref:       "Physics of the Dark Universe"}
 # - {doi:              "10.1016/j.dark.2021.100912"}
 # - {arxiv:            "2111.15009"}
 # - {instrument:       "magic"}
@@ -18,7 +20,7 @@
 # - {obs_time:         "h"}
 # - {figure:           "Fig. 4"}
 # - {comment:          ""}
-# - {status:           ""}
+# - {status:           "Done"}
 # schema : astropy −2.0
 
 mass sigmav
