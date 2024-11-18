@@ -1,0 +1,61 @@
+# %ECSV 0.9
+# %Part of https://github.com/moritzhuetten/DMbounds under the 
+# %Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License, see LICENSE.rst 
+# ---
+# datatype:
+# - {name: mass      , unit: GeV     , datatype: float32 , description: DM mass              }
+# - {name: sigmav    , unit: cm3s-1  , datatype: float32 , description: <sigmav>             }
+# meta: !!omap
+# - {reference:        "Combined searches for dark matter in dwarf spheroidal galaxies observed with the MAGIC telescopes, including new data from Coma Berenices and Draco"}
+# - {authors:          "MAGIC Collaboration: V. A. Acciari  et al."}
+# - {journalref:       "Physics of the Dark Universe"}
+# - {doi:              "10.1016/j.dark.2021.100912"}
+# - {arxiv:            "2111.15009"}
+# - {instrument:       "magic"}
+# - {year:             "2022"}
+# - {source:           "segue1"}
+# - {channel:          "tautau"}
+# - {confidence        "0.95" }
+# - {dmfraction:       "1"}
+# - {obs_time:         "h"}
+# - {figure:           "Fig. 4"}
+# - {comment:          "Added columns for ±1sigma, ±2sigma containment bands [unit: cm3s-1]."}
+# - {status:           "Done"}
+# schema : astropy −2.0
+
+mass sigmav -1sigma +1sigma -2sigma +2sigma
+1.22e+02 1.54e-22  1.06e-22 1.80e-21 4.90e-23 3.89e-21
+1.44e+02 9.47e-23  5.94e-23 1.09e-21 1.02e-23 2.73e-21
+1.74e+02 6.62e-23  3.51e-23 7.00e-22 7.37e-24 1.51e-21
+2.09e+02 4.65e-23  2.05e-23 4.96e-22 4.79e-24 1.06e-21
+2.52e+02 3.16e-23  1.48e-23 3.04e-22 3.86e-24 7.39e-22
+3.03e+02 2.25e-23  9.93e-24 2.24e-22 2.83e-24 5.37e-22
+3.66e+02 1.77e-23  7.18e-24 1.61e-22 2.12e-24 4.28e-22
+4.41e+02 1.48e-23  5.51e-24 1.15e-22 1.51e-24 3.26e-22
+5.31e+02 1.29e-23  4.05e-24 8.74e-23 1.27e-24 2.53e-22
+6.40e+02 1.15e-23  3.54e-24 7.39e-23 1.19e-24 1.85e-22
+7.72e+02 1.08e-23  2.54e-24 5.84e-23 9.60e-25 1.45e-22
+9.32e+02 1.01e-23  2.27e-24 5.00e-23 9.02e-25 1.23e-22
+1.12e+03 9.55e-24  2.06e-24 4.64e-23 9.25e-25 1.14e-22
+1.36e+03 9.15e-24  1.89e-24 4.55e-23 8.98e-25 1.12e-22
+1.63e+03 8.86e-24  1.63e-24 4.47e-23 8.96e-25 1.05e-22
+1.97e+03 8.54e-24  1.66e-24 4.24e-23 8.96e-25 9.75e-23
+2.38e+03 8.16e-24  1.64e-24 4.04e-23 8.96e-25 9.05e-23
+2.87e+03 8.29e-24  1.64e-24 4.03e-23 8.96e-25 8.52e-23
+3.46e+03 8.69e-24  1.64e-24 3.75e-23 9.35e-25 8.24e-23
+4.18e+03 9.53e-24  1.64e-24 3.52e-23 1.09e-24 8.24e-23
+5.05e+03 1.07e-23  1.75e-24 3.60e-23 1.28e-24 8.91e-23
+6.09e+03 1.22e-23  1.95e-24 3.60e-23 1.37e-24 1.07e-22
+7.36e+03 1.39e-23  2.04e-24 3.82e-23 1.46e-24 1.14e-22
+8.88e+03 1.64e-23  2.32e-24 4.22e-23 1.75e-24 1.17e-22
+1.16e+04 1.99e-23  2.94e-24 4.59e-23 1.94e-24 1.22e-22
+1.56e+04 2.59e-23  3.55e-24 4.68e-23 2.22e-24 1.37e-22
+1.89e+04 2.93e-23  3.70e-24 5.81e-23 3.19e-24 1.52e-22
+2.28e+04 3.32e-23  4.13e-24 6.55e-23 4.12e-24 1.68e-22
+2.75e+04 3.64e-23  4.94e-24 6.65e-23 4.27e-24 2.00e-22
+3.32e+04 3.97e-23  6.21e-24 6.58e-23 5.00e-24 2.39e-22
+4.01e+04 4.35e-23  7.45e-24 7.85e-23 6.27e-24 2.83e-22
+4.80e+04 4.80e-23  8.63e-24 1.02e-22 7.16e-24 3.51e-22
+8.51e+04 6.38e-23  1.03e-23 1.13e-22 9.45e-24 4.15e-22
+1.02e+05 7.23e-23  1.25e-23 1.36e-22 1.76e-23 4.56e-22
+6.31e+04 5.52e-23  1.62e-23 1.51e-22 2.74e-23 5.35e-22
