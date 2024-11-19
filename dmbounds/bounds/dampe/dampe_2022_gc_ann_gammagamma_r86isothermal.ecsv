@@ -7,6 +7,8 @@
 # - {name: sigmav    , unit: cm3s-1  , datatype: float32 , description: <sigmav>             }
 # meta: !!omap
 # - {reference:        "Search for gamma-ray spectral lines with the DArk Matter Particle Explorer"}
+# - {authors:          "The DAMPE Collaboration: F. Alemanno et al."}
+# - {journalref:       "Science Bullettin"}
 # - {doi:              "10.1016/j.scib.2021.12.015"}
 # - {arxiv:            "2112.08860"}
 # - {instrument:       "dampe"}
