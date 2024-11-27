@@ -19,7 +19,7 @@
 # - {dmfraction:       "1"}
 # - {obs_time:         "300h"}
 # - {figure:           "Fig. 4.13"}
-# - {comment:          "sensitivity (solid red line)"}
+# - {comment:          "sensitivity (solid black line)"}
 # - {status:           ""}
 # schema : astropy −2.0
 
