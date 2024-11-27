@@ -7,6 +7,8 @@
 # - {name: sigmav    , unit: cm3s-1  , datatype: float32 , description: <sigmav>             }
 # meta: !!omap
 # - {reference:        "Sensitivity of the Cherenkov Telescope Array to dark subhalos"}
+# - {authors:          "J. Coronado-Blázquez, M. Doro, M. A. Sánchez-Conde, A. Aguirre-Santaella"}
+# - {journalref:       "Physics of the Dark Universe"}
 # - {doi:              "10.1016/j.dark.2021.100845"}
 # - {arxiv:            "2101.10003"}
 # - {instrument:       "cta"}
