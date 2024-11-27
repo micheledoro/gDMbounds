@@ -8,6 +8,8 @@
 # - {name: sigmav_hi , unit: cm3s-1  , datatype: float32 , description: <sigmav> high        }
 # meta: !!omap
 # - {reference:        "Indirect detection of dark matter with γ rays"}
+# - {authors:          "S. Funk"}
+# - {journalref:       "PNAS (Review talk at the National Academy of Sciences "Sackler Symposium on Dark Matter" in Irvine, California 2012)"}
 # - {doi:              "10.1073/pnas.1308728111"}
 # - {arxiv:            "1310.2695"}
 # - {instrument:       "cta"}
@@ -18,7 +20,7 @@
 # - {dmfraction:       "1"}
 # - {obs_time:         "500h"}
 # - {figure:           "Fig. 1"}
-# - {comment:          "sensitivity, Einasto profile"}
+# - {comment:          "sensitivity, Einasto profile (light green)"}
 # - {status:           ""}
 # schema : astropy −2.0
 
