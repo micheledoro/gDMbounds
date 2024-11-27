@@ -7,6 +7,8 @@
 # - {name: sigmav    , unit: cm3s-1  , datatype: float32 , description: <sigmav>             }
 # meta: !!omap
 # - {reference:        "Science with the Cherenkov Telescope Array"}
+# - {authors:          "Cherenkov Telescope Array Consortium: Acharya, B. S. et al."}
+# - {journalref:       "(published by) World Scientific Publishing Co. Pte. Ltd."}
 # - {doi:              "10.1142/10986"}
 # - {arxiv:            "1709.07997"}
 # - {instrument:       "cta"}
@@ -17,8 +19,8 @@
 # - {dmfraction:       "1"}
 # - {obs_time:         "500h"}
 # - {figure:           "Fig. 4.11"}
-# - {comment:          "sensitivity"}
-# - {status:           "old import"}
+# - {comment:          "sensitivity (solid green line)"}
+# - {status:           ""}
 # schema : astropy −2.0
 
 mass sigmav
