@@ -7,6 +7,8 @@
 # - {name: tau       , unit: s       , datatype: float32 , description: Lifetime             }
 # meta: !!omap
 # - {reference:        "Science with the Cherenkov Telescope Array"}
+# - {authors:          "Cherenkov Telescope Array Consortium: Acharya, B. S. et al."}
+# - {journalref:       "(published by) World Scientific Publishing Co. Pte. Ltd."}
 # - {doi:              "10.1142/10986"}
 # - {arxiv:            "1709.07997"}
 # - {instrument:       "cta"}
@@ -17,7 +19,7 @@
 # - {dmfraction:       "1"}
 # - {obs_time:         "300h"}
 # - {figure:           "Fig. 4.13"}
-# - {comment:          "sensitivity"}
+# - {comment:          "sensitivity (solid red line)"}
 # - {status:           ""}
 # schema : astropy −2.0
 
