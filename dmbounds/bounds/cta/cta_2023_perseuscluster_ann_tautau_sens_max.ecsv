@@ -7,6 +7,8 @@
 # - {name: sigmav    , unit: cm3s-1  , datatype: float32 , description: <sigmav>             }
 # meta: !!omap
 # - {reference:        "Prospects for γ-ray observations of the Perseus galaxy cluster with the Cherenkov Telescope Array"}
+# - {authors:          "The Cherenkov Telescope Array Consortium: K. Abe et al."}
+# - {journalref:       "JCAP10(2024)"}
 # - {doi:              "10.48550/arXiv.2309.03712"}
 # - {arxiv:            "2309.03712"}
 # - {instrument:       "cta"}
@@ -17,8 +19,8 @@
 # - {dmfraction:       "1"}
 # - {obs_time:         "300h"}
 # - {figure:           "Fig. 20"}
-# - {comment:          "sensitivity, Jfactor max"}
-# - {status:           ""}
+# - {comment:          "sensitivity, Jfactor max (dashed line)"}
+# - {status:           "Done"}
 # schema : astropy −2.0
 
 mass sigmav
