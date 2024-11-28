@@ -8,7 +8,7 @@
 # meta: !!omap
 # - {reference:        "Sensitivity of the Cherenkov Telescope Array to a dark matter signal from the Galactic centre"}
 # - {authors:          "The CTA Consortium: A. Acharyya, R. Adam, et al."}
-# - {journalref:       "Journal of Astrophysics and Cosmology"}
+# - {journalref:       "Journal of Astrophysics and Cosmology (JCAP01(2021)057)"}
 # - {doi:              "10.1088/1475-7516/2021/01/057"}
 # - {arxiv:            "2007.16129"}
 # - {instrument:       "cta"}
