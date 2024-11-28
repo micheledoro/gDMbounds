@@ -7,6 +7,8 @@
 # - {name: sigmav    , unit: cm3s-1  , datatype: float32 , description: <sigmav>             }
 # meta: !!omap
 # - {reference:        "Sensitivity of the Cherenkov Telescope Array to TeV photon emission from the Large Magellanic Cloud"}
+# - {authors:          "The CTA Consortium: A. Acharyya, R. Adam, et al."}
+# - {journalref:       "Monthly Notices of the Royal Astronomical Society, Volume 523, Issue 4"}
 # - {doi:              "10.1093/mnras/stad1576"}
 # - {arxiv:            "2305.16707"}
 # - {instrument:       "cta"}
