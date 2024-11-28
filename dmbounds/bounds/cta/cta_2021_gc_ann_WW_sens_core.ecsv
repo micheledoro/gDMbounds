@@ -19,7 +19,7 @@
 # - {dmfraction:       "1"}
 # - {obs_time:         "525h"}
 # - {figure:           "7"}
-# - {comment:          "Einasto profile with a 1 kpc core (black dashed)"}
+# - {comment:          ""}
 # - {status:           ""}
 # schema : astropy −2.0
 
