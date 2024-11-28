@@ -19,7 +19,7 @@
 # - {dmfraction:       "1"}
 # - {obs_time:         "525h"}
 # - {figure:           "Fig. 5"}
-# - {comment:          "sensitivity (without systematic uncertainties, solid green line)"}
+# - {comment:          "sensitivity (without systematic uncertainties, dashed green line)"}
 # - {status:           ""}
 # schema : astropy −2.0
 
