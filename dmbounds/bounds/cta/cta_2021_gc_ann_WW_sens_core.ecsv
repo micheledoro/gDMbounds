@@ -18,8 +18,8 @@
 # - {confidence        "0.95" }
 # - {dmfraction:       "1"}
 # - {obs_time:         "525h"}
-# - {figure:           "7"}
-# - {comment:          ""}
+# - {figure:           "Fig. 7"}
+# - {comment:          "sensitivity with Einasto with 1kpc core (black dashed line)"}
 # - {status:           ""}
 # schema : astropy −2.0
 
