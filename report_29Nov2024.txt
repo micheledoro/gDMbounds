@@ -1,6 +1,7 @@
 Project Restructuring Summary
 1. Project Structure
-We discussed the importance of organizing your project into multiple files for better maintainability and readability. The proposed structure is as follows:
+We discussed the importance of organizing your project into multiple files 
+for better maintainability and readability. The proposed structure is as follows:
 /your_project
 │
 ├── dmbounds/
@@ -11,13 +12,21 @@ We discussed the importance of organizing your project into multiple files for b
 │ └── dmbounds.py # Main file that uses the above modules
 │
 └── main.py # Entry point for your application
+
 2. Renaming dmbounds.py
-You decided to rename dmbounds.py to dmbounds_old.py to keep the old version and create a new dmbounds.py.
+You decided to rename dmbounds.py to dmbounds_old.py to keep the old 
+version and create a new dmbounds.py.
+
 3. Extracting Functions
+
 3.1 Data Reader Functions
-We extracted functions related to reading .ecsv files from dmbounds_old.py and organized them into data_reader.py.
+We extracted functions related to reading .ecsv files from dmbounds_old.py 
+and organized them into data_reader.py.
+
 3.2 Plotting Functions
-We extracted plotting-related functions from dmbounds_old.py and organized them into plotter.py.
+We extracted plotting-related functions from dmbounds_old.py and organized 
+them into plotter.py.
+
 3.3 Example Functions
 data_reader.py:
 read_ecsv(file_path)
@@ -28,13 +37,21 @@ plot_data(x, y, label)
 save_plot(filename)
 set_plot_style(style='seaborn')
 clear_plot()
-Additional functions for multiple datasets, histograms, and scatter plots were suggested.
+Additional functions for multiple datasets, histograms, and scatter plots 
+were suggested.
+
 4. Setting Up dmbounds.py
-We structured dmbounds.py to import the necessary functions and orchestrate the workflow:
+We structured dmbounds.py to import the necessary functions and orchestrate 
+the workflow:
 Import necessary modules.
 Define a base directory to manage file paths.
 Create a main function to read data, process it, and plot results.
+
 5. Using a Base Directory
-We discussed how to define a base directory in dmbounds.py to manage file paths relative to the script's location.
+We discussed how to define a base directory in dmbounds.py to manage file 
+paths relative to the script's location.
+
 6. Modifying dictionaries.py
-You asked about modifying dictionaries.py to incorporate channel definitions from legend_channels.py. We discussed how to import channel definitions and update or create dictionaries accordingly.
+You asked about modifying dictionaries.py to incorporate channel definitions 
+from legend_channels.py. We discussed how to import channel definitions and 
+update or create dictionaries accordingly.
