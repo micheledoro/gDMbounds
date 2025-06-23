@@ -25,6 +25,8 @@
 - Addy J. Evans et al. 2023 "On the gamma-ray emission from the core of the Sagittarius dwarf galaxy" [doi](https://doi.org/10.1093/mnras/stad2074).
 
 
+## IACTS
+
 ### [VERITAS](https://github.com/micheledoro/gDMbounds/tree/main/dmbounds/bounds/veritas)
 - T. Arlen et al. 2012 "Constraints on Cosmic Rays, Magnetic Fields, and Dark Matter from Gamma- Ray Observations of the Coma Cluster of Galaxies with VERITAS and Fermi" [doi](https://doi.org/10.1088/0004-637X/757/2/123).
 
@@ -38,7 +40,7 @@
 - MAGIC collaboration 2016 "Limits to dark matter annihilation cross-section from a combined analysis of MAGIC and Fermi-LAT observations of dwarf satellite galaxies" [doi](https://doi.org/10.1088/1475-7516/2016/02/039).
 
 
-## IACTS
+
 ### [CTA](https://github.com/micheledoro/gDMbounds/tree/main/dmbounds/bounds/cta)
 - Funk 2015 "Indirect detection of dark matter with γ rays" PNAS 2014 112 (40) 12264-12271 [doi](https://doi.org/10.1073/pnas.1308728111). 
 
