@@ -25,6 +25,11 @@
 - Addy J. Evans et al. 2023 "On the gamma-ray emission from the core of the Sagittarius dwarf galaxy" [doi](https://doi.org/10.1093/mnras/stad2074).
 
 
+### [DAMPE](https://github.com/micheledoro/gDMbounds/tree/main/dmbounds/bounds/dampe)
+- DAMPE Collaboration 2022 "Search for gamma-ray spectral lines with the DArk Matter Particle Explorer" [doi](https://doi.org/10.1016/j.scib.2021.12.015).
+
+
+
 ## IACTS
 
 ### [VERITAS](https://github.com/micheledoro/gDMbounds/tree/main/dmbounds/bounds/veritas)
@@ -34,10 +39,6 @@
 
 
 ### [MAGIC](https://github.com/micheledoro/gDMbounds/tree/main/dmbounds/bounds/magic)
-
-
-### [MULTI-INST](https://github.com/micheledoro/gDMbounds/tree/main/dmbounds/bounds/multi-inst)
-- MAGIC collaboration 2016 "Limits to dark matter annihilation cross-section from a combined analysis of MAGIC and Fermi-LAT observations of dwarf satellite galaxies" [doi](https://doi.org/10.1088/1475-7516/2016/02/039).
 
 
 
@@ -51,23 +52,25 @@
 - A. Acharyya 2021 et al. "Sensitivity of the Cherenkov Telescope Array to TeV photon emission from the Large Magellanic Cloud" [doi](https://doi.org/10.1093/mnras/stad1576).
 
 
-### [LHAASO](https://github.com/micheledoro/gDMbounds/tree/main/dmbounds/bounds/lhaaso)
-- Dong-Ze He et al. 2020 "Expected LHAASO sensitivity to decaying dark matter signatures from dwarf galaxies gamma-ray emission" [doi](https://doi.org/10.1088/1674-1137/44/8/085001).
 
-- Zhen Cao et al. 2022 "Constraints on Heavy Decaying Dark Matter from 570 Days of LHAASO Observations" [doi](https://doi.org/10.1103/PhysRevLett.129.261103).
+### [HESS](https://github.com/micheledoro/gDMbounds/tree/main/dmbounds/bounds/hess)
 
 
+### [MULTI-INST](https://github.com/micheledoro/gDMbounds/tree/main/dmbounds/bounds/multi-inst)
+- MAGIC collaboration 2016 "Limits to dark matter annihilation cross-section from a combined analysis of MAGIC and Fermi-LAT observations of dwarf satellite galaxies" [doi](https://doi.org/10.1088/1475-7516/2016/02/039).
+
+
+## Shower Front Detectors
 ### [HAWC](https://github.com/micheledoro/gDMbounds/tree/main/dmbounds/bounds/hawc)
 - A. Albert at al. 2018 "Search for Dark Matter Gamma-ray Emission from the Andromeda Galaxy with the High-Altitude Water Cherenkov Observatory" [doi](https://doi.org/10.1088/1475-7516/2018/06/043).
 
 - A. Albert at al. 2018 "Dark Matter Limits From Dwarf Spheroidal Galaxies with The HAWC Gamma-Ray Observatory" [doi](https://doi.org/10.3847/1538-4357/aaa6d8).
 
 
-### [DAMPE](https://github.com/micheledoro/gDMbounds/tree/main/dmbounds/bounds/dampe)
-- DAMPE Collaboration 2022 "Search for gamma-ray spectral lines with the DArk Matter Particle Explorer" [doi](https://doi.org/10.1016/j.scib.2021.12.015).
+### [LHAASO](https://github.com/micheledoro/gDMbounds/tree/main/dmbounds/bounds/lhaaso)
+- Dong-Ze He et al. 2020 "Expected LHAASO sensitivity to decaying dark matter signatures from dwarf galaxies gamma-ray emission" [doi](https://doi.org/10.1088/1674-1137/44/8/085001).
 
-
-### [HESS](https://github.com/micheledoro/gDMbounds/tree/main/dmbounds/bounds/hess)
+- Zhen Cao et al. 2022 "Constraints on Heavy Decaying Dark Matter from 570 Days of LHAASO Observations" [doi](https://doi.org/10.1103/PhysRevLett.129.261103).
 
 
 
