@@ -1,3 +1,6 @@
 # Do not commit the followings:
 
 **/.DS_Store
+**/.ipynb_checkpoints/
+sandbox/aleksandra/outputs/*.png
+sandbox/aleksandra/outputs/*/*.png
