@@ -1,0 +1,19 @@
+- reference: Constraints on dark matter annihilation in dwarf spheroidal galaxies
+    from low frequency radio observations
+- doi: 10.1103/PhysRevD.100.043002
+- arxiv: ''
+- instrument: MWA
+- year: '2019'
+- source: Boo
+- channel: ''
+- confidence: '0.95'
+- dmfraction: '1'
+- obs_time: Phase I
+- figure: 'Figure 2 (top-left): Upper limits on <σv> from Boo using MWA Phase I'
+- journalref: Phys. Rev. D 100, 043002 (2019)
+- url: ''
+- collaboration: ''
+- comment: 'Radio limits with D0=3e26 cm^2/s and B=1 μG; solid: MWA, dashed/dotted:
+    FL/CR refs.'
+- tags: radio, dSph, Boo
+- status: done

@@ -1,0 +1,18 @@
+title: Constraints on dark matter annihilation in dwarf spheroidal galaxies from low
+  frequency radio observations
+authors: Arpan Kar et al.
+year: 2019
+doi: 10.1103/PhysRevD.100.043002
+journal: Phys. Rev. D
+instrument: MWA
+target: "Bo\xF6tes I (Boo) dwarf spheroidal"
+energy_range: "170\u2013231 MHz (GLEAM band)"
+channel: bb and tautau (two curves)
+source: "MWA Phase I; B=1 \u03BCG; D0=3e26 cm2 s-1"
+data_origin: Digitized from Figure 2 (top-left panel)
+notes: "Radio synchrotron non-detections at <1 GHz used to set exclusion limits; Boo\
+  \ shown as most promising of 14 dSphs. Limits compared to Fermi-LAT and CR antiproton\
+  \ bounds. Modeling assumes NFW/Einasto profiles, B\u22481\u20132 \u03BCG and diffusion\
+  \ D0\u22483e26 cm2 s-1."
+category: exclusion
+model: WIMP

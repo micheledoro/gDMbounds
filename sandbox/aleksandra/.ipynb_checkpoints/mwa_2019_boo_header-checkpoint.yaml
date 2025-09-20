@@ -1,0 +1,18 @@
+- reference: Constraints on dark matter annihilation in dwarf spheroidal galaxies
+    from low frequency radio observations
+- authors: Arpan Kar, Sourav Mitra et al.
+- journalref: Phys. Rev. D 100, 043002 (2019)
+- doi: 10.1103/PhysRevD.100.043002
+- instrument: MWA
+- year: '2019'
+- source: Boo
+- confidence: '0.95'
+- dmfraction: '1'
+- obs_time: Phase I
+- figure: "Figure 2 (top left): Upper limits on <\u03C3v> from Boo galaxy using MWA\
+    \ Phase I"
+- comment: "MWA Phase I observations of Boo dSph galaxy. Diffusion coefficient D\u2080\
+    \ = 3\xD710\xB2\u2076 cm\xB2/s, magnetic field B = 1 \u03BCG. Limits shown for\
+    \ bb (red) and \u03C4+\u03C4\u2212 (blue) annihilation channels. Solid lines represent\
+    \ MWA limits, dashed/dotted lines show Fermi-LAT (FL) and cosmic-ray (CR) constraints."
+- status: Done
