@@ -1,0 +1,53 @@
+# %ECSV 1.0
+# ---
+# datatype:
+# - {name: mass, unit: GeV, datatype: float32, description: DM mass}
+# - {name: sigmav, unit: cm3 / s, datatype: float32, description: <sigma v>}
+# meta: !!omap
+# - {reference: Constraints on dark matter annihilation in dSphs from low-frequency radio}
+# - {doi: 10.1103/PhysRevD.100.043002}
+# - {arxiv: ''}
+# - {instrument: MWA}
+# - {year: '2019'}
+# - {source: Boo}
+# - {channel: bb}
+# - {quantity: annihilation}
+# - {confidence: '0.95'}
+# - {dmfraction: '1'}
+# - {obs_time: Phase I}
+# - {figure: Fig. 2 (top-left)}
+# - {x_unit_src: GeV}
+# - {y_unit_src: cm3 s-1}
+# - {journalref: 'Phys. Rev. D 100, 043002 (2019)'}
+# - {url: ''}
+# - {collaboration: ''}
+# - {comment: "Radio limits with B=1 \u03BCG, D0=3e26 cm^2/s; solid: MWA; dashed/dotted: FL/CR."}
+# - {tags: 'radio, dSph, Boo'}
+# - {status: done}
+# - {tag: CR}
+# schema: astropy-2.0
+mass sigmav
+238.4537 1.2547137e-26
+303.77658 1.3001802e-26
+391.70764 1.3412176e-26
+487.07657 1.8943091e-26
+616.76355 2.0341738e-26
+776.2676 2.4637539e-26
+965.2652 3.5660007e-26
+1214.8967 4.8836588e-26
+1538.3701 4.2237086e-26
+1912.9166 6.058511e-26
+2350.0317 9.307699e-26
+2922.1934 1.3529275e-25
+3700.2444 1.622251e-25
+4685.4565 1.9581309e-25
+5721.3804 3.2031778e-25
+7028.757 4.8441453e-25
+8793.109 6.807492e-25
+10933.966 9.488083e-25
+13929.256 8.2018825e-25
+16804.258 1.3267092e-24
+20272.662 2.2306874e-24
+24754.816 3.567283e-24
+30968.75 5.115263e-24
+38508.703 7.06674e-24
