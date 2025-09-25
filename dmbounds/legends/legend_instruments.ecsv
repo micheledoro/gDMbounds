@@ -30,3 +30,5 @@ collider       'Collider searches'
 directsearches 'Direct detection'
 
 multi-inst     Multi-Instrument
+
+mwa	       Murchinson Widefield Array	
