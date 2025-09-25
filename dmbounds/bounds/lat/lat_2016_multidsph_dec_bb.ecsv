@@ -14,13 +14,12 @@
 # - {year:             "2016"}
 # - {source:           "multidsph-19"}
 # - {channel:          "bb"}
-# - {confidence        "0.95" }
+# - {confidence:       "0.95" }
 # - {dmfraction:       "1"}
 # - {obs_time:         "6y"}
 # - {figure:           "Fig. 2"}
 # - {comment:          ""}
 # - {status:           ""}
-# schema : astropy −2.0
 
 mass tau
 
