@@ -4,7 +4,7 @@
 # ---
 # datatype:
 # - {name: mass      , unit: GeV     , datatype: float32 , description: DM mass              }
-# - {name: sigmav    , unit: cm3s-1  , datatype: float32 , description: <sigmav>             }
+# - {name: sigmav    , unit: cm3 / s  , datatype: float32 , description: <sigmav>             }
 # meta: !!omap
 # - {reference:        "Legacy Analysis of Dark Matter Annihilation from the Milky Way Dwarf Spheroidal Galaxies with 14 Years of Fermi-LAT Data"}
 # - {doi:              "10.48550/arXiv.2311.04982"}
@@ -13,13 +13,13 @@
 # - {year:             "2023"}
 # - {source:           "multidsph-50"}
 # - {channel:          "bb"}
-# - {confidence        "0.95" }
+# - {confidence:        "0.95" }
 # - {dmfraction:       "1"}
 # - {obs_time:         "14y"}
 # - {figure:           "Fig.6"}
-# - {comment:          "Measured: Only dSphs with measured Jfactors, excluding “Special” cases"}
+# - {comment:          "Measured: Only dSphs with measured J-factors, excluding “Special” cases"}
 # - {status:           ""}
-# schema : astropy −2.0
+# schema: astropy-2.0
 
 mass sigmav
 7.930  5.305e-27
