@@ -22,6 +22,8 @@ lat            FERMI-LAT
 agile          AGILE 
 dampe          DAMPE
 
+nustar	       NU-STAR X-RAY
+
 lhaaso         LHAASO 
 hawc           HAWC 
 swgo           SWGO
