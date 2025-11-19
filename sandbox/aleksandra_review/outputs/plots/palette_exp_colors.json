@@ -6,5 +6,9 @@
   "lhaaso": "#9467bd",
   "magic": "#8c564b",
   "mwa": "#e377c2",
-  "veritas": "#7f7f7f"
+  "veritas": "#7f7f7f",
+  "authors": "#1f77b4",
+  "collider": "#ff7f0e",
+  "directsearches": "#d62728",
+  "multi-inst": "#17becf"
 }

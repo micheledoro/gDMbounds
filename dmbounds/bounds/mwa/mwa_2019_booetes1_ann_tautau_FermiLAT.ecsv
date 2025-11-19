@@ -2,31 +2,33 @@
 # ---
 # datatype:
 # - {name: mass, unit: GeV, datatype: float32, description: DM mass}
-# - {name: sigmav, unit: cm3 / s, datatype: float32, description: <sigma v>}
+# - {name: sigma_v, unit: cm3 / s, datatype: float32, description: <sigma v>}
 # meta: !!omap
 # - {reference: Constraints on dark matter annihilation in dSphs from low-frequency radio}
 # - {doi: 10.1103/PhysRevD.100.043002}
 # - {arxiv: ''}
-# - {instrument: MWA}
-# - {year: '2019'}
-# - {source: Boo}
-# - {channel: tautau}
-# - {quantity: annihilation}
-# - {confidence: '0.95'}
-# - {dmfraction: '1'}
-# - {obs_time: Phase I}
-# - {figure: Fig. 2 (top-left)}
-# - {x_unit_src: GeV}
-# - {y_unit_src: cm3 s-1}
+# - {bibcode: ''}
 # - {journalref: 'Phys. Rev. D 100, 043002 (2019)'}
 # - {url: ''}
 # - {collaboration: ''}
+# - {year: 2019}
+# - {figure: Fig. 2 (top-left)}
 # - {comment: "Radio limits with B=1 \u03BCG, D0=3e26 cm^2/s; solid: MWA; dashed/dotted: FL/CR."}
 # - {tags: 'radio, dSph, Boo'}
 # - {status: done}
-# - {tag: FL}
+# - {instrument: mwa}
+# - {target: booetes1}
+# - {mode: ann}
+# - {channel: tautau}
+# - {quantity: sigma_v}
+# - {confidence: 0.95}
+# - {dmfraction: 1.0}
+# - {obs_time: Phase I}
+# - {x_unit_src: GeV}
+# - {y_unit_src: cm3 s-1}
+# - {variant: FermiLAT}
 # schema: astropy-2.0
-mass sigmav
+mass sigma_v
 10.775042 1.403637e-26
 13.208662 1.6900126e-26
 14.376773 1.8046363e-26

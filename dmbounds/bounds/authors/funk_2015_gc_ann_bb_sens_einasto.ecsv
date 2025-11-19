@@ -9,20 +9,20 @@
 # meta: !!omap
 # - {reference:        "Indirect detection of dark matter with γ rays"}
 # - {authors:          "S. Funk"}
-# - {journalref:       "PNAS (Review talk at the National Academy of Sciences "Sackler Symposium on Dark Matter" in Irvine, California 2012)"}
+# - {journalref:       'PNAS (Review talk at the National Academy of Sciences "Sackler Symposium on Dark Matter" in Irvine, California 2012)'}
 # - {doi:              "10.1073/pnas.1308728111"}
 # - {arxiv:            "1310.2695"}
 # - {instrument:       "cta"}
 # - {year:             "2015"}
 # - {source:           "gc"}
 # - {channel:          "bb"}
-# - {confidence        "0.95" }
+# - {confidence:       "0.95"}
 # - {dmfraction:       "1"}
 # - {obs_time:         "500h"}
 # - {figure:           "Fig. 1"}
 # - {comment:          "sensitivity, Einasto profile (light green)"}
 # - {status:           ""}
-# schema : astropy −2.0
+# schema: astropy-2.0
 
 mass sigmav_lo sigmav_hi
 
