@@ -19,7 +19,7 @@ gchalo          'MW Outer Halo'                       gc
 galplane        'Galactic Plane Survey'               gc
 
 # DSPH
-booetes1        'Bo\"{o}tes I dSph'                   dsph
+booetes1        'Boötes I dSph'                      dsph
 canesvec1       'Canes Venatici I dSph'               dsph
 canesvec2       'Canes Venatici II dSph'              dsph
 
