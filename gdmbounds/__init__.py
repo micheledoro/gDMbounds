@@ -1,10 +1,14 @@
 """gDMbounds — gamma-ray bounds on dark matter annihilation and decay.
 
-The package is being rebuilt. What exists today is the schema layer: the
-definition of what a bound file is, and the validation that enforces it.
-Catalogue loading, selection and plotting are built on top of it.
+Two layers exist. `schema` defines what a bound file is and validates it;
+`catalog` reads every header into one table and gives selection over it. Plotting
+and recasting are still to come.
+
+    >>> import gdmbounds
+    >>> gdmbounds.catalog().select(instrument_class="iact", mode="ann", channel="bb")
 """
 
+from .catalog import Catalog, catalog
 from .quality import check_all_curves, check_curve
 from .schema import (
     CHANNEL_SPECTRA,
@@ -36,9 +40,11 @@ __all__ = [
     "REQUIRED_META",
     "STATEMENTS",
     "TARGET_CLASSES",
+    "Catalog",
     "Issue",
     "Vocabulary",
     "__version__",
+    "catalog",
     "check_all_curves",
     "check_curve",
     "check_database",

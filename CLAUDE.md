@@ -76,6 +76,7 @@ gdmbounds/          the package
   modelpredictions/ theory curves (thermal relic, GAMBIT scan)
 tests/              schema validation; run with pytest
   quality.py        checks on the numbers, kept separate from the schema
+  catalog.py        every header in one table, with selection over it
 tools/              one-off migration scripts, kept as a record
 unconverted/        raw digitised material not yet transcribed into bounds
 .github/workflows/  CI: schema validation, lint, and wheel contents
@@ -162,11 +163,16 @@ their source papers checked.
 The quarantine is a ratchet: a new bad file fails the suite, and a quarantined file
 that gets fixed also fails until it is removed from the list.
 
-Built so far: the schema layer only. **Not yet written** — catalogue loading and
-metadata search, selection by criterion, plotting, and recasting. `legacy/dmbounds_old.py`
-shows what the old API offered (`plot`, `metadata`, `filter_metadata`, `get_data`,
-`PlottingStyle`, `interactive_selection`) and is worth reading before designing
-the replacement.
+Built so far: `schema` (what a bound is), `quality` (whether its numbers are
+usable) and `catalog` (every header in one table, with composable selection).
+**Not yet written** — plotting and recasting. `legacy/dmbounds_old.py` shows what
+the old API offered (`plot`, `PlottingStyle`, `interactive_selection`) and is worth
+reading before designing the replacement.
+
+`Catalog.select` matches the publishing instrument; `Catalog.involves` matches
+participation, so a joint MAGIC+LAT analysis is found by the second and not the
+first. That distinction is deliberate — 86 bounds involve MAGIC, 74 are MAGIC's
+own.
 
 ## Conventions
 

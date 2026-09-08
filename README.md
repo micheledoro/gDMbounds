@@ -7,8 +7,8 @@ collider searches are included so that the three can be compared on one figure.
 The value of the archive is partly historical: it preserves limit curves that
 would otherwise stay locked inside the figures of old papers.
 
-**Status: rebuilding.** The schema and validation layer is in place and the whole
-database satisfies it. Catalogue search, plotting and recasting are being written.
+**Status: rebuilding.** Schema, validation and catalogue search are in place and
+the whole database satisfies the schema. Plotting and recasting are still to come.
 The plotting API described in older versions of this README no longer exists —
 see [Roadmap](#roadmap).
 
@@ -56,15 +56,32 @@ pip install -e ".[dev]"
 ```python
 import gdmbounds
 
-# every bound file that shipped with the package
-paths = gdmbounds.iter_bound_files()
+cat = gdmbounds.catalog()                 # <Catalog: 367 bounds — ...>
 
-# the controlled vocabularies: instruments, channels, targets
+cat.select(instrument="magic", target_class="dsph", channel="bb", mode="ann")
+cat.select(instrument_class="iact")       # every Cherenkov telescope
+cat.select(statement="limit")             # exclude projected sensitivities
+cat.select(instrument=["magic", "hess"])  # a list means any of
+
+cat.involves("magic")                     # joint analyses included, unlike select
+cat.between(2020, 2025)                   # by year of publication
+```
+
+Criteria compose, and selecting reads no curve — `select` returns another
+catalogue. Only `curves()` touches the files:
+
+```python
+chosen = cat.select(instrument_class="iact", mode="ann", channel="bb")
+print(chosen.summary("instrument"))       # how the selection breaks down
+tables = chosen.curves()                  # now the data is read
+```
+
+The validation layer is available directly too:
+
+```python
+assert gdmbounds.check_database() == []   # empty means the database is sound
 vocabulary = gdmbounds.load_vocabulary()
-print(vocabulary.instruments["magic"])     # MAGIC
-
-# check the database against the schema; an empty list means it is sound
-assert gdmbounds.check_database() == []
+print(vocabulary.instruments["magic"])    # MAGIC
 ```
 
 Reading one bound is plain astropy:
@@ -137,7 +154,7 @@ headers to copy. `unconverted/` holds raw digitised material not yet transcribed
 
 - [x] Schema and validation for the whole database
 - [x] Continuous integration
-- [ ] Catalogue search and selection by criterion — instrument, channel,
+- [x] Catalogue search and selection by criterion — instrument, channel,
       class of telescope, target class
 - [ ] Plotting, with selectable styles
 - [ ] Casting and recasting of limits between assumptions
