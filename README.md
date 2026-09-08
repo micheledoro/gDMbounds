@@ -107,6 +107,25 @@ Legend entries name only what varies within the selection. Eleven H.E.S.S. bound
 on Fornax that differ only by halo profile are labelled by profile, not by eleven
 repetitions of "H.E.S.S. 2012".
 
+### Styles
+
+```python
+gdmbounds.plot(selection, style="paper")   # default | paper | talk | print
+```
+
+The palette is Okabe–Ito, which stays legible under the common forms of colour
+vision deficiency — roughly one man in twelve has one, and a figure whose curves
+are separated by red against green is unreadable to them. `print` is greyscale.
+
+No two curves are ever drawn alike: once the palette runs out, markers take over,
+and if even that is exhausted the call warns rather than quietly repeating an
+appearance. Line style is reserved throughout for measured against projected, so
+it is never borrowed to separate groups.
+
+A style applies for the one call and is then withdrawn; using this package never
+changes how your other figures look. None of them needs LaTeX — pass `latex=True`
+for it, and you get a clear error rather than a TeX traceback if it is missing.
+
 The validation layer is available directly too:
 
 ```python
@@ -200,7 +219,7 @@ Regenerate it with `python tools/data_review.py`.
 - [x] Catalogue search and selection by criterion — instrument, channel,
       class of telescope, target class
 - [x] Plotting a selection
-- [ ] Selectable figure styles
+- [x] Selectable figure styles
 - [ ] Casting and recasting of limits between assumptions
 - [ ] A public-facing way to generate figures without installing anything
 

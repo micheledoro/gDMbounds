@@ -17,13 +17,14 @@ getting them wrong misreads the physics:
 from __future__ import annotations
 
 import collections
+import warnings
 from pathlib import Path
 
 import numpy as np
 from astropy import units as u
 from astropy.io import ascii
 
-from . import schema
+from . import schema, styles
 from .catalog import Catalog
 
 #: Axis label for the quantity each mode constrains.
@@ -135,19 +136,23 @@ def plot(
     ax=None,
     *,
     mass_unit: str = "TeV",
-    color_by: str = "instrument",
+    color_by: str | None = "auto",
     label: str | None = None,
     bands: bool = True,
     relic: str | None = "steigman",
     legend: str | None = None,
+    style: str | styles.Style = "default",
+    latex: bool = False,
     **line_kwargs,
 ):
     """Draw every bound in `selection` on one pair of log axes.
 
     Returns the axes, so the caller composes rather than being handed a figure.
     Nothing is shown or saved here.
+
+    `style` names one of `styles.STYLES`. It applies for this call only: the
+    session's matplotlib settings are the same afterwards as before.
     """
-    import matplotlib.pyplot as plt
 
     if len(selection) == 0:
         raise ValueError("nothing to plot: the selection is empty")
@@ -161,16 +166,54 @@ def plot(
         )
     mode = modes.pop()
 
+    chosen = styles.get(style)
+    with styles.use(chosen, latex=latex):
+        return _draw(selection, ax, mode, chosen, mass_unit, color_by, label,
+                     bands, relic, legend, line_kwargs)
+
+
+def _draw(selection, ax, mode, chosen, mass_unit, color_by, label, bands, relic,
+          legend, line_kwargs):
+    import matplotlib.pyplot as plt
+
     if ax is None:
-        _, ax = plt.subplots(figsize=(7.5, 5.5))
+        _, ax = plt.subplots(figsize=chosen.figsize)
     vocabulary = schema.load_vocabulary()
     unit = u.Unit(mass_unit)
 
     make_label = _labeller(selection, vocabulary, label)
     drawn: set[str] = set()
-    groups = sorted(set(selection.frame[color_by])) if color_by else []
-    palette = plt.rcParams["axes.prop_cycle"].by_key().get("color", ["C0"])
+    # "auto" colours by the legend entry, so no two entries look alike. Grouping
+    # by instrument instead is a deliberate choice — it reads well, but several
+    # entries then share a colour and the reader cannot tell which curve is which.
+    if color_by == "auto":
+        group_of = {row.path: make_label(row) for row in selection.frame.itertuples()}
+    elif color_by:
+        group_of = {row.path: getattr(row, color_by) for row in selection.frame.itertuples()}
+    else:
+        group_of = {}
+    groups = sorted(set(group_of.values()))
+    palette = chosen.palette
     colour_of = {g: palette[i % len(palette)] for i, g in enumerate(groups)}
+    # Markers only once colour alone stops separating the curves: on a figure of
+    # five they would be clutter, on one of fifteen they are what makes it
+    # readable at all.
+    marker_of = (
+        {
+            g: chosen.markers[(i // len(palette)) % len(chosen.markers)]
+            for i, g in enumerate(groups)
+        }
+        if chosen.markers and len(groups) > len(palette)
+        else {}
+    )
+    if groups and len(groups) > chosen.separable_groups():
+        warnings.warn(
+            f"{len(groups)} distinct curves exceed the "
+            f"{chosen.separable_groups()} the {chosen.name!r} style can tell apart, "
+            "so some curves are drawn alike. Narrow the selection, or pass "
+            "color_by=None and distinguish them another way.",
+            stacklevel=4,
+        )
 
     for row in selection.frame.itertuples(index=False):
         table = ascii.read(row.path, format="ecsv")
@@ -182,12 +225,18 @@ def plot(
         # One legend entry per distinct label: repeating it once per file turns
         # the legend into a wall and hides the plot behind it.
         text = make_label(row)
+        group = group_of.get(row.path)
         kwargs = {
-            "color": colour_of.get(getattr(row, color_by)) if color_by else None,
+            "color": colour_of.get(group) if group is not None else None,
             "linestyle": STATEMENT_STYLE.get(row.statement, "-"),
             "label": text if text not in drawn else "_nolegend_",
             **line_kwargs,
         }
+        if marker_of:
+            # Sparse, so the marker identifies the curve without drowning it.
+            kwargs.setdefault("marker", marker_of.get(group))
+            kwargs.setdefault("markevery", max(1, len(value) // 6))
+            kwargs.setdefault("markersize", 4)
         drawn.add(text)
         ax.plot(mass.value[order], value, **kwargs)
 
