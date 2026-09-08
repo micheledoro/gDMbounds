@@ -20,8 +20,8 @@ galplane        'Galactic Plane Survey'               gc
 
 # DSPH
 booetes1        'Bo\"{o}tes I dSph'                   dsph
-canesvec1       'Canes Ven I - II dSph'               dsph
-canesvec2       'Canes Ven I - II dSph'               dsph
+canesvec1       'Canes Venatici I dSph'               dsph
+canesvec2       'Canes Venatici II dSph'              dsph
 
 canismajor      'Canis Major dSph'                    dsph
 carina          'Carina dSph'                         dsph
@@ -61,7 +61,7 @@ ngc6388         'NGC 6388'                            globular
 
 # Galaxies
 m31             'M31'                                 galaxy
-m33             'M32'                                 galaxy
+m33             'M33'                                 galaxy
 wlm             'WLM'                                 galaxy
 LMC             'LMC'                                 galaxy
 

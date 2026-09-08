@@ -57,3 +57,48 @@ def test_describe_mentions_every_class(vocabulary):
     text = vocabulary.describe()
     for key in (*schema.INSTRUMENT_CLASSES, *schema.TARGET_CLASSES, *schema.CHANNEL_SPECTRA):
         assert key in text, f"describe() omits '{key}'"
+
+
+def _used(key):
+    """Every value of a metadata key actually used by a bound, collapsed to the
+    token the legends are indexed by."""
+    from astropy.io import ascii
+
+    collapse = {"instrument": schema.base_instrument, "source": schema.base_source}
+    return {
+        collapse.get(key, str)(str(ascii.read(p, format="ecsv").meta[key]))
+        for p in schema.iter_bound_files()
+    }
+
+
+def test_every_target_used_by_a_bound_is_in_the_legend(vocabulary):
+    """Adding a bound whose target has no legend entry must fail.
+
+    Already enforced through `schema.check_file`, which reports `unknown-target`;
+    stated separately here so the invariant is findable rather than implied.
+    """
+    missing = _used("source") - set(vocabulary.targets)
+    assert not missing, f"targets used by bounds but absent from the legend: {missing}"
+
+
+def test_every_channel_used_by_a_bound_is_in_the_legend(vocabulary):
+    missing = _used("channel") - set(vocabulary.channels)
+    assert not missing, f"channels used by bounds but absent from the legend: {missing}"
+
+
+@pytest.mark.parametrize("legend", ["instruments", "targets", "channels"])
+def test_legend_entries_are_distinguishable(legend):
+    """Two entries sharing a display name defeat the point of a legend.
+
+    `canesvec1` and `canesvec2` both read 'Canes Ven I - II dSph' until this
+    caught them, so a plot legend could not tell the two galaxies apart.
+    """
+    import collections
+
+    from astropy.io import ascii
+
+    table = ascii.read(schema.LEGENDS_DIR / f"legend_{legend}.ecsv")
+    label = "latex" if legend == "channels" else "longname"
+    counts = collections.Counter(str(row[label]) for row in table)
+    repeated = {name: n for name, n in counts.items() if n > 1}
+    assert not repeated, f"legend_{legend} reuses these labels: {repeated}"

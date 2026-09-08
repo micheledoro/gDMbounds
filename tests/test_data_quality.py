@@ -38,7 +38,7 @@ NEEDS_ADJUDICATION = {
 #: and upstream had independently sorted the same file. Reordering it changed no
 #: value and it has left the quarantine.
 NEEDS_RESORTING = {
-    "cta_2021_gc_ann_WW_sens_mstonly.ecsv": "unsorted-mass",
+    "ctao_2021_gc_ann_WW_sens_mstonly.ecsv": "unsorted-mass",
     "dampe_2022_gc_ann_gammagamma_r16einasto.ecsv": "unsorted-mass",
     "hawc_2018_multidsph_dec_WW.ecsv": "unsorted-mass",
     "hawc_2018_multidsph_dec_bb.ecsv": "unsorted-mass",
