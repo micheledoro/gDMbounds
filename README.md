@@ -1,44 +1,127 @@
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/moritzhuetten/dmbounds/HEAD?labpath=tutorial.ipynb)
+# gDMbounds
 
-# DMbounds
+A curated database of published gamma-ray bounds on dark matter annihilation and
+decay, with the tools to select and plot them. Limits from direct-detection and
+collider searches are included so that the three can be compared on one figure.
 
-A database for all latest indirect Dark Matter limits, and to compare against direct and collider limits. It also provides neat figures out of the box.
+The value of the archive is partly historical: it preserves limit curves that
+would otherwise stay locked inside the figures of old papers.
 
-Try it out on [Binder](https://mybinder.org/v2/gh/moritzhuetten/dmbounds/HEAD?labpath=tutorial.ipynb):
- 
- [![Screenshot](/screenshot.png)](https://mybinder.org/v2/gh/moritzhuetten/dmbounds/HEAD?labpath=tutorial.ipynb)
+**Status: rebuilding.** The schema and validation layer is in place and the whole
+database satisfies it. Catalogue search, plotting and recasting are being written.
+The plotting API described in older versions of this README no longer exists —
+see [Roadmap](#roadmap).
 
-So far, the following experiments are included:
+## What is in it
 
-`CTA`, `HAWC`, `LAT`, `LHAASO`, `MAGIC`, `SWGO`, `VERITAS`, `WHIPPLE`
+363 bounds, one ECSV file per published limit curve.
 
-and channels (latex in the plot, text in the file name):
+| Instrument | Bounds |  | Instrument | Bounds |
+|---|---:|---|---|---:|
+| H.E.S.S. | 121 | | LHAASO | 9 |
+| MAGIC | 74 | | DAMPE | 4 |
+| Fermi-LAT | 48 | | Collider searches | 3 |
+| CTA | 45 | | Direct detection | 3 |
+| VERITAS | 25 | | | |
+| HAWC | 19 | | | |
+| Multi-instrument | 12 | | | |
 
-`bb`, `tautau`, `ee`, `tt`, `WW`, `gg`, Zg`,...
-
-<img src="https://render.githubusercontent.com/render/math?math=b\bar{b},\tau^{+}\tau^{-},e^{+}e^{-},t\bar{t},W^{+}W^{-},\gamma\gamma,Z\gamma,...">
+316 constrain annihilation, 47 decay. Twenty annihilation channels are
+represented — `bb`, `WW`, `tautau`, `mumu`, `gammagamma`, `ee`, `ZZ`, `tt` and
+others — across dwarf spheroidals, galaxy clusters, the Galactic Centre, the
+LMC, diffuse emission and dark subhalos.
 
 ## Installation
 
 ```bash
-git clone https://github.com/micheledoro/gdmbounds.git
-pip install ./dmbounds/ (-e)
+pip install git+https://github.com/micheledoro/gDMbounds.git
 ```
-Alternatively, do
+
+Or from a clone, for development:
 
 ```bash
-git clone https://github.com/micheledoro/gdmbounds.git
-cd dmbounds
-python setup.py install (--user)
+git clone https://github.com/micheledoro/gDMbounds.git
+cd gDMbounds
+pip install -e ".[dev]"
 ```
 
-### Usage
+> Most of this package is data. When you change a bound file and reinstall, pass
+> `--no-cache-dir` and delete `build/` first — otherwise pip serves a cached wheel
+> and setuptools reuses stale files, and you silently get the old database.
+
+## Usage
 
 ```python
-from dmbounds import dmbounds as bounds
-...
+import gdmbounds
+
+# every bound file that shipped with the package
+paths = gdmbounds.iter_bound_files()
+
+# the controlled vocabularies: instruments, channels, targets
+vocabulary = gdmbounds.load_vocabulary()
+print(vocabulary.instruments["magic"])     # MAGIC
+
+# check the database against the schema; an empty list means it is sound
+assert gdmbounds.check_database() == []
 ```
 
-Please have a look at the [tutorial.ipynb notebook](tutorial.ipynb) for further details or [launch on Binder](https://mybinder.org/v2/gh/moritzhuetten/dmbounds/HEAD?labpath=tutorial.ipynb).
+Reading one bound is plain astropy:
 
-&copy; M. H&uuml;tten and M. Doro, 2022
+```python
+from astropy.io import ascii
+
+table = ascii.read("gdmbounds/bounds/magic/magic_2022_segue1_ann_bb.ecsv", format="ecsv")
+print(table.meta["reference"], table.meta["doi"])
+mass, sigmav = table["mass"], table["sigmav"]
+```
+
+## Data model
+
+One bound is one ECSV file. The header carries the metadata and is the source of
+truth; the filename is a human-readable convention that must agree with it.
+
+```
+<instrument>_<year>_<source>_<mode>_<channel>[_<qualifiers>].ecsv
+```
+
+`mode` is `ann` or `dec`. The channel is the fifth underscore-separated token,
+not the last — qualifiers such as `_sens`, `_nfw`, `_einasto`, `_measured` follow it.
+
+Required header keys: `reference`, `doi`, `arxiv`, `instrument`, `origin`, `year`,
+`source`, `mode`, `channel`, `confidence`, `dmfraction`, `obs_time`, `figure`,
+`comment`, `status`. `origin` distinguishes a collaboration's own result from a
+forecast or reinterpretation published by individual authors.
+
+Tables carry `mass` (GeV or TeV) and either `sigmav` (cm3s-1) or `tau` (s).
+A sensitivity curve may give only a band, `sigmav_lo` and `sigmav_hi`.
+
+Controlled vocabularies live in `gdmbounds/legends/`. `templates/` holds blank
+headers to copy. `unconverted/` holds raw digitised material not yet transcribed.
+
+## Contributing a bound
+
+1. Copy the matching template from `templates/`.
+2. Fill in the header. Provenance is mandatory: `doi` or `arxiv`, plus the
+   `figure` the curve was taken from.
+3. Name the file by the convention above.
+4. Run `pytest tests/ -q`. Every bound is validated on every pull request; a
+   malformed one will not merge.
+
+## Roadmap
+
+- [x] Schema and validation for the whole database
+- [x] Continuous integration
+- [ ] Catalogue search and selection by criterion — instrument, channel,
+      class of telescope, target class
+- [ ] Plotting, with selectable styles
+- [ ] Casting and recasting of limits between assumptions
+- [ ] A public-facing way to generate figures without installing anything
+
+## Licence
+
+Code under BSD-3-Clause (`LICENSE`); the bound database under CC-BY-4.0
+(`LICENSE-DATA`). Each bound is a transcription of a published result — citing
+gDMbounds does not replace citing the original paper, whose DOI is in every file.
+
+© M. Doro and G. D'Amico, 2022–2026. Earlier contributors are credited in
+[contributions.md](contributions.md).

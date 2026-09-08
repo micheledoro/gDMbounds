@@ -76,6 +76,43 @@ MODE_COLUMNS = {
 #: Accepted units for the mass column.
 MASS_UNITS = ("GeV", "TeV")
 
+#: How an instrument detects gamma rays. Bounds from different techniques cover
+#: different energy ranges and carry different systematics, so this is the axis
+#: along which "all the Cherenkov telescopes" is a meaningful selection.
+INSTRUMENT_CLASSES = {
+    "iact": "Imaging Atmospheric Cherenkov Telescope",
+    "satellite": "satellite-borne pair-conversion detector",
+    "swd": "ground-level shower-front / water-Cherenkov array",
+    "radio": "radio interferometer",
+    "collider": "collider search",
+    "direct": "direct-detection experiment",
+    "combined": "joint analysis across instruments",
+}
+
+#: What kind of object the bound looks at. Targets in one class share a dark
+#: matter density profile family and a set of astrophysical uncertainties.
+TARGET_CLASSES = {
+    "dsph": "dwarf spheroidal galaxy",
+    "cluster": "galaxy cluster",
+    "globular": "globular cluster",
+    "galaxy": "galaxy",
+    "gc": "Galactic Centre and Milky Way halo",
+    "diffuse": "diffuse or extragalactic emission",
+    "subhalo": "dark matter subhalo",
+    "unid": "unidentified source",
+    "collider": "collider search",
+    "direct": "direct-detection experiment",
+}
+
+#: The spectral shape a channel produces. A line and a continuum bound are not
+#: directly comparable, and plotting them on one axis without saying so misleads.
+CHANNEL_SPECTRA = {
+    "continuum": "broad spectrum from hadronisation or cascade",
+    "line": "monochromatic feature at the dark matter mass",
+    "model": "specific model with both line and continuum features",
+    "benchmark": "individual benchmark points rather than a curve",
+}
+
 #: ``<instrument>_<year>_<source>_<mode>_<channel>`` plus free-form qualifiers
 #: such as ``_sens``, ``_einasto``, ``_measured``. The channel is the fifth
 #: token, never simply the last one.
@@ -108,24 +145,72 @@ class Issue:
 
 @dataclass
 class Vocabulary:
-    """The controlled vocabularies, read from ``legends/``."""
+    """The controlled vocabularies, read from ``legends/``.
+
+    Each term maps to its display name, and separately to the class it belongs
+    to. The classes are what makes a selection like "every IACT bound" or "every
+    dwarf spheroidal" expressible without listing members by hand.
+    """
 
     instruments: dict[str, str] = field(default_factory=dict)
     channels: dict[str, str] = field(default_factory=dict)
     targets: dict[str, str] = field(default_factory=dict)
+    instrument_class: dict[str, str] = field(default_factory=dict)
+    target_class: dict[str, str] = field(default_factory=dict)
+    channel_spectrum: dict[str, str] = field(default_factory=dict)
+
+    def instruments_in(self, klass: str) -> list[str]:
+        """Every instrument using a given detection technique."""
+        return sorted(k for k, v in self.instrument_class.items() if v == klass)
+
+    def targets_in(self, klass: str) -> list[str]:
+        """Every target of a given type."""
+        return sorted(k for k, v in self.target_class.items() if v == klass)
+
+    def channels_with(self, spectrum: str) -> list[str]:
+        """Every channel producing a given spectral shape."""
+        return sorted(k for k, v in self.channel_spectrum.items() if v == spectrum)
+
+    def describe(self) -> str:
+        """A readable summary of every class and its members."""
+        blocks = []
+        for title, classes, membership in (
+            ("Instrument classes", INSTRUMENT_CLASSES, self.instrument_class),
+            ("Target classes", TARGET_CLASSES, self.target_class),
+            ("Channel spectra", CHANNEL_SPECTRA, self.channel_spectrum),
+        ):
+            lines = [title, "-" * len(title)]
+            for key, description in classes.items():
+                members = sorted(k for k, v in membership.items() if v == key)
+                lines.append(f"  {key:<10} {description}")
+                lines.append(f"             {', '.join(members) or '(none)'}")
+            blocks.append("\n".join(lines))
+        return "\n\n".join(blocks)
 
 
-def _read_legend(name: str, key: str, value: str) -> dict[str, str]:
+def _read_legend(name: str, key: str, *values: str) -> tuple[dict[str, str], ...]:
     table = ascii.read(LEGENDS_DIR / f"legend_{name}.ecsv")
-    return {str(row[key]): str(row[value]) for row in table}
+    return tuple(
+        {str(row[key]): str(row[value]) for row in table} for value in values
+    )
 
 
 def load_vocabulary() -> Vocabulary:
     """Read the controlled vocabularies that bound metadata must draw from."""
+    instruments, instrument_class = _read_legend(
+        "instruments", "shortname", "longname", "class"
+    )
+    channels, channel_spectrum = _read_legend(
+        "channels", "shortname", "latex", "spectrum"
+    )
+    targets, target_class = _read_legend("targets", "shortname", "longname", "class")
     return Vocabulary(
-        instruments=_read_legend("instruments", "shortname", "longname"),
-        channels=_read_legend("channels", "shortname", "latex"),
-        targets=_read_legend("targets", "shortname", "longname"),
+        instruments=instruments,
+        channels=channels,
+        targets=targets,
+        instrument_class=instrument_class,
+        target_class=target_class,
+        channel_spectrum=channel_spectrum,
     )
 
 
@@ -276,6 +361,34 @@ def iter_bound_files(root: Path | None = None):
     """Yield every bound file in the database, in a stable order."""
     root = root or BOUNDS_DIR
     return sorted(root.glob("*/*.ecsv"))
+
+
+def check_vocabulary(vocabulary: Vocabulary | None = None) -> list[Issue]:
+    """Check that the legends classify every term into a known class.
+
+    The legends are hand-edited, and a class column is exactly the kind of thing
+    that acquires a typo or gets left blank on a new row.
+    """
+    vocabulary = vocabulary or load_vocabulary()
+    issues: list[Issue] = []
+    for legend, membership, allowed, label in (
+        ("instruments", vocabulary.instrument_class, INSTRUMENT_CLASSES, "class"),
+        ("targets", vocabulary.target_class, TARGET_CLASSES, "class"),
+        ("channels", vocabulary.channel_spectrum, CHANNEL_SPECTRA, "spectrum"),
+    ):
+        path = LEGENDS_DIR / f"legend_{legend}.ecsv"
+        for term, value in sorted(membership.items()):
+            if not value or value == "--":
+                issues.append(Issue(path, "unclassified", f"'{term}' has no {label}"))
+            elif value not in allowed:
+                issues.append(
+                    Issue(
+                        path,
+                        "unknown-class",
+                        f"'{term}' has {label} '{value}', not one of {sorted(allowed)}",
+                    )
+                )
+    return issues
 
 
 def check_database(root: Path | None = None) -> list[Issue]:

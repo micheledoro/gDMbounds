@@ -1,6 +1,6 @@
 # %ECSV 0.9
-# %Part of https://github.com/moritzhuetten/DMbounds under the 
-# %Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License, see LICENSE.rst 
+# %Part of https://github.com/micheledoro/gDMbounds under the
+# %Creative Commons Attribution 4.0 International License, see LICENSE-DATA
 # ---
 # datatype:
 # - {name: mass      , unit: GeV     , datatype: float32 , description: DM mass              }
@@ -13,7 +13,7 @@
 # - {figure:           "Fig. 2.6"}
 # - {comment:          "Analytical calculation, h^2Omega=0.12"}
 # - {status:           ""}
-# schema : astropy −2.0
+# schema : astropy -2.0
 
 mass sigmav
 

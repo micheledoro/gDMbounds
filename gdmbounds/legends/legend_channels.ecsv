@@ -1,34 +1,35 @@
 # %ECSV 0.9
-# %Part of https://github.com/moritzhuetten/DMbounds under the 
-# %Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License, see LICENSE.rst 
+# %Part of https://github.com/micheledoro/gDMbounds under the
+# %Creative Commons Attribution 4.0 International License, see LICENSE-DATA
 # ---
 # datatype:
 # - {name: shortname  , unit:  , datatype: string , description: channel short name       }
 # - {name: latex      , unit:  , datatype: string , description: channel latex expression }
+# - {name: spectrum  , unit:  , datatype: string , description: spectral shape        }
 # - {name: comment    , unit:  , datatype: string , description: comment/explanation      }
 # meta: !!omap
 # - {comment:        'Legend for channels names'}
-# schema : astropy −2.0
+# schema : astropy -2.0
 
-shortname   latex               comment
+shortname    latex              comment                                   spectrum
 
-ee          e^{+}e^{-}          'lepton antilepton e'
-mumu        \mu^{+}\mu^{-}      'lepton antilepton mu'
-tautau      \tau^{+}\tau^{-}    'lepton antilepton tau'
-qq          q\bar{q}            'light quarks (up, down, strange)'
-bb          b\bar{b}            'quarks antiquark b'
-uu          u\bar{u}            'quarks antiquark u'
-tt          t\bar{t}            'quark antiquark t'
-cc          c\bar{c}            'quark antiquark c'
-WW          W^{+}W^{-}          'boson antiboson W'
-ZZ          ZZ                  'boson antiboson Z'
-gg          gg                  'gluon antigluon g'
-hh          hh                  ''
-gammagamma  \gamma\gamma        'gamma gamma line'
-Zgamma      Z\gamma             'Z gamma line'
-points      points              'specific benchmarks DM models'
-KK          \mathrm{KK}         'Kaluza-Klein DM'
-triplett    triplett            'Pure WIMP Triplett'
-quintuplett quintuplett         'Pure WIMP Quintuplett'
-4e          2(e^{+}e^{-})       'four-electron final state via mediator'
-4mu         2(\mu^{+}\mu^{-})     'four-muon final state via mediator'
+ee           e^{+}e^{-}         'lepton antilepton e'                     continuum
+mumu         \mu^{+}\mu^{-}     'lepton antilepton mu'                    continuum
+tautau       \tau^{+}\tau^{-}   'lepton antilepton tau'                   continuum
+qq           q\bar{q}           'light quarks (up, down, strange)'        continuum
+bb           b\bar{b}           'quarks antiquark b'                      continuum
+uu           u\bar{u}           'quarks antiquark u'                      continuum
+tt           t\bar{t}           'quark antiquark t'                       continuum
+cc           c\bar{c}           'quark antiquark c'                       continuum
+WW           W^{+}W^{-}         'boson antiboson W'                       continuum
+ZZ           ZZ                 'boson antiboson Z'                       continuum
+gg           gg                 'gluon antigluon g'                       continuum
+hh           hh                 ''                                        continuum
+gammagamma   \gamma\gamma       'gamma gamma line'                        line
+Zgamma       Z\gamma            'Z gamma line'                            line
+points       points             'specific benchmarks DM models'           benchmark
+KK           \mathrm{KK}        'Kaluza-Klein DM'                         model
+triplett     triplett           'Pure WIMP Triplett'                      model
+quintuplett  quintuplett        'Pure WIMP Quintuplett'                   model
+4e           2(e^{+}e^{-})      'four-electron final state via mediator'  continuum
+4mu          2(\mu^{+}\mu^{-})  'four-muon final state via mediator'      continuum

@@ -9,10 +9,16 @@ and the package is `gdmbounds` — repo, package and PyPI name are deliberately 
 
 ## People
 
-- **Michele Doro** (professor, Univ. Padova) — initial idea, maintainer.
-- **Giacomo D'Amico** — active collaborator; co-author of the casting/recasting
-  methods that macro-function 3 will implement.
-- Earlier contributors are listed in `contributions.md`.
+The software is authored by **Michele Doro** (professor, Univ. Padova) and
+**Giacomo D'Amico**, who together published the casting/recasting methods that
+macro-function 3 will implement. Earlier contributors, including the original
+framework author, are credited in `contributions.md` but are not authors of the
+current software.
+
+**Author lists inside ECSV headers are citations, not project authorship.** They
+name the authors of the paper a bound was transcribed from, and must never be
+edited to reflect who works on gDMbounds. The same goes for filenames that cite
+a paper, such as `modelpredictions/wimp_huetten2017_*`.
 
 **Archived work:** the `aleksandra` branch holds sandbox material that has been
 deliberately removed from `main`. Do not merge it, copy from it, or use it as a
@@ -51,9 +57,10 @@ description of what exists today.
 - **Licensing is split**: code under BSD-3-Clause (`LICENSE`), the bound database
   under CC-BY-4.0 (`LICENSE-DATA`). The old combined CC-BY-NC-SA-3.0 is kept as
   `LICENSE-legacy-CC-BY-NC-SA-3.0` and still governs `legacy/`.
-- **Instrument and target classes** (IACT / satellite / shower-front; dSph /
-  cluster / ...) belong in the legend ECSV files as an extra column, not in a
-  Python dictionary — data stays data. *Not yet added.*
+- **Instrument and target classes** live in the legend ECSV files as an extra
+  column, not in a Python dictionary — data stays data. The canonical class sets
+  and their meanings are in `schema.py` (`INSTRUMENT_CLASSES`, `TARGET_CLASSES`,
+  `CHANNEL_SPECTRA`) and reach users through `Vocabulary.describe()`.
 - **Every bound sits under the instrument its header declares.** There is no
   `authors/` directory: a forecast by individual authors lives under its
   instrument and is marked `origin: "author"`, so it can be included or excluded
@@ -68,6 +75,7 @@ gdmbounds/          the package
   legends/          controlled vocabularies: instruments, channels, targets
   modelpredictions/ theory curves (thermal relic, GAMBIT scan)
 tests/              schema validation; run with pytest
+  quality.py        checks on the numbers, kept separate from the schema
 tools/              one-off migration scripts, kept as a record
 unconverted/        raw digitised material not yet transcribed into bounds
 .github/workflows/  CI: schema validation, lint, and wheel contents
@@ -80,8 +88,10 @@ sandbox/<name>/     per-person scratch work; nothing in the package imports from
 
 363 bound files under `gdmbounds/bounds/<instrument>/`. Instrument directories:
 `collider`, `cta`, `dampe`, `directsearches`, `hawc`, `hess`, `lat`, `lhaaso`,
-`magic`, `multi-inst`, `veritas`. ASKAP appears in the legend but has no bounds:
-its directory held four raw text files and no ECSV, now in `unconverted/`.
+`magic`, `multi-inst`, `veritas`. There was an `askap/` directory holding four raw
+text files and no ECSV; it is now in `unconverted/`. ASKAP is not in
+`legend_instruments` and never was, so — like the old `authors/` directory — it
+was invisible to the loader, which globs by legend key.
 
 **Filename convention:**
 
@@ -113,11 +123,43 @@ the filename, and provenance only in which directory a file happened to sit in.
 `sigmav_hi`) with no central value, and that satisfies the schema. Some stacked-dSph
 files carry one column per member galaxy.
 
+## Classification axes
+
+These are what makes "plot every IACT bound" or "every dwarf spheroidal"
+expressible. Four exist; two are proposed and not yet built.
+
+| Axis | Where it lives | State |
+|---|---|---|
+| annihilation vs decay | `mode` key | done |
+| collaboration vs author | `origin` key | done |
+| detection technique | `class` in `legend_instruments` | done |
+| target type | `class` in `legend_targets` | done |
+| line vs continuum | `spectrum` in `legend_channels` | done |
+| measured limit vs projected sensitivity | — | **proposed** |
+| DM density profile assumed | filename qualifier only | **proposed** |
+
+The last two matter more than they look. 48 bounds are projected sensitivities
+(45 CTA, 3 LHAASO) marked only by a `_sens` in the filename; plotting one beside
+a measured limit without distinguishing them is misleading. And 78 bounds carry a
+profile assumption (`_nfw`, `_einasto`, `_iso`, `_burkert`) that determines
+whether two limits are comparable at all.
+
 ## State
 
-All 363 bounds satisfy the schema; `pytest tests/ -q` is green (366 tests). CI runs
-that check, `ruff`, and a wheel build that asserts the bounds are actually inside
-the package.
+All 363 bounds satisfy the schema. `pytest tests/ -q` is green — 713 passing, 25
+skipped. CI runs that check, `ruff`, and a wheel build that asserts the bounds are
+actually inside the package.
+
+The 25 skips are quarantined in `tests/test_data_quality.py`: bounds whose *numbers*
+are unusable even though the file is well-formed. Twenty-three have points out of
+order or repeated, consistent with digitisation noise. Two are **closed contours** —
+`lat_2023_sagittarius_ann_bb` and `magic_2018_perseuscluster_dec_WW` climb in mass,
+turn, and return to within a few percent of where they started. A closed contour is
+a region, not an upper limit, and cannot be plotted or interpolated as one. Both need
+their source papers checked.
+
+The quarantine is a ratchet: a new bad file fails the suite, and a quarantined file
+that gets fixed also fails until it is removed from the list.
 
 Built so far: the schema layer only. **Not yet written** — catalogue loading and
 metadata search, selection by criterion, plotting, and recasting. `legacy/dmbounds_old.py`
