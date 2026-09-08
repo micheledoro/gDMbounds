@@ -1,0 +1,36 @@
+# %ECSV 0.9
+# %Part of https://github.com/micheledoro/gDMbounds under the
+# %Creative Commons Attribution 4.0 International License, see LICENSE-DATA
+# ---
+# datatype:
+# - {name: shortname  , unit:  , datatype: string , description: experiment short name     }
+# - {name: longname   , unit:  , datatype: string , description: experiment long name      }
+# - {name: class     , unit:  , datatype: string , description: detection technique   }
+# meta: !!omap
+# - {comment:        'Legend for experiment names'}
+# schema : astropy -2.0
+
+shortname       longname                     class
+
+magic           MAGIC                        iact
+hess            H.E.S.S.                     iact
+veritas         VERITAS                      iact
+whipple         WHIPPLE                      iact
+cangaroo        CANGAROO                     iact
+cta             CTA                          iact
+
+lat             FERMI-LAT                    satellite
+agile           AGILE                        satellite
+dampe           DAMPE                        satellite
+
+nustar          NuSTAR                       xray
+
+lhaaso          LHAASO                       swd
+hawc            HAWC                         swd
+swgo            SWGO                         swd
+
+collider        'Collider searches'          collider
+directsearches  'Direct detection'           direct
+
+multi-inst      Multi-Instrument             combined
+mwa             'Murchison Widefield Array'  radio

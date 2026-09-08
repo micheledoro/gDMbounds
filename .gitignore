@@ -4,3 +4,16 @@
 **/.ipynb_checkpoints/
 sandbox/aleksandra/outputs/*.png
 sandbox/aleksandra/outputs/*/*.png
+
+# Build artefacts
+*.egg-info/
+build/
+dist/
+__pycache__/
+.pytest_cache/
+
+# Third-party code someone cloned into a sandbox rather than depending on it.
+# HDMSpectra is a public MIT package (github.com/nickrodd/HDMSpectra); it was
+# committed here as a gitlink with no .gitmodules entry, which broke
+# `git submodule status` and gave every clone an empty directory.
+sandbox/kumar/HDMSpectra/

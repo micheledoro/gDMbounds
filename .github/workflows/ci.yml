@@ -1,0 +1,83 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      # Every bound file must parse and satisfy the schema. A single malformed
+      # legend entry once broke every import of this package for eleven months;
+      # this job exists so that cannot happen again.
+      - name: Validate the database
+        run: pytest tests/ -q
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install ruff
+      - run: ruff check gdmbounds tools
+
+  package:
+    name: Build and check the wheel
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install build twine
+      - run: python -m build
+      - run: twine check dist/*
+
+      # The database is the point of the package: a wheel shipping the code
+      # without the bounds would import cleanly and be useless. The contents must
+      # match the source tree exactly, not merely be numerous — setuptools keeps a
+      # build/lib directory that retains renamed and deleted files, and a loose
+      # check happily passes while the wheel carries stale duplicates.
+      - name: Verify the wheel matches the source tree
+        run: |
+          python - <<'PY'
+          import glob, zipfile
+          from pathlib import Path
+
+          wheel = glob.glob("dist/*.whl")[0]
+          shipped = {
+              n[len("gdmbounds/"):]
+              for n in zipfile.ZipFile(wheel).namelist()
+              if n.startswith("gdmbounds/") and n.endswith(".ecsv")
+          }
+          source = {
+              str(p.relative_to("gdmbounds"))
+              for p in Path("gdmbounds").rglob("*.ecsv")
+          }
+          missing = sorted(source - shipped)
+          extra = sorted(shipped - source)
+          print(f"{len(shipped)} data files in {wheel}")
+          assert not missing, f"absent from the wheel: {missing[:10]}"
+          assert not extra, f"in the wheel but not in the source tree: {extra[:10]}"
+          PY

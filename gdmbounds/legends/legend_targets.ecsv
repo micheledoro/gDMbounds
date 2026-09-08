@@ -1,0 +1,87 @@
+# %ECSV 0.9
+# %Part of https://github.com/micheledoro/gDMbounds under the
+# %Creative Commons Attribution 4.0 International License, see LICENSE-DATA
+# ---
+# datatype:
+# - {name: shortname  , unit:  , datatype: string , description: target short name     }
+# - {name: longname   , unit:  , datatype: string , description: target long name      }
+# - {name: class     , unit:  , datatype: string , description: target type           }
+# meta: !!omap
+# - {comment:        'Legend of target names and acronyms'}
+# schema : astropy -2.0
+
+shortname       longname                              class
+
+# GALACTIC CENTER AREA
+sgra            'MW Centre/Sgr A*'                    gc
+gc              'MW Inner Halo'                       gc
+gchalo          'MW Outer Halo'                       gc
+galplane        'Galactic Plane Survey'               gc
+
+# DSPH
+booetes1        'Bo\"{o}tes I dSph'                   dsph
+canesvec1       'Canes Ven I - II dSph'               dsph
+canesvec2       'Canes Ven I - II dSph'               dsph
+
+canismajor      'Canis Major dSph'                    dsph
+carina          'Carina dSph'                         dsph
+comaberenices   'Coma Berenices dSph'                 dsph
+draco           'Draco dSph'                          dsph
+draco2          'Draco II dSph'                       dsph
+fornaxdsph      'Fornax dSph'                         dsph
+grus2           'Grus II dSph cand.'                  dsph
+hercules        'Hercules dSph'                       dsph
+leo1            'Leo I dSph'                          dsph
+leo2            'Leo II dSph'                         dsph
+leo3            'Leo III dSph'                        dsph
+leo4            'Leo IV dSph'                         dsph
+leo5            'Leo V dSph'                          dsph
+reticulum2      'Reticulum II dSph'                   dsph
+sagittarius     'Sagittarius dSph'                    dsph
+sculptor        'Sculptor dSph'                       dsph
+segue1          'Segue I dSph'                        dsph
+segue2          'Segue II dSph'                       dsph
+sextans         'Sextans dSph'                        dsph
+triangulum2     'Triangulum II dSph cand.'            dsph
+tucana2         'Tucana II dSph'                      dsph
+tucana3         'Tucana III dSph'                     dsph
+tucana4         'Tucana IV dSph'                      dsph
+ursamajor2      'Ursa Major II dSph'                  dsph
+ursaminor       'Ursa Minor dSph'                     dsph
+willman1        'Willman I dSph'                      dsph
+
+multidsph       'Combined dSphs'                      dsph
+
+# UNID
+1fglJ23470710   'FGL J2347.3+0710 (and so on)'        unid
+
+# Globular clusters
+m15             'M15'                                 globular
+ngc6388         'NGC 6388'                            globular
+
+# Galaxies
+m31             'M31'                                 galaxy
+m33             'M32'                                 galaxy
+wlm             'WLM'                                 galaxy
+LMC             'LMC'                                 galaxy
+
+# Galaxy Clusters
+abell2029       'Abell 2029'                          cluster
+perseuscluster  'Perseus (Abell 426)'                 cluster
+fornaxcluster   'Fornax (Abell S0373)'                cluster
+comacluster     'Coma (Abell 1656)'                   cluster
+multicluster    'Combined galaxy clusters'            cluster
+m49             'M49'                                 cluster
+ngc4636         'NGC 4636'                            cluster
+centaurus       'Centaurus'                           cluster
+awm7            'AWM 7'                               cluster
+
+#diffuse
+egbg            'Extragalactic gamma-ray background'  diffuse
+
+atlascms        'ATLAS and CMS (LHC)'                 collider
+coupp           COUPP                                 direct
+
+#other
+diffuse         'Diffuse emission'                    diffuse
+darksubhalos    'Dark matter subhalos'                subhalo
