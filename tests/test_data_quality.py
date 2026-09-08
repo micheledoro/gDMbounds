@@ -30,8 +30,13 @@ NEEDS_ADJUDICATION = {
 }
 
 #: Curves with points out of order or repeated, consistent with noise in the
-#: digitisation of a published figure. Sorting by mass is very probably the right
-#: fix, but it edits scientific data, so it waits for a decision.
+#: digitisation of a published figure. Sorting by mass reorders rows without
+#: changing any value, but it still edits a published curve, so it waits for a
+#: decision on each file.
+#:
+#: One is already settled: ``magic_2022_segue1_ann_bb`` had three rows permuted,
+#: and upstream had independently sorted the same file. Reordering it changed no
+#: value and it has left the quarantine.
 NEEDS_RESORTING = {
     "cta_2021_gc_ann_WW_sens_mstonly.ecsv": "unsorted-mass",
     "dampe_2022_gc_ann_gammagamma_r16einasto.ecsv": "unsorted-mass",
@@ -51,7 +56,6 @@ NEEDS_RESORTING = {
     "magic_2022_comaberenices_ann_hh.ecsv": "unsorted-mass",
     "magic_2022_multidsph_ann_WW.ecsv": "unsorted-mass",
     "magic_2022_segue1_ann_ZZ.ecsv": "unsorted-mass",
-    "magic_2022_segue1_ann_bb.ecsv": "unsorted-mass",
     "magic_2022_segue1_ann_mumu.ecsv": "unsorted-mass",
     "magic_2022_segue1_ann_tautau.ecsv": "unsorted-mass",
     "multi-inst-magic-lat_2016_multidsph_ann_mumu.ecsv": "unsorted-mass",
@@ -102,7 +106,7 @@ def test_curve_is_usable(path):
 
 def test_quarantine_is_shrinking_not_growing():
     """A ratchet: the count is recorded so an increase has to be deliberate."""
-    assert len(QUARANTINE) <= 24, (
+    assert len(QUARANTINE) <= 23, (
         f"the quarantine has grown to {len(QUARANTINE)}; bounds are meant to be "
         "fixed and removed from it, not added to it"
     )
