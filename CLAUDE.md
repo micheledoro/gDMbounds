@@ -77,7 +77,7 @@ gdmbounds/          the package
 tests/              schema validation; run with pytest
   quality.py        checks on the numbers, kept separate from the schema
   catalog.py        every header in one table, with selection over it
-tools/              one-off migration scripts, kept as a record
+tools/              migration scripts and data_review.py, which regenerates DATA_REVIEW.md
 unconverted/        material the schema cannot yet hold, including ALP contours
 .github/workflows/  CI: schema validation, lint, and wheel contents
 legacy/             pre-2026 code, not shipped, reference only
@@ -161,7 +161,12 @@ a region, not an upper limit, and cannot be plotted or interpolated as one. Both
 their source papers checked.
 
 The quarantine is a ratchet: a new bad file fails the suite, and a quarantined file
-that gets fixed also fails until it is removed from the list.
+that gets fixed also fails until it is removed from the list. The same pattern guards
+against a bound duplicating another's curve.
+
+`DATA_REVIEW.md` collects everything that passes the schema but still needs a human
+to read a paper. It is **generated** by `tools/data_review.py` — re-run that rather
+than editing it, or it will drift from the data it describes.
 
 Built so far: `schema` (what a bound is), `quality` (whether its numbers are
 usable) and `catalog` (every header in one table, with composable selection).

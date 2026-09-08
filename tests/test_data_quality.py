@@ -118,3 +118,44 @@ def test_summary_of_outstanding_problems(capsys):
     with capsys.disabled():
         print("\n  outstanding curve problems:", dict(kinds))
 
+
+
+#: Bounds whose curves are byte-identical to another's. Two measurements do not
+#: produce the same numbers, so each pair is a copy-paste that needs a paper to
+#: resolve. Listed here so a *new* duplicate fails the suite.
+KNOWN_IDENTICAL = {
+    frozenset({
+        "magic_2022_comaberenices_ann_mumu.ecsv",
+        "magic_2022_multidsph_ann_mumu.ecsv",
+    }),
+}
+
+
+def test_no_new_bound_duplicates_another():
+    """A curve repeated in two files means one of them holds the wrong data."""
+    import collections
+    import hashlib
+
+    import numpy as np
+    from astropy.io import ascii
+
+    seen = collections.defaultdict(list)
+    for path in iter_bound_files():
+        table = ascii.read(path, format="ecsv")
+        columns = [c for c in ("mass", "sigmav", "tau") if c in table.colnames]
+        if len(columns) < 2:
+            continue
+        block = np.column_stack([np.asarray(table[c], float) for c in columns])
+        seen[hashlib.md5(np.ascontiguousarray(block)).hexdigest()].append(path.name)
+
+    found = {frozenset(names) for names in seen.values() if len(names) > 1}
+    unexpected = found - KNOWN_IDENTICAL
+    assert not unexpected, (
+        "these bounds have curves identical to another's:\n  "
+        + "\n  ".join(" == ".join(sorted(g)) for g in unexpected)
+    )
+    stale = KNOWN_IDENTICAL - found
+    assert not stale, (
+        "these are no longer identical; remove them from KNOWN_IDENTICAL:\n  "
+        + "\n  ".join(" == ".join(sorted(g)) for g in stale)
+    )
