@@ -2,7 +2,11 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    # The long-lived working branches are listed so that every commit is tested
+    # as it lands. Without them CI would only run once a pull request is opened,
+    # and work accumulating on a branch for weeks would go unchecked until the
+    # moment it is hardest to unpick.
+    branches: [main, repo_fix, data_fix, repo_dev]
   pull_request:
 
 jobs:
