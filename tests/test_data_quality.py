@@ -17,6 +17,10 @@ from gdmbounds.schema import iter_bound_files
 #: closed contours — a signal region rather than an upper limit — and the source
 #: papers need checking before deciding whether the file is mislabelled or the
 #: transcription is wrong.
+#:
+#: Both currently carry ``statement: "limit"``, assigned mechanically from the
+#: filename. If the papers confirm they are signal regions, that key becomes
+#: ``"detection"`` and these entries leave the quarantine.
 NEEDS_ADJUDICATION = {
     "lat_2023_sagittarius_ann_bb.ecsv": "closed contour; check the paper",
     "magic_2018_perseuscluster_dec_WW.ecsv": "closed contour; check the paper",

@@ -110,9 +110,9 @@ target sample is `multi<class>[-<n>][-<member>...]`, e.g. `multidsph-4-booetes1-
 for grouping.
 
 **Header metadata** (`REQUIRED_META` in `schema.py`): `reference`, `doi`, `arxiv`,
-`instrument`, `origin`, `year`, `source`, `mode`, `channel`, `confidence`,
-`dmfraction`, `obs_time`, `figure`, `comment`, `status`. Optional: `authors`,
-`journalref`.
+`instrument`, `origin`, `statement`, `year`, `source`, `mode`, `channel`,
+`confidence`, `dmfraction`, `obs_time`, `figure`, `comment`, `status`. Optional:
+`authors`, `journalref`, `profile`.
 
 `mode` (`ann`/`dec`) and `origin` (`collaboration`/`author`) were both added in
 the 2026 migration. Neither existed before: annihilation-vs-decay lived only in
@@ -128,26 +128,25 @@ files carry one column per member galaxy.
 These are what makes "plot every IACT bound" or "every dwarf spheroidal"
 expressible. Four exist; two are proposed and not yet built.
 
-| Axis | Where it lives | State |
+| Axis | Where it lives | Spread |
 |---|---|---|
-| annihilation vs decay | `mode` key | done |
-| collaboration vs author | `origin` key | done |
-| detection technique | `class` in `legend_instruments` | done |
-| target type | `class` in `legend_targets` | done |
-| line vs continuum | `spectrum` in `legend_channels` | done |
-| measured limit vs projected sensitivity | — | **proposed** |
-| DM density profile assumed | filename qualifier only | **proposed** |
+| annihilation vs decay | `mode` key | 316 ann / 47 dec |
+| collaboration vs author | `origin` key | 358 / 5 |
+| measured vs projected | `statement` key | 315 limit / 48 sensitivity |
+| halo profile assumed | `profile` key, optional | 88 stated / 275 not |
+| detection technique | `class` in `legend_instruments` | iact, satellite, swd, radio, collider, direct, combined |
+| target type | `class` in `legend_targets` | dsph, cluster, globular, galaxy, gc, diffuse, subhalo, unid |
+| line vs continuum | `spectrum` in `legend_channels` | continuum, line, model, benchmark |
 
-The last two matter more than they look. 48 bounds are projected sensitivities
-(45 CTA, 3 LHAASO) marked only by a `_sens` in the filename; plotting one beside
-a measured limit without distinguishing them is misleading. And 78 bounds carry a
-profile assumption (`_nfw`, `_einasto`, `_iso`, `_burkert`) that determines
-whether two limits are comparable at all.
+Two things to hold on to. All 45 CTA bounds are `sensitivity`, which is right —
+CTA is not operating; treat any future CTA bound claiming `limit` as suspect until
+checked. And **a missing `profile` means the filename never said, not that no
+profile was assumed** — every J-factor rests on one. Filtering on `profile` drops
+275 bounds, and any selection doing so should say it is.
 
 ## State
 
-All 363 bounds satisfy the schema. `pytest tests/ -q` is green — 713 passing, 25
-skipped. CI runs that check, `ruff`, and a wheel build that asserts the bounds are
+All 363 bounds satisfy the schema. `pytest tests/ -q` is green — 718 passing, 25 skipped. CI runs that check, `ruff`, and a wheel build that asserts the bounds are
 actually inside the package.
 
 The 25 skips are quarantined in `tests/test_data_quality.py`: bounds whose *numbers*

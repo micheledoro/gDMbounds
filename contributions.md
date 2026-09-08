@@ -5,7 +5,7 @@ Last update 2026.09.08
 The project is authored and maintained by:
 
 - Michele Doro (professor, Univ. Padova)
-- Giacomo D'Amico
+- Giacomo D'Amico (MSCA Fellow, Univ. Padova)
 
 ## Earlier contributors
 

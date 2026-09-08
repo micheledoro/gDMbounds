@@ -11,7 +11,7 @@ requires-python = ">=3.9"
 license = { text = "BSD-3-Clause" }
 authors = [
     { name = "Michele Doro", email = "michele.doro@unipd.it" },
-    { name = "Giacomo D'Amico" },
+    { name = "Giacomo D'Amico" },  # MSCA Fellow, Univ. Padova
 ]
 keywords = ["dark matter", "gamma-ray", "astroparticle", "indirect detection"]
 classifiers = [

@@ -34,6 +34,7 @@ REQUIRED_META = (
     "arxiv",
     "instrument",
     "origin",
+    "statement",
     "year",
     "source",
     "mode",
@@ -47,7 +48,12 @@ REQUIRED_META = (
 )
 
 #: Recognised but not mandatory.
-OPTIONAL_META = ("authors", "journalref")
+#:
+#: ``profile`` is optional because the filename records it for only about a
+#: quarter of the database. Its absence means the assumed halo profile was not
+#: written down, **not** that none was assumed — every J-factor rests on one. Any
+#: selection filtering on ``profile`` silently drops the rest, and should say so.
+OPTIONAL_META = ("authors", "journalref", "profile")
 
 #: Who produced a bound. A forecast or reinterpretation published by individual
 #: authors is not the same kind of result as a collaboration measurement, and
@@ -75,6 +81,27 @@ MODE_COLUMNS = {
 
 #: Accepted units for the mass column.
 MASS_UNITS = ("GeV", "TeV")
+
+#: What kind of statement a bound makes. Mixing these on one figure without
+#: distinguishing them is the most misleading thing this database could do: a
+#: projected sensitivity for an instrument that is not yet operating is not
+#: evidence about the universe in the way a measured limit is.
+STATEMENTS = {
+    "limit": "upper limit derived from observed data",
+    "sensitivity": "projected reach of an instrument or exposure",
+    "detection": "claimed signal region rather than an exclusion",
+}
+
+#: Assumed dark matter halo density profile. Two limits computed under different
+#: profiles are not directly comparable, because the J-factor differs.
+PROFILES = {
+    "nfw": "Navarro-Frenk-White, including contracted and rescaled variants",
+    "einasto": "Einasto",
+    "burkert": "Burkert",
+    "isothermal": "isothermal / cored isothermal",
+    "cored": "cored, family unspecified",
+    "cusped": "cusped, family unspecified",
+}
 
 #: How an instrument detects gamma rays. Bounds from different techniques cover
 #: different energy ranges and carry different systematics, so this is the axis
@@ -283,6 +310,16 @@ def check_file(path: Path, vocabulary: Vocabulary | None = None) -> list[Issue]:
     origin = str(meta.get("origin", ""))
     if origin and origin not in ORIGINS:
         report("bad-value", f"origin '{origin}' is not one of {sorted(ORIGINS)}")
+
+    statement = str(meta.get("statement", ""))
+    if statement and statement not in STATEMENTS:
+        report(
+            "bad-value", f"statement '{statement}' is not one of {sorted(STATEMENTS)}"
+        )
+
+    profile = str(meta.get("profile", ""))
+    if profile and profile not in PROFILES:
+        report("bad-value", f"profile '{profile}' is not one of {sorted(PROFILES)}")
 
     if vocabulary is not None:
         instrument = base_instrument(str(meta.get("instrument", "")))

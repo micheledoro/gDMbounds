@@ -11,6 +11,7 @@
 # - {arxiv:            "1009.5988"}
 # - {instrument:       "lat"}
 # - {origin:           "collaboration"}
+# - {statement:        "limit"}
 # - {year:             "2010"}
 # - {source:           "comacluster"}
 # - {mode:             "dec"}

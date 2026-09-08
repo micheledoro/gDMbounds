@@ -13,6 +13,7 @@
 # - {arxiv:            "1703.04937"}
 # - {instrument:       "veritas"}
 # - {origin:           "collaboration"}
+# - {statement:        "limit"}
 # - {year:             "2017"}
 # - {source:           "multidsph-3-booetes1-draco-ursaminor"}
 # - {mode:             "ann"}

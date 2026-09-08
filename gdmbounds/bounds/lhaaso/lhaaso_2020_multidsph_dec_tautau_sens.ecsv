@@ -11,6 +11,7 @@
 # - {arxiv:            "1910.05017"}
 # - {instrument:       "lhaaso"}
 # - {origin:           "collaboration"}
+# - {statement:        "sensitivity"}
 # - {year:             "2020"}
 # - {source:           "multidsph-19"}
 # - {mode:             "dec"}

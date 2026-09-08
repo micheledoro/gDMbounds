@@ -11,6 +11,7 @@
 # - {arxiv:            "1601.06590"}
 # - {instrument:       "multi-inst-magic-lat"}
 # - {origin:           "collaboration"}
+# - {statement:        "limit"}
 # - {year:             "2016"}
 # - {source:           "multidsph-15"}
 # - {mode:             "ann"}

@@ -87,10 +87,34 @@ truth; the filename is a human-readable convention that must agree with it.
 `mode` is `ann` or `dec`. The channel is the fifth underscore-separated token,
 not the last — qualifiers such as `_sens`, `_nfw`, `_einasto`, `_measured` follow it.
 
-Required header keys: `reference`, `doi`, `arxiv`, `instrument`, `origin`, `year`,
-`source`, `mode`, `channel`, `confidence`, `dmfraction`, `obs_time`, `figure`,
-`comment`, `status`. `origin` distinguishes a collaboration's own result from a
-forecast or reinterpretation published by individual authors.
+Required header keys: `reference`, `doi`, `arxiv`, `instrument`, `origin`,
+`statement`, `year`, `source`, `mode`, `channel`, `confidence`, `dmfraction`,
+`obs_time`, `figure`, `comment`, `status`. Optional: `authors`, `journalref`,
+`profile`.
+
+## Selecting by class
+
+Bounds are classified along several axes so that a whole kind of result can be
+included or excluded deliberately rather than by listing files.
+
+```python
+v = gdmbounds.load_vocabulary()
+
+v.instruments_in("iact")     # every Cherenkov telescope
+v.targets_in("cluster")      # every galaxy cluster
+v.channels_with("line")      # channels giving a sharp spectral feature
+
+print(v.describe())          # every class and its members
+```
+
+In the headers: `mode` is annihilation or decay; `origin` separates a
+collaboration's own result from a forecast by individual authors; `statement`
+separates a measured limit from a projected sensitivity — all 45 CTA entries are
+projections, since CTA is not yet operating.
+
+`profile` records the assumed halo density profile, and is **optional**: the
+filename states it for 88 of 363 bounds. A missing `profile` means it was not
+written down, not that none was assumed. Filtering on it excludes the other 275.
 
 Tables carry `mass` (GeV or TeV) and either `sigmav` (cm3s-1) or `tau` (s).
 A sensitivity curve may give only a band, `sigmav_lo` and `sigmav_hi`.

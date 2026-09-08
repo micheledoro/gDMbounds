@@ -11,6 +11,7 @@
 # - {arxiv:            "2406.08698"}
 # - {instrument:       "lhaaso"}
 # - {origin:           "collaboration"}
+# - {statement:        "limit"}
 # - {year:             "2024"}
 # - {source:           "multidsph"}
 # - {mode:             "dec"}
