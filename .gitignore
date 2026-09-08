@@ -17,3 +17,6 @@ __pycache__/
 # committed here as a gitlink with no .gitmodules entry, which broke
 # `git submodule status` and gave every clone an empty directory.
 sandbox/kumar/HDMSpectra/
+
+# Example figures are generated, never committed: see tools/example_figures.py
+figures/

@@ -107,6 +107,18 @@ Legend entries name only what varies within the selection. Eleven H.E.S.S. bound
 on Fornax that differ only by halo profile are labelled by profile, not by eleven
 repetitions of "H.E.S.S. 2012".
 
+### Seeing it
+
+```bash
+python tools/example_figures.py     # writes figures/
+open figures/                       # or your file browser
+```
+
+Five examples, each showing something the plotting layer decides for you. The
+figures are not committed: a PNG in the repository goes stale the moment the data
+or the code changes, and there is no cheap way to test that it has not — so the
+script is what is kept, and the pictures are whatever it produces today.
+
 ### Styles
 
 ```python
