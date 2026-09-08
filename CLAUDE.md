@@ -1,102 +1,105 @@
 # gDMbounds
 
-A database and toolkit for gamma-ray indirect Dark Matter searches: published
-experimental limits on DM annihilation and decay, the means to plot them, and
+A database and toolkit for indirect Dark Matter searches: published experimental
+limits on DM annihilation and decay, the means to select and plot them, and
 (planned) methods to recast them.
 
 Successor to `moritzhuetten/dmbounds`; the canonical repo is `micheledoro/gDMbounds`
 and the package is `gdmbounds` — repo, package and PyPI name are deliberately aligned.
 
+## Picking up on another machine
+
+```bash
+git clone git@github.com:micheledoro/gDMbounds.git
+cd gDMbounds
+conda env create -f environment.yml     # or: pip install -e ".[dev]"
+conda activate gdmbounds
+pytest tests/ -q                        # expect 821 passed, 23 skipped
+```
+
+`environment.yml` installs the dependencies through **pip inside a conda
+environment**, deliberately: pip is what CI uses, so the local resolution matches
+the one the tests run against. Letting conda solve them produced astropy 6.1
+beside numpy 2.5, a pair that cannot import — astropy 6.1 calls `np.in1d`, which
+numpy 2 removed.
+
+**Unmerged work lives on `repo_dev`.** The plotting layer and figure styles are
+there, three commits ahead of `main`, with no pull request opened yet.
+
 ## People
 
 The software is authored by **Michele Doro** (professor, Univ. Padova) and
-**Giacomo D'Amico**, who together published the casting/recasting methods that
-macro-function 3 will implement. Earlier contributors, including the original
-framework author, are credited in `contributions.md` but are not authors of the
+**Giacomo D'Amico** (MSCA Fellow, Univ. Padova), who together published the
+casting/recasting methods that macro-function 3 will implement. Earlier
+contributors are credited in `contributions.md` but are not authors of the
 current software.
 
 **Author lists inside ECSV headers are citations, not project authorship.** They
 name the authors of the paper a bound was transcribed from, and must never be
-edited to reflect who works on gDMbounds. The same goes for filenames that cite
-a paper, such as `modelpredictions/wimp_huetten2017_*`.
-
-**Archived work:** the `aleksandra` branch holds sandbox material that has been
-deliberately removed from `main`. Do not merge it, copy from it, or use it as a
-reference. It exists as a record only. ECSV header corrections under
-`gdmbounds/bounds/lat/` that originated there are format fixes to project data
-and intentionally remain in `main`.
+edited to reflect who works on gDMbounds. The same goes for filenames that cite a
+paper, such as `modelpredictions/wimp_huetten2017_*`.
 
 ## Where the project is going
 
-Four macro-functions define the target. They are a design brief, not a
-description of what exists today.
+1. **Archive.** Curated collection of published limits, including historical ones
+   — the value is partly in preserving results that would otherwise stay locked
+   in the figures of old papers.
+2. **Plotting.** *Built.* Select bounds by criterion and draw them, in four styles.
+   **Still open:** the delivery mechanism — interactive web, downloadable scripts,
+   pre-rendered images. Deferred until the API settles.
+3. **Recasting.** Apply the Doro–D'Amico methods to transform limits between
+   assumptions. **Nothing exists yet.** This is the next substantial piece.
+4. **Professional structure.** *Built.* CI, packaging, generated documentation.
 
-1. **Archive.** Curated collection of published gamma-ray limits on DM
-   annihilation and decay, including historical ones — the value is partly in
-   preserving results that would otherwise be lost in old papers.
-2. **Plotting.** Let a user select bounds and plot them, either explicitly or
-   semi-automatically by criterion: all bounds from one experiment, one
-   annihilation channel, one class of telescope, and so on. Multiple styles.
-   **Open question:** delivery mechanism — interactive web, downloadable
-   scripts, pre-rendered images, or a combination. Deliberately deferred until
-   the library API is stable.
-3. **Recasting.** Apply the casting/recasting methods published by Doro and
-   D'Amico to transform limits between assumptions. **Nothing exists yet.**
-4. **Professional structure.** Real continuous integration, and a presentation
-   layer that exposes data and methods to a wider public.
+## Branching
 
-## Decisions taken
+| branch | for |
+|---|---|
+| `repo_dev` | new capability — plotting, recasting |
+| `repo_fix` | the repository itself — CI, packaging, tests, tooling, docs |
+| `data_fix` | corrections to bounds already in the database |
 
-- **Rebuild rather than repair.** The pre-2026 modules were abandoned mid-refactor
-  and did not import. They were removed; `legacy/dmbounds_old.py` is kept
-  **out of the package** as a reference for behaviour worth reproducing, not as
-  code to extend.
-- **The ECSV header is the source of truth**, the filename a human-readable
-  convention that must agree with it. `gdmbounds/schema.py` defines the contract
-  and the tests enforce it.
-- **Licensing is split**: code under BSD-3-Clause (`LICENSE`), the bound database
-  under CC-BY-4.0 (`LICENSE-DATA`). The old combined CC-BY-NC-SA-3.0 is kept as
-  `LICENSE-legacy-CC-BY-NC-SA-3.0` and still governs `legacy/`.
-- **Instrument and target classes** live in the legend ECSV files as an extra
-  column, not in a Python dictionary — data stays data. The canonical class sets
-  and their meanings are in `schema.py` (`INSTRUMENT_CLASSES`, `TARGET_CLASSES`,
-  `CHANNEL_SPECTRA`) and reach users through `Vocabulary.describe()`.
-- **Every bound sits under the instrument its header declares.** There is no
-  `authors/` directory: a forecast by individual authors lives under its
-  instrument and is marked `origin: "author"`, so it can be included or excluded
-  by query rather than by directory. The author surname is a filename qualifier.
+Plus one short-lived branch per new dataset (`bounds/magic-2023-lines`), closed on
+its own. Commit freely; open a pull request when the work is coherent. CI runs on
+every push to all three, not only on pull requests — see `CONTRIBUTING.md`.
+
+`main` is protected: pull requests only, CI must pass.
+
+Two things that bite with long-lived branches: **rebase on `main` regularly** (a
+stale local clone once met a rewritten remote and untangling it took longer than
+the work it held), and **do not split a coherent change across branches** — put it
+where its centre of gravity is.
 
 ## Layout
 
 ```
-gdmbounds/          the package
+gdmbounds/
   schema.py         what a bound file is, and its validation — everything builds on this
-  bounds/<inst>/    363 ECSV files, one per published limit curve
-  legends/          controlled vocabularies: instruments, channels, targets
-  modelpredictions/ theory curves (thermal relic, GAMBIT scan)
-tests/              schema validation; run with pytest
   quality.py        checks on the numbers, kept separate from the schema
-  catalog.py        every header in one table, with selection over it
+  catalog.py        every header in one table, with composable selection over it
   plotting.py       draws a selection; refuses to mix modes, marks forecasts
   styles.py         palettes and rcParams, applied per call and then withdrawn
-tools/              migration scripts and data_review.py, which regenerates DATA_REVIEW.md
-unconverted/        material the schema cannot yet hold, including ALP contours
-.github/workflows/  CI: schema validation, lint, and wheel contents
+  bounds/<inst>/    385 ECSV files, one per published limit curve
+  legends/          controlled vocabularies: instruments, targets, channels
+  modelpredictions/ theory curves (thermal relic, GAMBIT scan)
+tests/              run with pytest; 821 passing, 23 skipped
+tools/              migration scripts, the two document generators, the figure gallery
+templates/          blank ECSV headers for adding a new bound — with a README
+unconverted/        material the schema cannot hold, including ALP contours
 legacy/             pre-2026 code, not shipped, reference only
-templates/          blank ECSV headers for adding a new bound
-sandbox/<name>/     per-person scratch work; nothing in the package imports from it
+sandbox/<name>/     per-person scratch; nothing in the package imports from it
+figures/            generated by tools/example_figures.py, gitignored
 ```
 
 ## Data model
 
-385 bound files under `gdmbounds/bounds/<instrument>/`. Instrument directories:
-`collider`, `ctao`, `dampe`, `directsearches`, `hawc`, `hess`, `lat`, `lhaaso`,
-`magic`, `multi-inst`, `mwa`, `nustar`, `veritas`. The archive is no longer
-purely gamma-ray: MWA is radio and NuSTAR is X-ray, and NuSTAR constrains dark
-matter at **keV** masses, so `MASS_UNITS` admits keV and MeV. There was an `askap/` directory holding four raw
-text files and no ECSV; it is now in `unconverted/`. ASKAP is not in
-`legend_instruments` and never was, so — like the old `authors/` directory — it
-was invisible to the loader, which globs by legend key.
+385 bounds under `gdmbounds/bounds/<instrument>/`: `collider`, `ctao`, `dampe`,
+`directsearches`, `hawc`, `hess`, `lat`, `lhaaso`, `magic`, `multi-inst`, `mwa`,
+`nustar`, `veritas`.
+
+The archive is **no longer purely gamma-ray**: MWA is radio, NuSTAR is X-ray, and
+NuSTAR constrains dark matter at **keV** masses, so `MASS_UNITS` admits keV and MeV
+alongside GeV and TeV.
 
 **Filename convention:**
 
@@ -104,109 +107,138 @@ was invisible to the loader, which globs by legend key.
 <instrument>_<year>_<source>_<mode>_<channel>[_<qualifiers>].ecsv
 ```
 
-`mode` is `ann` or `dec`. The channel is the **fifth underscore-separated token** —
-not the last: qualifiers such as `_sens`, `_einasto`, `_nfw`, `_measured`,
-`_benchmark`, `_substructure-high` may follow it, and may themselves contain
-hyphens. Tokens are not all lowercase: `LMC` and `WW` are correct as written.
+`mode` is `ann` or `dec`. The channel is the **fifth underscore-separated token**,
+not the last: qualifiers such as `_sens`, `_nfw`, `_noJerror`, `_substructure-high`
+follow it and may contain hyphens. Tokens are not all lowercase — `LMC` and `WW`
+are correct as written.
 
 **Composite identifiers:** a joint analysis is `multi-inst-<a>-<b>`; a stacked
-target sample is `multi<class>[-<n>][-<member>...]`, e.g. `multidsph-4-booetes1-draco`.
-`schema.base_instrument` and `schema.base_source` collapse these to the token used
-for grouping.
+sample is `multi<class>[-<n>][-<member>...]`. `schema.base_instrument` and
+`schema.base_source` collapse these to the grouping token.
 
-**Header metadata** (`REQUIRED_META` in `schema.py`): `reference`, `doi`, `arxiv`,
-`instrument`, `origin`, `statement`, `year`, `source`, `mode`, `channel`,
-`confidence`, `dmfraction`, `obs_time`, `figure`, `comment`, `status`. Optional:
-`authors`, `journalref`, `profile`.
+**Header metadata** (`REQUIRED_META`): `reference`, `doi`, `arxiv`, `instrument`,
+`origin`, `statement`, `year`, `source`, `mode`, `channel`, `confidence`,
+`dmfraction`, `obs_time`, `figure`, `comment`, `status`. Optional: `authors`,
+`journalref`, `profile`, `bibcode`, `url`.
 
-`mode` (`ann`/`dec`) and `origin` (`collaboration`/`author`) were both added in
-the 2026 migration. Neither existed before: annihilation-vs-decay lived only in
-the filename, and provenance only in which directory a file happened to sit in.
+`mode`, `origin` and `statement` were all added in the 2026 migration. None existed
+before: annihilation-vs-decay lived only in the filename, provenance only in which
+directory a file sat in, and measured-vs-projected only in a `_sens` suffix.
 
-**Table columns:** `mass` (GeV or TeV) always; `sigmav` (cm3s-1) for annihilation,
-`tau` (s) for decay. A sensitivity curve may give only a band (`sigmav_lo` /
-`sigmav_hi`) with no central value, and that satisfies the schema. Some stacked-dSph
-files carry one column per member galaxy.
+**Table columns:** `mass` always; `sigmav` (cm3s-1) for annihilation, `tau` (s) for
+decay. Optional columns are documented in `schema.OPTIONAL_COLUMNS` — containment
+bands, and `sigmav_expected`, the limit expected under the null hypothesis, which
+must never be confused with the observed one.
 
 ## Classification axes
 
-These are what makes "plot every IACT bound" or "every dwarf spheroidal"
-expressible. Four exist; two are proposed and not yet built.
+All seven are built and populated. `VOCABULARY.md` lists every class and its
+members; `python -m gdmbounds` prints the same.
 
-| Axis | Where it lives | Spread |
+| axis | where | spread |
 |---|---|---|
-| annihilation vs decay | `mode` key | 338 ann / 47 dec |
-| collaboration vs author | `origin` key | 357 / 10 |
-| measured vs projected | `statement` key | 319 limit / 48 sensitivity |
-| halo profile assumed | `profile` key, optional | 88 stated / 275 not |
+| annihilation vs decay | `mode` | 338 / 47 |
+| collaboration vs author | `origin` | 375 / 10 |
+| measured vs projected | `statement` | 337 limit / 48 sensitivity |
+| halo profile | `profile`, optional | 92 stated / 293 not |
 | detection technique | `class` in `legend_instruments` | iact, satellite, xray, sfd, radio, collider, direct, combined |
 | target type | `class` in `legend_targets` | dsph, cluster, globular, galaxy, gc, diffuse, subhalo, unid |
 | line vs continuum | `spectrum` in `legend_channels` | continuum, line, model, benchmark |
 
 Two things to hold on to. All 45 CTAO bounds are `sensitivity`, which is right —
-CTAO is not operating; treat any future CTAO bound claiming `limit` as suspect
-until checked. And **a missing `profile` means the filename never said, not that no
-profile was assumed** — every J-factor rests on one. Filtering on `profile` drops
-275 bounds, and any selection doing so should say it is.
+CTAO is not operating; treat a future CTAO bound claiming `limit` as suspect until
+checked. And **a missing `profile` means the filename never said, not that no
+profile was assumed** — every J-factor rests on one. Filtering on it drops 293
+bounds, and a selection doing so should say so.
 
 ## State
 
-All 363 bounds satisfy the schema. `pytest tests/ -q` is green — 788 passing, 23 skipped. CI runs that check, `ruff`, and a wheel build that asserts the bounds are
-actually inside the package.
+All 385 bounds satisfy the schema. `pytest tests/ -q` is green — 821 passing, 23
+skipped. CI runs that, `ruff`, and a wheel build asserting the shipped file set
+matches the source tree exactly.
 
-The 24 skips are quarantined in `tests/test_data_quality.py`: bounds whose *numbers*
-are unusable even though the file is well-formed. Twenty-three have points out of
-order or repeated, consistent with digitisation noise. Two are **closed contours** —
-`lat_2023_sagittarius_ann_bb` and `magic_2018_perseuscluster_dec_WW` climb in mass,
-turn, and return to within a few percent of where they started. A closed contour is
-a region, not an upper limit, and cannot be plotted or interpolated as one. Both need
-their source papers checked.
+The 23 skips are quarantined in `tests/test_data_quality.py`: bounds whose *numbers*
+are unusable though the file is well-formed. Twenty-two have points out of order or
+repeated. One, `magic_2018_perseuscluster_dec_WW`, is a **closed contour** — it
+climbs in mass, turns, and returns near its start, which is a region and not an
+upper limit. Its paper needs checking.
 
-The quarantine is a ratchet: a new bad file fails the suite, and a quarantined file
-that gets fixed also fails until it is removed from the list. The same pattern guards
-against a bound duplicating another's curve.
+Every quarantine here is a **ratchet**: a newly broken file fails the suite, and a
+fixed one fails until it is delisted. The same pattern guards against a bound
+duplicating another's curve.
 
 Two documents are **generated**, never hand-edited:
 
-- `VOCABULARY.md` — every classification axis and its members, from
-  `tools/vocabulary_reference.py`. The axes are defined in `schema.py` and their
-  membership in the legends; this joins the two so one file answers "what classes
-  exist and what is in them". `python -m gdmbounds` prints the same thing.
-- `DATA_REVIEW.md` — everything that passes the schema but still needs a human to
-  read a paper, from `tools/data_review.py`.
+- `VOCABULARY.md` — every axis and its members, from `tools/vocabulary_reference.py`
+- `DATA_REVIEW.md` — everything passing the schema that still needs a human to read
+  a paper, from `tools/data_review.py`
 
-`tests/test_generated_docs.py` fails if either is out of date, so a committed copy
-cannot quietly diverge from its source. Both tools are timestamp-free on purpose:
-regenerating must be a no-op when nothing changed, or the test could not exist.
+`tests/test_generated_docs.py` fails if either is stale. Both tools are
+timestamp-free on purpose: regenerating must be a no-op when nothing changed, or
+that test could not exist.
 
-Built so far: `schema` (what a bound is), `quality` (whether its numbers are
-usable) and `catalog` (every header in one table, with composable selection).
-**Not yet written** — recasting.
-
-Two rules the plotting layer keeps, and which a change should not quietly break:
-line style means measured-against-projected and nothing else, so groups are
-separated by colour and then by marker; and no two legend entries may share an
-appearance, which is why the default colours by legend entry rather than by
-instrument. `tests/test_styles.py` enforces both. `legacy/dmbounds_old.py` shows what
-the old API offered (`plot`, `PlottingStyle`, `interactive_selection`) and is worth
-reading before designing the replacement.
+Two rules the plotting layer keeps, which a change should not quietly break: line
+style means measured-against-projected and nothing else, so groups are separated by
+colour and then by marker; and no two legend entries may share an appearance, which
+is why the default colours by legend entry rather than by instrument.
+`tests/test_styles.py` enforces both.
 
 `Catalog.select` matches the publishing instrument; `Catalog.involves` matches
 participation, so a joint MAGIC+LAT analysis is found by the second and not the
-first. That distinction is deliberate — 86 bounds involve MAGIC, 74 are MAGIC's
-own.
+first — 86 bounds involve MAGIC, 74 are MAGIC's own.
+
+## Open: a "most constraining" selector
+
+Discussed, **not implemented**, and worth resuming rather than restarting.
+
+Michele proposed picking the bound with the lowest absolute `sigmav`, and after
+seeing the objections still prefers that over a dominance test. Left for him to
+revisit. What the data showed, so it need not be rediscovered:
+
+- **A limit is a curve, not a number.** Among 31 dSph bb limits, four are the
+  strongest somewhere: LHAASO 2024 over 48% of the mass range, multi-inst 2026 over
+  32%, MWA 2019 over 19%, LAT 2020 over 1%. A single scalar hides that the answer
+  changes with mass, and compares minima that fall in different physical regimes —
+  Fermi-LAT's near 10 GeV, an IACT's near 1 TeV.
+- **The direction inverts for decay.** Strongest means lowest `sigmav` but *highest*
+  `tau`. A minimum-seeking implementation answers backwards on all 47 decay bounds.
+- **The question is well-posed only with the target fixed.** Otherwise it compares
+  J-factors rather than measurements. With instrument, channel and target fixed, 5
+  of 8 real cases have a curve that beats all others everywhere; 3 do not, so the
+  answer must be allowed to be "none dominates".
+- **The trap.** Where a winner exists it is often the most *optimistic* variant:
+  `magic_2020_triangulum2_ann_bb_noJerror` (no J-factor uncertainty),
+  `hess_2012_fornaxcluster_ann_bb_nfwrb02_substructure-high_theta1deg`. They are
+  stronger because they assume more, not because they measure better, and they are
+  not the numbers one would quote. Any such selector should surface the qualifiers
+  that distinguish the winner rather than hide them.
+
+## What still needs a human
+
+In `DATA_REVIEW.md`, and none of it is a CI failure:
+
+- `magic_2022_comaberenices_ann_mumu` and `magic_2022_multidsph_ann_mumu` hold the
+  **same curve**. Across other channels the combined analysis is more constraining
+  than the single target, as physics requires; for mumu it is not, in none of the
+  100 shared mass points, because it is the same data. One file is wrong.
+- Four MAGIC files carry `confidence: "Median"` — not a confidence level. They are
+  median expected curves also marked `statement: "limit"`, which an expected curve
+  is not. Both need correcting together.
+- Five H.E.S.S. 2014 bounds record no `figure`, so nothing checks the transcription.
+- The 2026 joint-analysis files describe `sv_lo_95` as a 3σ bound and `sv_hi_95` as
+  2σ. The numeric suffixes were used; the prose contradicts itself. **Raise with
+  whoever produced them.**
 
 ## Conventions
 
 - Repo language is **English** — code, comments, commit messages, docs.
-- Work on branches and open a PR; `main` is the published branch.
-- Bounds are transcribed from published figures/tables. Every new bound needs its
-  provenance in the header — `doi` or `arxiv` plus `figure`.
-- Never hand-edit a legend or bound file without running `pytest`: a single
-  unquoted multi-word value once broke every import of the package for eleven
-  months without anyone noticing.
+- Bounds are transcribed from published figures. Provenance is mandatory: `doi` or
+  `arxiv`, plus the `figure` the curve came from.
+- Never hand-edit a legend or bound without running `pytest`: one unquoted
+  multi-word value broke every import of the package for eleven months.
+- Regenerate `VOCABULARY.md` and `DATA_REVIEW.md` after changing classes or data.
 - **Reinstalling after a data change needs `pip install --no-cache-dir .`**, and
   delete `build/` first. Most of this package is data, but pip caches the built
-  wheel by version, and setuptools keeps renamed and deleted files in `build/lib`.
-  Both will silently serve you a stale database while `pytest` on the source tree
-  says everything is fine. CI is immune — it builds from a fresh checkout.
+  wheel by version and setuptools keeps renamed files in `build/lib`; both will
+  serve a stale database while `pytest` on the source tree says all is well. CI is
+  immune — it builds from a fresh checkout.
