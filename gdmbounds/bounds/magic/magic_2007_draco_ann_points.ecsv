@@ -1,6 +1,6 @@
 # %ECSV 0.9
-# %Part of https://github.com/micheledoro/gDMbounds/ under the
-# %Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License, see LICENSE.rst 
+# %Part of https://github.com/micheledoro/gDMbounds under the
+# %Creative Commons Attribution 4.0 International License, see LICENSE-DATA
 # ---
 # datatype:
 # - {name: mass      , unit: GeV     , datatype: float32 , description: DM mass              }
@@ -14,14 +14,15 @@
 # - {instrument:       "magic"}
 # - {year:             "2007"}
 # - {source:           "draco"}
+# - {mode:             "ann"}
 # - {channel:          "points"}
-# - {confidence        "0.95" }
+# - {confidence:       "0.95"}
 # - {dmfraction:       "1"}
 # - {obs_time:         "7.8h"}
 # - {figure:           "Fig. 2.— Thermally averaged neutralino annihilation cross section as a function of the neutralino mass for mSUGRA models after renormalization to the relic density"}
 # - {comment:          "Attention, these are specific limits for specific benchmark DM models"}
 # - {status:           "Done"}
-# schema : astropy −2.0
+# schema : astropy -2.0
 
 mass sigmav
 94.72879907934819 1.6804130140980087e-21

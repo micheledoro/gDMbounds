@@ -1,6 +1,6 @@
 # %ECSV 0.9
-# %Part of https://github.com/micheledoro/gDMbounds/ under the
-# %Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License, see LICENSE.rst 
+# %Part of https://github.com/micheledoro/gDMbounds under the
+# %Creative Commons Attribution 4.0 International License, see LICENSE-DATA
 # ---
 # datatype:
 # - {name: mass      , unit: GeV     , datatype: float32 , description: DM mass              }
@@ -14,14 +14,15 @@
 # - {instrument:       "magic"}
 # - {year:             "2011"}
 # - {source:           "segue1"}
+# - {mode:             "ann"}
 # - {channel:          "bb"}
-# - {confidence        "0.95" }
+# - {confidence:       "0.95"}
 # - {dmfraction:       "1"}
 # - {obs_time:         "29.4h"}
 # - {figure:           "Figure 6"}
 # - {comment:          ""}
 # - {status:           "Done"}
-# schema : astropy −2.0
+# schema : astropy -2.0
 
 mass sigmav
 201.3559322033898 1.2252798573828788e-21

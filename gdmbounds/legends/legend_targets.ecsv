@@ -81,3 +81,6 @@ egbg           'Extragalactic gamma-ray background'
 atlascms       'ATLAS and CMS (LHC)'
 coupp          COUPP
 
+#other
+diffuse        'Diffuse emission'
+darksubhalos   'Dark matter subhalos'

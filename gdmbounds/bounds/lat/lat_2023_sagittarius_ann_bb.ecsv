@@ -1,6 +1,6 @@
 # %ECSV 0.9
-# %Part of https://github.com/micheledoro/gDMbounds/ under the
-# %Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License, see LICENSE.rst 
+# %Part of https://github.com/micheledoro/gDMbounds under the
+# %Creative Commons Attribution 4.0 International License, see LICENSE-DATA
 # ---
 # datatype:
 # - {name: mass      , unit: GeV     , datatype: float32 , description: DM mass              }
@@ -12,8 +12,9 @@
 # - {instrument:       "lat"}
 # - {year:             "2023"}
 # - {source:           "sagittarius"}
+# - {mode:             "ann"}
 # - {channel:          "bb"}
-# - {confidence:        "0.95" }
+# - {confidence:       "0.95"}
 # - {dmfraction:       "1"}
 # - {obs_time:         ""}
 # - {figure:           "Fig. 7"}

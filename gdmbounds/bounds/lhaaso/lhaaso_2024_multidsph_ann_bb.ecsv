@@ -1,5 +1,6 @@
-# %Part of https://github.com/micheledoro/gDMbounds/ under the
-# %Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License, see LICENSE.rst 
+# %ECSV 0.9
+# %Part of https://github.com/micheledoro/gDMbounds under the
+# %Creative Commons Attribution 4.0 International License, see LICENSE-DATA
 # ---
 # datatype:
 # - {name: mass      , unit: TeV     , datatype: float32 , description: DM mass              }
@@ -11,14 +12,15 @@
 # - {instrument:       "lhaaso"}
 # - {year:             "2024"}
 # - {source:           "multidsph"}
+# - {mode:             "ann"}
 # - {channel:          "bb"}
-# - {confidence        "0.95" }
+# - {confidence:       "0.95"}
 # - {dmfraction:       ""}
 # - {obs_time:         ""}
 # - {figure:           "Fig. 1"}
 # - {comment:          ""}
 # - {status:           ""}
-# schema : astropy −2.0
+# schema : astropy -2.0
 
 mass sigmav
 1.15e+0  1.25e-22

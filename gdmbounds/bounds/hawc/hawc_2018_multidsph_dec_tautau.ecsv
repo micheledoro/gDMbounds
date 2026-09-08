@@ -1,6 +1,6 @@
 # %ECSV 0.9
-# %Part of https://github.com/micheledoro/gDMbounds/ under the
-# %Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License, see LICENSE.rst 
+# %Part of https://github.com/micheledoro/gDMbounds under the
+# %Creative Commons Attribution 4.0 International License, see LICENSE-DATA
 # ---
 # datatype:
 # - {name: mass      , unit: TeV     , datatype: float32 , description: DM mass              }
@@ -12,14 +12,15 @@
 # - {instrument:       "hawc"}
 # - {year:             "2018"}
 # - {source:           "multidsph-15"}
+# - {mode:             "dec"}
 # - {channel:          "tautau"}
-# - {confidence        "0.95" }
+# - {confidence:       "0.95"}
 # - {dmfraction:       "1"}
 # - {obs_time:         "507d"}
 # - {figure:           "Fig. 5"}
 # - {comment:          ""}
 # - {status:           ""}
-# schema : astropy −2.0
+# schema : astropy -2.0
 
 mass tau
 

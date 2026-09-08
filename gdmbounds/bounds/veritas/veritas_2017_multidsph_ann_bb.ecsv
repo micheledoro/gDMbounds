@@ -1,6 +1,6 @@
 # %ECSV 0.9
-# %Part of https://github.com/micheledoro/gDMbounds/ under the
-# %Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License, see LICENSE.rst 
+# %Part of https://github.com/micheledoro/gDMbounds under the
+# %Creative Commons Attribution 4.0 International License, see LICENSE-DATA
 # ---
 # datatype:
 # - {name: mass      , unit: GeV     , datatype: float32 , description: DM mass              }
@@ -14,14 +14,15 @@
 # - {instrument:       "veritas"}
 # - {year:             "2017"}
 # - {source:           "multidsph-4-booetes1-draco-ursaminor-segue1"}
+# - {mode:             "ann"}
 # - {channel:          "bb"}
-# - {confidence        "0.95" }
+# - {confidence:       "0.95"}
 # - {dmfraction:       "1"}
 # - {obs_time:         "229.8h"}
 # - {figure:           "Figs. 5, 8, and the left panel of Fig. 7"}
 # - {comment:          ""}
 # - {status:           "VERITAS original data"}
-# schema : astropy −2.0
+# schema : astropy -2.0
 
 mass sigmav_lo sigmav sigmav_hi
    

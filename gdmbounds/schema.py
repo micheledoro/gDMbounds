@@ -15,6 +15,7 @@ import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from astropy import units as u
 from astropy.io import ascii
 from astropy.table import Table
 
@@ -53,10 +54,14 @@ MODES = {
     "dec": "decay",
 }
 
-#: Quantity column expected for each mode, with its physical unit.
-MODE_COLUMN = {
-    "ann": ("sigmav", "cm3s-1"),
-    "dec": ("tau", "s"),
+#: The quantity each mode limits: the central-value column, the band columns
+#: that may stand in for it, and the unit all of them carry.
+#:
+#: A sensitivity curve often gives only a band, with no central value, so a file
+#: satisfies its mode by carrying either.
+MODE_COLUMNS = {
+    "ann": ("sigmav", ("sigmav_lo", "sigmav_hi"), "cm3s-1"),
+    "dec": ("tau", ("tau_lo", "tau_hi"), "s"),
 }
 
 #: Accepted units for the mass column.
@@ -113,6 +118,20 @@ def load_vocabulary() -> Vocabulary:
         channels=_read_legend("channels", "shortname", "latex"),
         targets=_read_legend("targets", "shortname", "longname"),
     )
+
+
+def _same_unit(actual, expected: str) -> bool:
+    """Compare units as physical quantities, not as strings.
+
+    A file declaring ``cm3s-1`` is read back by astropy as ``cm3 / s``; the two
+    are the same unit written differently.
+    """
+    if actual is None:
+        return False
+    try:
+        return u.Unit(actual) == u.Unit(expected)
+    except Exception:
+        return False
 
 
 def base_instrument(value: str) -> str:
@@ -190,19 +209,27 @@ def _check_columns(table: Table, mode: str, report) -> None:
     """Verify the table carries the quantity its mode implies, in the right unit."""
     if "mass" not in table.colnames:
         report("bad-table", "no 'mass' column")
-    else:
-        unit = str(table["mass"].unit or "")
-        if unit not in MASS_UNITS:
-            report("bad-unit", f"mass is in '{unit}', expected one of {MASS_UNITS}")
+    elif not any(_same_unit(table["mass"].unit, m) for m in MASS_UNITS):
+        report(
+            "bad-unit",
+            f"mass is in '{table['mass'].unit}', expected one of {MASS_UNITS}",
+        )
 
-    if mode in MODE_COLUMN:
-        column, expected_unit = MODE_COLUMN[mode]
-        if column not in table.colnames:
-            report("bad-table", f"mode '{mode}' requires a '{column}' column")
-        else:
-            unit = str(table[column].unit or "")
-            if unit != expected_unit:
-                report("bad-unit", f"{column} is in '{unit}', expected '{expected_unit}'")
+    if mode in MODE_COLUMNS:
+        central, bands, expected_unit = MODE_COLUMNS[mode]
+        candidates = (central, *bands)
+        present = [c for c in candidates if c in table.colnames]
+        if not present:
+            report(
+                "bad-table",
+                f"mode '{mode}' requires '{central}' or the bands {list(bands)}",
+            )
+        for column in present:
+            if not _same_unit(table[column].unit, expected_unit):
+                report(
+                    "bad-unit",
+                    f"{column} is in '{table[column].unit}', expected '{expected_unit}'",
+                )
 
 
 def _check_filename_agrees(path: Path, meta: dict, report) -> None:
@@ -216,7 +243,7 @@ def _check_filename_agrees(path: Path, meta: dict, report) -> None:
         return
 
     comparisons = (
-        ("instrument", base_instrument(str(meta.get("instrument", "")))),
+        ("instrument", str(meta.get("instrument", ""))),
         ("year", str(meta.get("year", ""))),
         ("source", base_source(str(meta.get("source", "")))),
         ("mode", str(meta.get("mode", ""))),

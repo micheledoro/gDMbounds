@@ -1,6 +1,6 @@
 # %ECSV 0.9
-# %Part of https://github.com/micheledoro/gDMbounds/ under the
-# %Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License, see LICENSE.rst 
+# %Part of https://github.com/micheledoro/gDMbounds under the
+# %Creative Commons Attribution 4.0 International License, see LICENSE-DATA
 # ---
 # datatype:
 # - {name: mass      , unit: GeV     , datatype: float32 , description: DM mass              }
@@ -57,14 +57,15 @@
 # - {instrument:       "lat"}
 # - {year:             "2017"}
 # - {source:           "multidsph-45"}
+# - {mode:             "ann"}
 # - {channel:          "tautau"}
-# - {confidence        "0.95" }
+# - {confidence:       "0.95"}
 # - {dmfraction:       "1"}
 # - {obs_time:         "6y"}
 # - {figure:           "Fig. 9"}
 # - {comment:          "original data"}
 # - {status:           ""}
-# schema : astropy −2.0
+# schema : astropy -2.0
 
 mass bootes_I bootes_II bootes_III canes_venatici_I canes_venatici_II carina cetus_II columba_I coma_berenices draco draco_II eridanus_II eridanus_III fornax grus_I grus_II hercules horologium_I horologium_II hydra_II indus_II kim_2 leo_I leo_II leo_IV leo_V pegasus_III phoenix_II pictor_I pisces_II reticulum_II reticulum_III sagittarius_II sculptor segue_1 sextans triangulum_II tucana_II tucana_III tucana_IV tucana_V ursa_major_I ursa_major_II ursa_minor willman_1 sigmav
 

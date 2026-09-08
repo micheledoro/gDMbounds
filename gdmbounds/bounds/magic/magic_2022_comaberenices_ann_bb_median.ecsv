@@ -1,6 +1,6 @@
 # %ECSV 0.9
-# %Part of https://github.com/micheledoro/gDMbounds/ under the
-# %Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License, see LICENSE.rst 
+# %Part of https://github.com/micheledoro/gDMbounds under the
+# %Creative Commons Attribution 4.0 International License, see LICENSE-DATA
 # ---
 # datatype:
 # - {name: mass      , unit: GeV     , datatype: float32 , description: DM mass              }
@@ -13,15 +13,16 @@
 # - {arxiv:            "2111.15009"}
 # - {instrument:       "magic"}
 # - {year:             "2022"}
-# - {source:           "Coma Berenices dSph"}
+# - {source:           "comaberenices"}
+# - {mode:             "ann"}
 # - {channel:          "bb"}
-# - {confidence        "Median" }
+# - {confidence:       "Median"}
 # - {dmfraction:       "1"}
 # - {obs_time:         "49.5h"}
 # - {figure:           "Fig3"}
 # - {comment:          "Any comments on the result"}
 # - {status:           "Status of file"}
-# schema : astropy −2.0
+# schema : astropy -2.0
 
 mass sigmav
 7.50e+1  1.50e-21

@@ -21,13 +21,13 @@ and channels (latex in the plot, text in the file name):
 ## Installation
 
 ```bash
-git clone https://github.com/moritzhuetten/dmbounds.git
+git clone https://github.com/micheledoro/gdmbounds.git
 pip install ./dmbounds/ (-e)
 ```
 Alternatively, do
 
 ```bash
-git clone https://github.com/moritzhuetten/dmbounds.git
+git clone https://github.com/micheledoro/gdmbounds.git
 cd dmbounds
 python setup.py install (--user)
 ```

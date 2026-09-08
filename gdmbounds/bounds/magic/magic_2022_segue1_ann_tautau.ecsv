@@ -1,10 +1,14 @@
 # %ECSV 0.9
-# %Part of https://github.com/micheledoro/gDMbounds/ under the
-# %Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License, see LICENSE.rst 
+# %Part of https://github.com/micheledoro/gDMbounds under the
+# %Creative Commons Attribution 4.0 International License, see LICENSE-DATA
 # ---
 # datatype:
 # - {name: mass      , unit: GeV     , datatype: float32 , description: DM mass              }
 # - {name: sigmav    , unit: cm3s-1  , datatype: float32 , description: <sigmav>             }
+# - {name: sigmav_1sigma_lo, unit: cm3s-1  , datatype: float32 , description: <sigmav> -1 sigma    }
+# - {name: sigmav_1sigma_hi, unit: cm3s-1  , datatype: float32 , description: <sigmav> +1 sigma    }
+# - {name: sigmav_2sigma_lo, unit: cm3s-1  , datatype: float32 , description: <sigmav> -2 sigma    }
+# - {name: sigmav_2sigma_hi, unit: cm3s-1  , datatype: float32 , description: <sigmav> +2 sigma    }
 # meta: !!omap
 # - {reference:        "Combined searches for dark matter in dwarf spheroidal galaxies observed with the MAGIC telescopes, including new data from Coma Berenices and Draco"}
 # - {authors:          "MAGIC Collaboration: V. A. Acciari  et al."}
@@ -14,15 +18,16 @@
 # - {instrument:       "magic"}
 # - {year:             "2022"}
 # - {source:           "segue1"}
+# - {mode:             "ann"}
 # - {channel:          "tautau"}
-# - {confidence        "0.95" }
+# - {confidence:       "0.95"}
 # - {dmfraction:       "1"}
 # - {obs_time:         "h"}
 # - {figure:           "Fig. 4"}
 # - {comment:          "Added columns for ±1sigma, ±2sigma containment bands [unit: cm3s-1]."}
 # - {status:           "Done"}
-# schema : astropy −2.0
-mass sigmav -1sigma +1sigma -2sigma +2sigma
+# schema : astropy -2.0
+mass sigmav sigmav_1sigma_lo sigmav_1sigma_hi sigmav_2sigma_lo sigmav_2sigma_hi
 1.15e+02 3.40e-24 2.32e-24 4.10e-23 1.14e-24 1.01e-22
 1.44e+02 2.58e-24 1.31e-24 2.03e-23 6.96e-25 4.85e-23
 1.77e+02 2.56e-24 8.86e-25 1.50e-23 4.23e-25 3.62e-23

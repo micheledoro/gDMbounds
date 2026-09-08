@@ -1,6 +1,6 @@
 # %ECSV 0.9
-# %Part of https://github.com/micheledoro/gDMbounds/ under the
-# %Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License, see LICENSE.rst 
+# %Part of https://github.com/micheledoro/gDMbounds under the
+# %Creative Commons Attribution 4.0 International License, see LICENSE-DATA
 # ---
 # datatype:
 # - {name: mass      , unit: GeV     , datatype: float32 , description: DM mass              }
@@ -12,14 +12,15 @@
 # - {instrument:       "lat"}
 # - {year:             "2020"}
 # - {source:           "multidsph-27"}
+# - {mode:             "ann"}
 # - {channel:          "bb"}
-# - {confidence        "0.95" }
+# - {confidence:       "0.95"}
 # - {dmfraction:       "1"}
 # - {obs_time:         "11y"}
 # - {figure:           "Fig. 9"}
 # - {comment:          "Frequentist global fit limit (1 DOF)"}
 # - {status:           "original data, https://zenodo.org/record/2612268 Aquarius II, Boötes I, Canes Venatici I, Canes Venatici II, Carina, Carina II, Coma Berenices, Draco, Draco II, Fornax, Grus I, Hercules, Horologium I, Leo I, Leo II, Leo IV, Leo V, Pegasus III, Pisces II, Reticulum II, Sculptor, Segue 1, Sextans, Tucana II, Ursa Major I, Ursa Major II, and Ursa Minor."}
-# schema : astropy −2.0
+# schema : astropy -2.0
 
 mass sigmav
 

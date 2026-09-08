@@ -1,6 +1,6 @@
 # %ECSV 0.9
-# %Part of https://github.com/micheledoro/gDMbounds/ under the
-# %Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License, see LICENSE.rst 
+# %Part of https://github.com/micheledoro/gDMbounds under the
+# %Creative Commons Attribution 4.0 International License, see LICENSE-DATA
 # ---
 # datatype:
 # - {name: mass      , unit: GeV     , datatype: float32 , description: DM mass              }
@@ -14,14 +14,15 @@
 # - {instrument:       "cta"}
 # - {year:             "2023"}
 # - {source:           "LMC"}
+# - {mode:             "ann"}
 # - {channel:          "bb"}
-# - {confidence        "0.95" }
+# - {confidence:       "0.95"}
 # - {dmfraction:       "1"}
 # - {obs_time:         "340h"}
 # - {figure:           "Fig. 19"}
 # - {comment:          "sensitivity, statistical reach, without systematic uncertainties, Iso-mean model"}
 # - {status:           ""}
-# schema : astropy −2.0
+# schema : astropy -2.0
 
 mass sigmav
 219.9  5.552e-24

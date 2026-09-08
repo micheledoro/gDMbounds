@@ -1,25 +1,27 @@
 # %ECSV 0.9
-# %Part of https://github.com/micheledoro/gDMbounds/ under the
-# %Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License, see LICENSE.rst 
+# %Part of https://github.com/micheledoro/gDMbounds under the
+# %Creative Commons Attribution 4.0 International License, see LICENSE-DATA
 # ---
 # datatype:
 # - {name: mass      , unit: GeV     , datatype: float32 , description: DM mass              }
 # - {name: tau       , unit: s       , datatype: float32 , description: Lifetime             }
 # meta: !!omap
-# - {author}:          "Matthew G. Baring, Tathagata Ghosh, Farinaldo S. Queiroz, and Kuver Sinha" 
+# - {authors:          "Matthew G. Baring, Tathagata Ghosh, Farinaldo S. Queiroz, and Kuver Sinha"}
 # - {reference:        "New Limits on the Dark Matter Lifetime from Dwarf Spheroidal Galaxies using Fermi-LAT"}
 # - {doi:              "10.1103/PhysRevD.93.103009"}
 # - {arxiv:            "1510.00389"}
 # - {instrument:       "lat"}
 # - {year:             "2016"}
 # - {source:           "multidsph-19"}
+# - {mode:             "dec"}
 # - {channel:          "bb"}
-# - {confidence:       "0.95" }
+# - {confidence:       "0.95"}
 # - {dmfraction:       "1"}
 # - {obs_time:         "6y"}
 # - {figure:           "Fig. 2"}
 # - {comment:          ""}
 # - {status:           ""}
+# schema : astropy -2.0
 
 mass tau
 

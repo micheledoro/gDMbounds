@@ -1,6 +1,6 @@
 # %ECSV 0.9
-# %Part of https://github.com/micheledoro/gDMbounds/ under the
-# %Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License, see LICENSE.rst 
+# %Part of https://github.com/micheledoro/gDMbounds under the
+# %Creative Commons Attribution 4.0 International License, see LICENSE-DATA
 # ---
 # datatype:
 # - {name: mass      , unit: GeV     , datatype: float32 , description: DM mass              }
@@ -14,14 +14,15 @@
 # - {instrument:       "cta"}
 # - {year:             "2023"}
 # - {source:           "perseuscluster"}
-# - {channel:          "tautau"}
-# - {confidence        "0.95" }
+# - {mode:             "ann"}
+# - {channel:          "bb"}
+# - {confidence:       "0.95"}
 # - {dmfraction:       "1"}
 # - {obs_time:         "300h"}
 # - {figure:           "Fig. 19"}
 # - {comment:          "sensitivity to a DM annihilation signal from Perseus the cluster"}
 # - {status:           "done"}
-# schema : astropy −2.0
+# schema : astropy -2.0
 
 mass sigmav
 5.37162e+1  9.41453e-23
