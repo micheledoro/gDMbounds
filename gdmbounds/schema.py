@@ -129,7 +129,7 @@ INSTRUMENT_CLASSES = {
     "iact": "Imaging Atmospheric Cherenkov Telescope",
     "satellite": "satellite-borne pair-conversion detector",
     "xray": "satellite-borne X-ray telescope",
-    "swd": "ground-level shower-front / water-Cherenkov array",
+    "sfd": "shower-front detector array",
     "radio": "radio interferometer",
     "collider": "collider search",
     "direct": "direct-detection experiment",

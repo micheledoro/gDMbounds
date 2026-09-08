@@ -38,7 +38,7 @@ These files describe a median expected curve, and the word landed in the confide
 
 ## Curves whose points are out of order or repeated
 
-- `cta_2021_gc_ann_WW_sens_mstonly.ecsv`
+- `ctao_2021_gc_ann_WW_sens_mstonly.ecsv`
 - `dampe_2022_gc_ann_gammagamma_r16einasto.ecsv`
 - `hawc_2018_multidsph_dec_WW.ecsv`
 - `hawc_2018_multidsph_dec_bb.ecsv`

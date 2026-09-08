@@ -69,10 +69,10 @@ Assigned in `gdmbounds/legends/legend_instruments.ecsv` in the `class` column, a
 
 | class | meaning | n | members |
 |---|---|---|---|
-| `iact` | Imaging Atmospheric Cherenkov Telescope | 6 | `cangaroo`, `cta`, `hess`, `magic`, `veritas`, `whipple` |
+| `iact` | Imaging Atmospheric Cherenkov Telescope | 6 | `cangaroo`, `ctao`, `hess`, `magic`, `veritas`, `whipple` |
 | `satellite` | satellite-borne pair-conversion detector | 3 | `agile`, `dampe`, `lat` |
 | `xray` | satellite-borne X-ray telescope | 1 | `nustar` |
-| `swd` | ground-level shower-front / water-Cherenkov array | 3 | `hawc`, `lhaaso`, `swgo` |
+| `sfd` | shower-front detector array | 3 | `hawc`, `lhaaso`, `swgo` |
 | `radio` | radio interferometer | 1 | `mwa` |
 | `collider` | collider search | 1 | `collider` |
 | `direct` | direct-detection experiment | 1 | `directsearches` |

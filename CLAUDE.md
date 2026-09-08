@@ -88,7 +88,7 @@ sandbox/<name>/     per-person scratch work; nothing in the package imports from
 ## Data model
 
 385 bound files under `gdmbounds/bounds/<instrument>/`. Instrument directories:
-`collider`, `cta`, `dampe`, `directsearches`, `hawc`, `hess`, `lat`, `lhaaso`,
+`collider`, `ctao`, `dampe`, `directsearches`, `hawc`, `hess`, `lat`, `lhaaso`,
 `magic`, `multi-inst`, `mwa`, `nustar`, `veritas`. The archive is no longer
 purely gamma-ray: MWA is radio and NuSTAR is X-ray, and NuSTAR constrains dark
 matter at **keV** masses, so `MASS_UNITS` admits keV and MeV. There was an `askap/` directory holding four raw
@@ -137,13 +137,13 @@ expressible. Four exist; two are proposed and not yet built.
 | collaboration vs author | `origin` key | 357 / 10 |
 | measured vs projected | `statement` key | 319 limit / 48 sensitivity |
 | halo profile assumed | `profile` key, optional | 88 stated / 275 not |
-| detection technique | `class` in `legend_instruments` | iact, satellite, xray, swd, radio, collider, direct, combined |
+| detection technique | `class` in `legend_instruments` | iact, satellite, xray, sfd, radio, collider, direct, combined |
 | target type | `class` in `legend_targets` | dsph, cluster, globular, galaxy, gc, diffuse, subhalo, unid |
 | line vs continuum | `spectrum` in `legend_channels` | continuum, line, model, benchmark |
 
-Two things to hold on to. All 45 CTA bounds are `sensitivity`, which is right —
-CTA is not operating; treat any future CTA bound claiming `limit` as suspect until
-checked. And **a missing `profile` means the filename never said, not that no
+Two things to hold on to. All 45 CTAO bounds are `sensitivity`, which is right —
+CTAO is not operating; treat any future CTAO bound claiming `limit` as suspect
+until checked. And **a missing `profile` means the filename never said, not that no
 profile was assumed** — every J-factor rests on one. Filtering on `profile` drops
 275 bounds, and any selection doing so should say it is.
 

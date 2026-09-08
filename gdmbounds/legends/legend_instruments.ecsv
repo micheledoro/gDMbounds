@@ -17,7 +17,7 @@ hess            H.E.S.S.                     iact
 veritas         VERITAS                      iact
 whipple         WHIPPLE                      iact
 cangaroo        CANGAROO                     iact
-cta             CTA                          iact
+ctao            CTAO                         iact
 
 lat             FERMI-LAT                    satellite
 agile           AGILE                        satellite
@@ -25,9 +25,9 @@ dampe           DAMPE                        satellite
 
 nustar          NuSTAR                       xray
 
-lhaaso          LHAASO                       swd
-hawc            HAWC                         swd
-swgo            SWGO                         swd
+lhaaso          LHAASO                       sfd
+hawc            HAWC                         sfd
+swgo            SWGO                         sfd
 
 collider        'Collider searches'          collider
 directsearches  'Direct detection'           direct

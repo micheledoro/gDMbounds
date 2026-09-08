@@ -21,7 +21,7 @@ see [Roadmap](#roadmap).
 | H.E.S.S. | 121 | | HAWC | 19 |
 | MAGIC | 78 | | LHAASO | 9 |
 | Fermi-LAT | 47 | | DAMPE | 4 |
-| CTA | 45 | | MWA | 4 |
+| CTAO | 45 | | MWA | 4 |
 | Multi-instrument | 26 | | Collider searches | 3 |
 | VERITAS | 25 | | Direct detection | 3 |
 | | | | NuSTAR | 1 |
@@ -148,8 +148,8 @@ print(v.describe())          # every class and its members
 
 In the headers: `mode` is annihilation or decay; `origin` separates a
 collaboration's own result from a forecast by individual authors; `statement`
-separates a measured limit from a projected sensitivity — all 45 CTA entries are
-projections, since CTA is not yet operating.
+separates a measured limit from a projected sensitivity — all 45 CTAO entries are
+projections, since CTAO is not yet operating.
 
 `profile` records the assumed halo density profile, and is **optional**: the
 filename states it for 88 of 363 bounds. A missing `profile` means it was not
