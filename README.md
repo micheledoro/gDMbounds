@@ -126,6 +126,13 @@ Required header keys: `reference`, `doi`, `arxiv`, `instrument`, `origin`,
 
 ## Selecting by class
 
+Every class and its members is listed in [VOCABULARY.md](VOCABULARY.md), or from
+the command line:
+
+```bash
+python -m gdmbounds
+```
+
 Bounds are classified along several axes so that a whole kind of result can be
 included or excluded deliberately rather than by listing files.
 
