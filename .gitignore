@@ -4,3 +4,10 @@
 **/.ipynb_checkpoints/
 sandbox/aleksandra/outputs/*.png
 sandbox/aleksandra/outputs/*/*.png
+
+# Build artefacts
+*.egg-info/
+build/
+dist/
+__pycache__/
+.pytest_cache/

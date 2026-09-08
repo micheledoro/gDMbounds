@@ -4,8 +4,8 @@ A database and toolkit for gamma-ray indirect Dark Matter searches: published
 experimental limits on DM annihilation and decay, the means to plot them, and
 (planned) methods to recast them.
 
-Successor to `moritzhuetten/dmbounds`; the canonical repo is now
-`micheledoro/gDMbounds`. Some files still carry the old URL — see *Known issues*.
+Successor to `moritzhuetten/dmbounds`; the canonical repo is `micheledoro/gDMbounds`
+and the package is `gdmbounds` — repo, package and PyPI name are deliberately aligned.
 
 ## People
 
@@ -17,7 +17,7 @@ Successor to `moritzhuetten/dmbounds`; the canonical repo is now
 **Archived work:** the `aleksandra` branch holds sandbox material that has been
 deliberately removed from `main`. Do not merge it, copy from it, or use it as a
 reference. It exists as a record only. ECSV header corrections under
-`dmbounds/bounds/lat/` that originated there are format fixes to project data
+`gdmbounds/bounds/lat/` that originated there are format fixes to project data
 and intentionally remain in `main`.
 
 ## Where the project is going
@@ -32,91 +32,98 @@ description of what exists today.
    semi-automatically by criterion: all bounds from one experiment, one
    annihilation channel, one class of telescope, and so on. Multiple styles.
    **Open question:** delivery mechanism — interactive web, downloadable
-   scripts, pre-rendered images, or a combination. Not yet decided.
+   scripts, pre-rendered images, or a combination. Deliberately deferred until
+   the library API is stable.
 3. **Recasting.** Apply the casting/recasting methods published by Doro and
-   D'Amico to transform limits between assumptions. **Nothing exists yet**;
-   `dmbounds/computations.py` is an empty placeholder where this belongs.
+   D'Amico to transform limits between assumptions. **Nothing exists yet.**
 4. **Professional structure.** Real continuous integration, and a presentation
-   layer that exposes data and methods to a wider public. Explicitly a
-   first-class goal, not polish to add later.
+   layer that exposes data and methods to a wider public.
 
-**Current phase: structure before content.** The near-term work is deciding the
-architecture — packaging, CI, data validation, how the web layer relates to the
-Python library. Resist adding features or bounds until that is settled.
+## Decisions taken
 
-## Current state — read before assuming
+- **Rebuild rather than repair.** The pre-2026 modules were abandoned mid-refactor
+  and did not import. They were removed; `legacy/dmbounds_old.py` is kept
+  **out of the package** as a reference for behaviour worth reproducing, not as
+  code to extend.
+- **The ECSV header is the source of truth**, the filename a human-readable
+  convention that must agree with it. `gdmbounds/schema.py` defines the contract
+  and the tests enforce it.
+- **Licensing is split**: code under BSD-3-Clause (`LICENSE`), the bound database
+  under CC-BY-4.0 (`LICENSE-DATA`). The old combined CC-BY-NC-SA-3.0 is kept as
+  `LICENSE-legacy-CC-BY-NC-SA-3.0` and still governs `legacy/`.
+- **Instrument and target classes** (IACT / satellite / shower-front; dSph /
+  cluster / ...) belong in the legend ECSV files as an extra column, not in a
+  Python dictionary — data stays data.
 
-The repository is **mid-refactor and the refactor is incomplete**:
+## Layout
 
-- `dmbounds/dmbounds_old.py` (1191 lines) is the real, working legacy
-  implementation.
-- `dmbounds/dmbounds.py`, `data_reader.py`, `plotter.py` are a newer modular
-  skeleton that is **largely non-functional scaffolding**. `read_multiple_ecsv`
-  builds an empty DataFrame and never populates it; `plotter.py` is generic
-  matplotlib boilerplate with `'X-axis'` labels; `dmbounds.py:main()` references
-  a nonexistent `bounds/instrument2/` path.
-- `dmbounds/computations.py` is a 0-byte file.
-
-Do not mistake the new modules for a working API. Any real behaviour currently
-lives in `dmbounds_old.py`.
-
-There is **no CI, no test suite, no `pyproject.toml`, and no pinned
-requirements**. Packaging is a legacy `setup.py` still pointing at the old
-upstream repo and author.
+```
+gdmbounds/          the package
+  schema.py         what a bound file is, and its validation — everything builds on this
+  bounds/<inst>/    363 ECSV files, one per published limit curve
+  legends/          controlled vocabularies: instruments, channels, targets
+  modelpredictions/ theory curves (thermal relic, GAMBIT scan)
+tests/              schema validation; run with pytest
+legacy/             pre-2026 code, not shipped, reference only
+templates/          blank ECSV headers for adding a new bound
+sandbox/<name>/     per-person scratch work; nothing in the package imports from it
+```
 
 ## Data model
 
-363 ECSV files under `dmbounds/bounds/<instrument>/`, one file per published
-limit curve. Instruments present: `askap`, `authors`, `collider`, `cta`,
-`dampe`, `directsearches`, `hawc`, `hess`, `lat`, `lhaaso`, `magic`,
-`multi-inst`, `veritas`. (`authors` holds theory/phenomenology curves rather
-than one experiment.)
+363 bound files under `gdmbounds/bounds/<instrument>/`. Instrument directories:
+`askap`, `authors`, `collider`, `cta`, `dampe`, `directsearches`, `hawc`, `hess`,
+`lat`, `lhaaso`, `magic`, `multi-inst`, `veritas`. (`authors` holds
+theory/phenomenology curves rather than one experiment.)
 
 **Filename convention:**
 
 ```
-<instrument>_<year>_<target>_<mode>_<channel>[_<qualifiers>].ecsv
+<instrument>_<year>_<source>_<mode>_<channel>[_<qualifiers>].ecsv
 ```
 
-`mode` is `ann` or `dec`. Qualifiers such as `_sens`, `_einasto`, `_nfw`,
-`_expo`, `_unbinned`, `_measured`, `_benchmark` may follow the channel — so the
-channel is **not** simply the last underscore-separated token. Parse against the
-`channel` metadata key, not by splitting the filename.
+`mode` is `ann` or `dec`. The channel is the **fifth underscore-separated token** —
+not the last: qualifiers such as `_sens`, `_einasto`, `_nfw`, `_measured`,
+`_benchmark`, `_substructure-high` may follow it, and may themselves contain
+hyphens. Tokens are not all lowercase: `LMC` and `WW` are correct as written.
 
-**File format:** ECSV with an `astropy` table. Columns are typically `mass`
-(GeV) and `sigmav` (cm3s-1) for annihilation or a lifetime for decay, sometimes
-with `±1sigma`/`±2sigma` containment bands. The header carries a YAML `!!omap`
-of metadata: `reference`, `authors`, `journalref`, `doi`, `arxiv`, `instrument`,
-`year`, `source`, `channel`, `confidence`, `dmfraction`, `obs_time`, `figure`,
-`comment`, `status`.
+**Composite identifiers:** a joint analysis is `multi-inst-<a>-<b>`; a stacked
+target sample is `multi<class>[-<n>][-<member>...]`, e.g. `multidsph-4-booetes1-draco`.
+`schema.base_instrument` and `schema.base_source` collapse these to the token used
+for grouping.
 
-Controlled vocabularies live in `dmbounds/legends/`
-(`legend_instruments.ecsv`, `legend_channels.ecsv`, `legend_targets.ecsv`);
-theory curves in `dmbounds/modelpredictions/`; blank headers to copy in
-`templates/`.
+**Header metadata** (`REQUIRED_META` in `schema.py`): `reference`, `doi`, `arxiv`,
+`instrument`, `year`, `source`, `mode`, `channel`, `confidence`, `dmfraction`,
+`obs_time`, `figure`, `comment`, `status`. Optional: `authors`, `journalref`.
 
-## Known issues in the data
+`mode` is **new**: no historical file carries it, so annihilation-vs-decay lived
+only in the filename. Adding it is part of the pending migration.
 
-Found by scanning all 363 files. These are the concrete argument for validation
-in CI — they are systematic, not one-offs:
+**Table columns:** `mass` (GeV or TeV) always; `sigmav` (cm3s-1) for annihilation,
+`tau` (s) for decay. Some files add containment bands; some stacked-dSph files
+carry one column per member galaxy.
 
-- **357/363** write the metadata key as `{confidence  "0.95" }` — missing the
-  colon, so it is not valid YAML and does not parse as a key.
-- **358/363** end with `schema : astropy −2.0` using a Unicode minus (U+2212)
-  instead of an ASCII hyphen.
-- **3** files disagree between filename and `channel` metadata:
-  `cta_2023_perseuscluster_ann_bb_sens.ecsv`, `magic_2022_segue1_ann_bb.ecsv`,
-  and `magic_2022_segue1_ann_WW.ecsv` all declare `channel: "tautau"`.
-- **4** still reference the old `moritzhuetten` URL in their licence line.
+## Pending data migration
 
-The six already-clean files are those corrected in September 2025; the fix was
-never applied to the rest.
+`pytest` currently fails on 8 tests — deliberately. The failures are the real
+defect list, not noise, and each needs fixing before the catalogue layer is built:
+
+- **356** files missing `mode`; **351** missing `confidence` (written as
+  `{confidence  "0.95" }`, no colon, so it never parsed as a key).
+- **7** unreadable: band columns present in the data but not declared in the
+  `datatype` block.
+- **19** filename/header mismatches, and **3** filenames in `authors/` that do not
+  follow the convention at all.
+- **10** values outside the controlled vocabularies.
+
+Run `pytest tests/ -q` for the current list.
 
 ## Conventions
 
 - Repo language is **English** — code, comments, commit messages, docs.
 - Work on branches and open a PR; `main` is the published branch.
-- `sandbox/` holds per-person exploratory work (`sandbox/<name>/`). It is
-  scratch space: nothing in the library should import from it.
-- Bounds are transcribed from published figures/tables. Every new bound needs
-  its provenance in the ECSV header — `doi` or `arxiv` plus `figure`.
+- Bounds are transcribed from published figures/tables. Every new bound needs its
+  provenance in the header — `doi` or `arxiv` plus `figure`.
+- Never hand-edit a legend or bound file without running `pytest`: a single
+  unquoted multi-word value once broke every import of the package for eleven
+  months without anyone noticing.

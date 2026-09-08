@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gdmbounds"
+version = "0.2.0"
+description = "A database of gamma-ray bounds on dark matter annihilation and decay, with tools to select, plot and recast them"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "BSD-3-Clause" }
+authors = [
+    { name = "Michele Doro", email = "michele.doro@unipd.it" },
+    { name = "Giacomo D'Amico" },
+]
+keywords = ["dark matter", "gamma-ray", "astroparticle", "indirect detection"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Astronomy",
+]
+dependencies = [
+    "numpy>=1.20",
+    "scipy>=1.7",
+    "astropy>=5.0",
+    "matplotlib>=3.5",
+    "pandas>=1.3",
+]
+
+[project.optional-dependencies]
+notebook = ["ipywidgets>=8.0", "ipython", "palettable"]
+dev = ["pytest>=7.0", "ruff"]
+
+[project.urls]
+Homepage = "https://github.com/micheledoro/gDMbounds"
+Repository = "https://github.com/micheledoro/gDMbounds"
+
+[tool.setuptools.packages.find]
+include = ["gdmbounds*"]
+
+[tool.setuptools.package-data]
+gdmbounds = ["bounds/*/*.ecsv", "legends/*.ecsv", "modelpredictions/*.ecsv"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
