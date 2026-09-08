@@ -134,3 +134,8 @@ the replacement.
 - Never hand-edit a legend or bound file without running `pytest`: a single
   unquoted multi-word value once broke every import of the package for eleven
   months without anyone noticing.
+- **Reinstalling after a data change needs `pip install --no-cache-dir .`**, and
+  delete `build/` first. Most of this package is data, but pip caches the built
+  wheel by version, and setuptools keeps renamed and deleted files in `build/lib`.
+  Both will silently serve you a stale database while `pytest` on the source tree
+  says everything is fine. CI is immune — it builds from a fresh checkout.

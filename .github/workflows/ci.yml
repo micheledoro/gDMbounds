@@ -54,17 +54,30 @@ jobs:
       - run: python -m build
       - run: twine check dist/*
 
-      # The database is the point of the package; a wheel that ships the code
-      # without the bounds would install and import cleanly while being useless.
-      - name: Verify the bounds ship inside the wheel
+      # The database is the point of the package: a wheel shipping the code
+      # without the bounds would import cleanly and be useless. The contents must
+      # match the source tree exactly, not merely be numerous — setuptools keeps a
+      # build/lib directory that retains renamed and deleted files, and a loose
+      # check happily passes while the wheel carries stale duplicates.
+      - name: Verify the wheel matches the source tree
         run: |
           python - <<'PY'
           import glob, zipfile
+          from pathlib import Path
+
           wheel = glob.glob("dist/*.whl")[0]
-          names = zipfile.ZipFile(wheel).namelist()
-          bounds = [n for n in names if n.startswith("gdmbounds/bounds/") and n.endswith(".ecsv")]
-          legends = [n for n in names if n.startswith("gdmbounds/legends/")]
-          print(f"{len(bounds)} bounds, {len(legends)} legends in {wheel}")
-          assert len(bounds) > 300, f"only {len(bounds)} bounds in the wheel"
-          assert len(legends) == 3, f"only {len(legends)} legends in the wheel"
+          shipped = {
+              n[len("gdmbounds/"):]
+              for n in zipfile.ZipFile(wheel).namelist()
+              if n.startswith("gdmbounds/") and n.endswith(".ecsv")
+          }
+          source = {
+              str(p.relative_to("gdmbounds"))
+              for p in Path("gdmbounds").rglob("*.ecsv")
+          }
+          missing = sorted(source - shipped)
+          extra = sorted(shipped - source)
+          print(f"{len(shipped)} data files in {wheel}")
+          assert not missing, f"absent from the wheel: {missing[:10]}"
+          assert not extra, f"in the wheel but not in the source tree: {extra[:10]}"
           PY
