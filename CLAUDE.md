@@ -77,6 +77,7 @@ gdmbounds/          the package
 tests/              schema validation; run with pytest
   quality.py        checks on the numbers, kept separate from the schema
   catalog.py        every header in one table, with selection over it
+  plotting.py       draws a selection; refuses to mix modes, marks forecasts
 tools/              migration scripts and data_review.py, which regenerates DATA_REVIEW.md
 unconverted/        material the schema cannot yet hold, including ALP contours
 .github/workflows/  CI: schema validation, lint, and wheel contents
@@ -179,7 +180,8 @@ regenerating must be a no-op when nothing changed, or the test could not exist.
 
 Built so far: `schema` (what a bound is), `quality` (whether its numbers are
 usable) and `catalog` (every header in one table, with composable selection).
-**Not yet written** — plotting and recasting. `legacy/dmbounds_old.py` shows what
+**Not yet written** — recasting, and the figure styles the old `PlottingStyle`
+offered. `legacy/dmbounds_old.py` shows what
 the old API offered (`plot`, `PlottingStyle`, `interactive_selection`) and is worth
 reading before designing the replacement.
 

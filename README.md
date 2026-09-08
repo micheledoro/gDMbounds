@@ -89,6 +89,24 @@ print(chosen.summary("instrument"))       # how the selection breaks down
 tables = chosen.curves()                  # now the data is read
 ```
 
+## Plotting
+
+```python
+selection = cat.select(instrument_class="iact", mode="ann", channel="bb")
+ax = gdmbounds.plot(selection)
+ax.figure.savefig("iact_bb.png", bbox_inches="tight")
+```
+
+`plot` takes a selection and nothing else — it does not know how the selection was
+made. Two things it decides for you, because getting them wrong misreads the
+physics: annihilation and decay cannot share an axis and asking for both raises,
+and a projected sensitivity is drawn dashed so it cannot be mistaken for a
+measurement.
+
+Legend entries name only what varies within the selection. Eleven H.E.S.S. bounds
+on Fornax that differ only by halo profile are labelled by profile, not by eleven
+repetitions of "H.E.S.S. 2012".
+
 The validation layer is available directly too:
 
 ```python
@@ -181,7 +199,8 @@ Regenerate it with `python tools/data_review.py`.
 - [x] Continuous integration
 - [x] Catalogue search and selection by criterion — instrument, channel,
       class of telescope, target class
-- [ ] Plotting, with selectable styles
+- [x] Plotting a selection
+- [ ] Selectable figure styles
 - [ ] Casting and recasting of limits between assumptions
 - [ ] A public-facing way to generate figures without installing anything
 
