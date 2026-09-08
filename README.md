@@ -163,6 +163,11 @@ headers to copy. `unconverted/` holds raw digitised material not yet transcribed
 4. Run `pytest tests/ -q`. Every bound is validated on every pull request; a
    malformed one will not merge.
 
+Passing the schema is not the same as being right. `DATA_REVIEW.md` lists the
+bounds that parse cleanly but still need someone to check a paper — a curve
+identical to another's, a closed contour stored as a limit, points out of order.
+Regenerate it with `python tools/data_review.py`.
+
 ## Roadmap
 
 - [x] Schema and validation for the whole database
