@@ -1,0 +1,24 @@
+# Development environment for gDMbounds.
+#
+#   conda env create -f environment.yml
+#   conda activate gdmbounds
+#
+# conda provides the interpreter; pip installs the package and its dependencies,
+# because pip is also what CI uses, so the local resolution matches the one the
+# tests actually run against.
+#
+# This is not incidental. Resolving astropy and numpy through conda's classic
+# solver with flexible channel priority produced astropy 6.1 alongside numpy 2.5,
+# a pair that cannot import: astropy 6.1 calls np.in1d, removed in numpy 2. pip
+# resolves the same constraints to a working pair.
+
+name: gdmbounds
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python=3.12
+  - pip
+  - pip:
+      - -e .[dev]

@@ -47,6 +47,19 @@ cd gDMbounds
 pip install -e ".[dev]"
 ```
 
+With conda, `environment.yml` builds the same thing:
+
+```bash
+conda env create -f environment.yml
+conda activate gdmbounds
+pytest tests/ -q
+```
+
+It deliberately installs the Python dependencies through pip rather than conda,
+so that what you develop against is what CI resolves. Letting conda solve them
+can yield astropy 6.1 beside numpy 2.5 — a pair that fails on import, since
+astropy 6.1 calls `np.in1d`, which numpy 2 removed.
+
 > Most of this package is data. When you change a bound file and reinstall, pass
 > `--no-cache-dir` and delete `build/` first — otherwise pip serves a cached wheel
 > and setuptools reuses stale files, and you silently get the old database.
