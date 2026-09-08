@@ -1,0 +1,48 @@
+# %ECSV 0.9
+# %Part of https://github.com/micheledoro/gDMbounds under the
+# %Creative Commons Attribution 4.0 International License, see LICENSE-DATA
+# ---
+# datatype:
+# - {name: mass             , unit: GeV     , datatype: float32 , description: DM mass                                   }
+# - {name: sigmav           , unit: cm3s-1  , datatype: float32 , description: <sigmav>                                  }
+# meta: !!omap
+# - {reference:        "Search for Gamma-ray Spectral Lines from Dark Matter Annihilation up to 100 TeV towards the Galactic Center with MAGIC"}
+# - {authors:          "MAGIC Collaboration: V. A. Acciari et al."}
+# - {journalref:       "Phys. Rev. Lett. 130, 061002 (2023)"}
+# - {doi:              "10.1103/PhysRevLett.130.061002"}
+# - {arxiv:            "2212.10527"}
+# - {instrument:       "magic"}
+# - {origin:           "collaboration"}
+# - {statement:        "limit"}
+# - {year:             "2023"}
+# - {source:           "gc"}
+# - {mode:             "ann"}
+# - {channel:          "gammagamma"}
+# - {profile:          "einasto"}
+# - {confidence:       "0.95"}
+# - {dmfraction:       "1"}
+# - {obs_time:         "223h"}
+# - {figure:           "Fig. 3"}
+# - {comment:          "Einasto profile; observed 95% CL <sigmav> upper limit from a gamma-ray line search toward the Galactic Centre"}
+# - {status:           "Done"}
+# schema : astropy -2.0
+
+mass sigmav
+912 6.70962e-28
+1202 4.46762e-28
+1585 5.41667e-28
+2100 9.86662e-28
+2754 1.71726e-27
+3631 2.0724e-27
+4786 2.7691e-27
+6310 4.45244e-27
+8318 9.5155e-27
+10965 9.79706e-27
+14454 1.33412e-26
+19055 1.67587e-26
+25119 2.29652e-26
+33113 3.49573e-26
+43650 4.53939e-26
+57543 4.85409e-26
+75857 7.67721e-26
+100000 7.85672e-26

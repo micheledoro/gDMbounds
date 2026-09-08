@@ -78,7 +78,7 @@ tests/              schema validation; run with pytest
   quality.py        checks on the numbers, kept separate from the schema
   catalog.py        every header in one table, with selection over it
 tools/              one-off migration scripts, kept as a record
-unconverted/        raw digitised material not yet transcribed into bounds
+unconverted/        material the schema cannot yet hold, including ALP contours
 .github/workflows/  CI: schema validation, lint, and wheel contents
 legacy/             pre-2026 code, not shipped, reference only
 templates/          blank ECSV headers for adding a new bound
@@ -87,7 +87,7 @@ sandbox/<name>/     per-person scratch work; nothing in the package imports from
 
 ## Data model
 
-367 bound files under `gdmbounds/bounds/<instrument>/`. Instrument directories:
+385 bound files under `gdmbounds/bounds/<instrument>/`. Instrument directories:
 `collider`, `cta`, `dampe`, `directsearches`, `hawc`, `hess`, `lat`, `lhaaso`,
 `magic`, `multi-inst`, `mwa`, `nustar`, `veritas`. The archive is no longer
 purely gamma-ray: MWA is radio and NuSTAR is X-ray, and NuSTAR constrains dark
@@ -133,7 +133,7 @@ expressible. Four exist; two are proposed and not yet built.
 
 | Axis | Where it lives | Spread |
 |---|---|---|
-| annihilation vs decay | `mode` key | 320 ann / 47 dec |
+| annihilation vs decay | `mode` key | 338 ann / 47 dec |
 | collaboration vs author | `origin` key | 357 / 10 |
 | measured vs projected | `statement` key | 319 limit / 48 sensitivity |
 | halo profile assumed | `profile` key, optional | 88 stated / 275 not |
@@ -149,7 +149,7 @@ profile was assumed** — every J-factor rests on one. Filtering on `profile` dr
 
 ## State
 
-All 363 bounds satisfy the schema. `pytest tests/ -q` is green — 727 passing, 24 skipped. CI runs that check, `ruff`, and a wheel build that asserts the bounds are
+All 363 bounds satisfy the schema. `pytest tests/ -q` is green — 788 passing, 23 skipped. CI runs that check, `ruff`, and a wheel build that asserts the bounds are
 actually inside the package.
 
 The 24 skips are quarantined in `tests/test_data_quality.py`: bounds whose *numbers*

@@ -79,6 +79,21 @@ MODE_COLUMNS = {
     "dec": ("tau", ("tau_lo", "tau_hi"), "s"),
 }
 
+#: Optional data columns a bound may carry beyond its central curve, and what
+#: each means. A combined analysis often publishes the limit it observed
+#: alongside the limit it expected under the null hypothesis, and the two must
+#: not be confused: the observed one is the result, the expected one says how
+#: lucky or unlucky the observation was.
+OPTIONAL_COLUMNS = {
+    "sigmav_expected": "median limit expected under the null hypothesis",
+    "sigmav_1sigma_lo": "lower edge of the 68% containment band",
+    "sigmav_1sigma_hi": "upper edge of the 68% containment band",
+    "sigmav_2sigma_lo": "lower edge of the 95% containment band",
+    "sigmav_2sigma_hi": "upper edge of the 95% containment band",
+    "sigmav_lo": "lower edge of a band whose level is not stated",
+    "sigmav_hi": "upper edge of a band whose level is not stated",
+}
+
 #: Accepted units for the mass column.
 #:
 #: keV and MeV admit X-ray searches for light dark matter, which constrain the
