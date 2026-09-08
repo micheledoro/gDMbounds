@@ -53,7 +53,7 @@ REQUIRED_META = (
 #: quarter of the database. Its absence means the assumed halo profile was not
 #: written down, **not** that none was assumed — every J-factor rests on one. Any
 #: selection filtering on ``profile`` silently drops the rest, and should say so.
-OPTIONAL_META = ("authors", "journalref", "profile")
+OPTIONAL_META = ("authors", "journalref", "profile", "bibcode", "url")
 
 #: Who produced a bound. A forecast or reinterpretation published by individual
 #: authors is not the same kind of result as a collaboration measurement, and
@@ -80,7 +80,11 @@ MODE_COLUMNS = {
 }
 
 #: Accepted units for the mass column.
-MASS_UNITS = ("GeV", "TeV")
+#:
+#: keV and MeV admit X-ray searches for light dark matter, which constrain the
+#: same annihilation cross-section over a mass range twelve orders of magnitude
+#: below the gamma-ray one.
+MASS_UNITS = ("keV", "MeV", "GeV", "TeV")
 
 #: What kind of statement a bound makes. Mixing these on one figure without
 #: distinguishing them is the most misleading thing this database could do: a
@@ -109,6 +113,7 @@ PROFILES = {
 INSTRUMENT_CLASSES = {
     "iact": "Imaging Atmospheric Cherenkov Telescope",
     "satellite": "satellite-borne pair-conversion detector",
+    "xray": "satellite-borne X-ray telescope",
     "swd": "ground-level shower-front / water-Cherenkov array",
     "radio": "radio interferometer",
     "collider": "collider search",

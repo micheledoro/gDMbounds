@@ -86,9 +86,11 @@ sandbox/<name>/     per-person scratch work; nothing in the package imports from
 
 ## Data model
 
-363 bound files under `gdmbounds/bounds/<instrument>/`. Instrument directories:
+367 bound files under `gdmbounds/bounds/<instrument>/`. Instrument directories:
 `collider`, `cta`, `dampe`, `directsearches`, `hawc`, `hess`, `lat`, `lhaaso`,
-`magic`, `multi-inst`, `veritas`. There was an `askap/` directory holding four raw
+`magic`, `multi-inst`, `mwa`, `nustar`, `veritas`. The archive is no longer
+purely gamma-ray: MWA is radio and NuSTAR is X-ray, and NuSTAR constrains dark
+matter at **keV** masses, so `MASS_UNITS` admits keV and MeV. There was an `askap/` directory holding four raw
 text files and no ECSV; it is now in `unconverted/`. ASKAP is not in
 `legend_instruments` and never was, so — like the old `authors/` directory — it
 was invisible to the loader, which globs by legend key.
@@ -130,11 +132,11 @@ expressible. Four exist; two are proposed and not yet built.
 
 | Axis | Where it lives | Spread |
 |---|---|---|
-| annihilation vs decay | `mode` key | 316 ann / 47 dec |
-| collaboration vs author | `origin` key | 358 / 5 |
-| measured vs projected | `statement` key | 315 limit / 48 sensitivity |
+| annihilation vs decay | `mode` key | 320 ann / 47 dec |
+| collaboration vs author | `origin` key | 357 / 10 |
+| measured vs projected | `statement` key | 319 limit / 48 sensitivity |
 | halo profile assumed | `profile` key, optional | 88 stated / 275 not |
-| detection technique | `class` in `legend_instruments` | iact, satellite, swd, radio, collider, direct, combined |
+| detection technique | `class` in `legend_instruments` | iact, satellite, xray, swd, radio, collider, direct, combined |
 | target type | `class` in `legend_targets` | dsph, cluster, globular, galaxy, gc, diffuse, subhalo, unid |
 | line vs continuum | `spectrum` in `legend_channels` | continuum, line, model, benchmark |
 
@@ -146,10 +148,10 @@ profile was assumed** — every J-factor rests on one. Filtering on `profile` dr
 
 ## State
 
-All 363 bounds satisfy the schema. `pytest tests/ -q` is green — 718 passing, 25 skipped. CI runs that check, `ruff`, and a wheel build that asserts the bounds are
+All 363 bounds satisfy the schema. `pytest tests/ -q` is green — 727 passing, 24 skipped. CI runs that check, `ruff`, and a wheel build that asserts the bounds are
 actually inside the package.
 
-The 25 skips are quarantined in `tests/test_data_quality.py`: bounds whose *numbers*
+The 24 skips are quarantined in `tests/test_data_quality.py`: bounds whose *numbers*
 are unusable even though the file is well-formed. Twenty-three have points out of
 order or repeated, consistent with digitisation noise. Two are **closed contours** —
 `lat_2023_sagittarius_ann_bb` and `magic_2018_perseuscluster_dec_WW` climb in mass,

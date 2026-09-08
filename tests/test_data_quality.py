@@ -18,11 +18,14 @@ from gdmbounds.schema import iter_bound_files
 #: papers need checking before deciding whether the file is mislabelled or the
 #: transcription is wrong.
 #:
-#: Both currently carry ``statement: "limit"``, assigned mechanically from the
-#: filename. If the papers confirm they are signal regions, that key becomes
-#: ``"detection"`` and these entries leave the quarantine.
+#: They carry ``statement: "limit"``, assigned mechanically from the filename. If
+#: the paper confirms a signal region, that key becomes ``"detection"`` and the
+#: entry leaves the quarantine.
+#:
+#: One case is already closed. ``lat_2023_sagittarius_ann_bb`` was flagged here by
+#: its geometry, and independently deleted upstream in October as "the wrong
+#: data"; it is gone from the database.
 NEEDS_ADJUDICATION = {
-    "lat_2023_sagittarius_ann_bb.ecsv": "closed contour; check the paper",
     "magic_2018_perseuscluster_dec_WW.ecsv": "closed contour; check the paper",
 }
 
@@ -99,7 +102,7 @@ def test_curve_is_usable(path):
 
 def test_quarantine_is_shrinking_not_growing():
     """A ratchet: the count is recorded so an increase has to be deliberate."""
-    assert len(QUARANTINE) <= 25, (
+    assert len(QUARANTINE) <= 24, (
         f"the quarantine has grown to {len(QUARANTINE)}; bounds are meant to be "
         "fixed and removed from it, not added to it"
     )

@@ -23,6 +23,8 @@ lat             FERMI-LAT                    satellite
 agile           AGILE                        satellite
 dampe           DAMPE                        satellite
 
+nustar          NuSTAR                       xray
+
 lhaaso          LHAASO                       swd
 hawc            HAWC                         swd
 swgo            SWGO                         swd

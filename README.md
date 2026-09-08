@@ -14,19 +14,21 @@ see [Roadmap](#roadmap).
 
 ## What is in it
 
-363 bounds, one ECSV file per published limit curve.
+367 bounds, one ECSV file per published limit curve.
 
 | Instrument | Bounds |  | Instrument | Bounds |
 |---|---:|---|---|---:|
 | H.E.S.S. | 121 | | LHAASO | 9 |
 | MAGIC | 74 | | DAMPE | 4 |
-| Fermi-LAT | 48 | | Collider searches | 3 |
-| CTA | 45 | | Direct detection | 3 |
-| VERITAS | 25 | | | |
-| HAWC | 19 | | | |
+| Fermi-LAT | 47 | | MWA | 4 |
+| CTA | 45 | | Collider searches | 3 |
+| VERITAS | 25 | | Direct detection | 3 |
+| HAWC | 19 | | NuSTAR | 1 |
 | Multi-instrument | 12 | | | |
 
-316 constrain annihilation, 47 decay. Twenty annihilation channels are
+320 constrain annihilation, 47 decay. Most are gamma-ray, but the archive also
+covers radio (MWA) and X-ray (NuSTAR) searches, the latter reaching down to
+keV-scale dark matter — twelve orders of magnitude below the gamma-ray range. Twenty annihilation channels are
 represented — `bb`, `WW`, `tautau`, `mumu`, `gammagamma`, `ee`, `ZZ`, `tt` and
 others — across dwarf spheroidals, galaxy clusters, the Galactic Centre, the
 LMC, diffuse emission and dark subhalos.
@@ -116,7 +118,7 @@ projections, since CTA is not yet operating.
 filename states it for 88 of 363 bounds. A missing `profile` means it was not
 written down, not that none was assumed. Filtering on it excludes the other 275.
 
-Tables carry `mass` (GeV or TeV) and either `sigmav` (cm3s-1) or `tau` (s).
+Tables carry `mass` (keV, MeV, GeV or TeV) and either `sigmav` (cm3s-1) or `tau` (s).
 A sensitivity curve may give only a band, `sigmav_lo` and `sigmav_hi`.
 
 Controlled vocabularies live in `gdmbounds/legends/`. `templates/` holds blank

@@ -24,10 +24,11 @@ from .schema import Issue, iter_bound_files
 #: Below this the "curve" is too sparse to interpolate meaningfully.
 MIN_POINTS = 3
 
-#: Generous bounds on DM mass in GeV. Anything outside is a transcription slip,
-#: not a physics result: gamma-ray searches do not probe sub-100-MeV or
-#: super-Planckian dark matter.
-MASS_RANGE_GEV = (0.1, 1e9)
+#: Generous bounds on DM mass in GeV. Anything outside is a transcription slip
+#: rather than a physics result. The floor admits keV-scale searches — NuSTAR
+#: constrains dark matter around 10 keV — while still catching a curve whose
+#: units were misread by orders of magnitude.
+MASS_RANGE_GEV = (1e-8, 1e9)
 
 #: No published cross-section limit is anywhere near the thermal relic value
 #: from above; a curve above this is in the wrong units or off by orders.
@@ -36,6 +37,10 @@ MAX_SIGMAV = 1e-15
 #: A decay lifetime limit shorter than this would be younger than anything the
 #: field constrains.
 MIN_TAU = 1e15
+
+
+#: Unit conversions to GeV for the mass column.
+TO_GEV = {"keV": 1e-6, "MeV": 1e-3, "GeV": 1.0, "TeV": 1e3}
 
 
 def _quantity_column(table) -> str | None:
@@ -60,7 +65,7 @@ def check_curve(path: Path) -> list[Issue]:
 
     mass = np.asarray(table["mass"], dtype=float)
     unit = str(table["mass"].unit)
-    mass_gev = mass * (1000.0 if unit == "TeV" else 1.0)
+    mass_gev = mass * TO_GEV.get(unit, 1.0)
 
     if len(mass) < MIN_POINTS:
         report("too-short", f"only {len(mass)} points")

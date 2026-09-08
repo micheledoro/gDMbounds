@@ -1,0 +1,76 @@
+# %ECSV 0.9
+# %Part of https://github.com/micheledoro/gDMbounds under the
+# %Creative Commons Attribution 4.0 International License, see LICENSE-DATA
+# ---
+# datatype:
+# - {name: mass      , unit: GeV       , datatype: float32 , description: DM mass           }
+# - {name: sigmav    , unit: cm3s-1    , datatype: float32 , description: <sigmav>          }
+# meta: !!omap
+# - {reference:        "Constraints on dark matter annihilation in dSphs from low-frequency radio"}
+# - {journalref:       "Phys. Rev. D 100, 043002 (2019)"}
+# - {doi:              "10.1103/PhysRevD.100.043002"}
+# - {arxiv:            ""}
+# - {instrument:       "mwa"}
+# - {origin:           "author"}
+# - {statement:        "limit"}
+# - {year:             "2019"}
+# - {source:           "booetes1"}
+# - {mode:             "ann"}
+# - {channel:          "tautau"}
+# - {confidence:       "0.95"}
+# - {dmfraction:       "1.0"}
+# - {obs_time:         "Phase I"}
+# - {figure:           "Fig. 2 (top-left)"}
+# - {comment:          "Radio limits with B=1 μG, D0=3e26 cm^2/s; solid: MWA; dashed/dotted: FL/CR."}
+# - {status:           "done"}
+# schema : astropy -2.0
+
+mass sigmav
+1.0775e+01 1.4036e-26
+1.3209e+01 1.6900e-26
+1.4377e+01 1.8046e-26
+1.7449e+01 2.1839e-26
+1.8993e+01 2.3320e-26
+2.3052e+01 2.6585e-26
+2.5090e+01 2.8767e-26
+3.0453e+01 3.5394e-26
+3.3146e+01 3.8940e-26
+3.9110e+01 4.7447e-26
+4.3261e+01 5.3774e-26
+5.3361e+01 6.9067e-26
+5.6805e+01 7.4255e-26
+6.9645e+01 9.6652e-26
+7.4590e+01 1.0322e-25
+9.0898e+01 1.3706e-25
+9.7353e+01 1.4637e-25
+1.1864e+02 1.9436e-25
+1.2706e+02 2.0757e-25
+1.5236e+02 2.6578e-25
+1.6584e+02 2.9631e-25
+1.9886e+02 3.8511e-25
+2.1644e+02 4.2580e-25
+2.6376e+02 5.8445e-25
+2.8249e+02 6.2832e-25
+3.4426e+02 8.3431e-25
+3.8080e+02 9.8394e-25
+4.4931e+02 1.2311e-24
+4.9450e+02 1.4140e-24
+6.0934e+02 2.0806e-24
+7.3868e+02 2.7941e-24
+8.2637e+02 3.3301e-24
+9.7998e+02 4.5027e-24
+1.0786e+03 5.1203e-24
+1.3144e+03 7.4604e-24
+1.5761e+03 1.0657e-23
+1.8006e+03 1.3926e-23
+2.1591e+03 1.9462e-23
+2.6079e+03 2.8359e-23
+2.9578e+03 3.6582e-23
+3.5041e+03 5.3686e-23
+4.1512e+03 8.0050e-23
+4.7425e+03 1.0565e-22
+5.5845e+03 1.6102e-22
+6.7046e+03 2.5306e-22
+7.5583e+03 3.3038e-22
+8.9002e+03 4.9857e-22
+1.0000e+04 6.4782e-22

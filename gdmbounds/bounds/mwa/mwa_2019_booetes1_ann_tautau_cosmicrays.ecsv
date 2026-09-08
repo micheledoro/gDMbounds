@@ -1,0 +1,52 @@
+# %ECSV 0.9
+# %Part of https://github.com/micheledoro/gDMbounds under the
+# %Creative Commons Attribution 4.0 International License, see LICENSE-DATA
+# ---
+# datatype:
+# - {name: mass      , unit: GeV       , datatype: float32 , description: DM mass           }
+# - {name: sigmav    , unit: cm3s-1    , datatype: float32 , description: <sigmav>          }
+# meta: !!omap
+# - {reference:        "Constraints on dark matter annihilation in dSphs from low-frequency radio"}
+# - {journalref:       "Phys. Rev. D 100, 043002 (2019)"}
+# - {doi:              "10.1103/PhysRevD.100.043002"}
+# - {arxiv:            ""}
+# - {instrument:       "mwa"}
+# - {origin:           "author"}
+# - {statement:        "limit"}
+# - {year:             "2019"}
+# - {source:           "booetes1"}
+# - {mode:             "ann"}
+# - {channel:          "tautau"}
+# - {confidence:       "0.95"}
+# - {dmfraction:       "1.0"}
+# - {obs_time:         "Phase I"}
+# - {figure:           "Fig. 2 (top-left)"}
+# - {comment:          "Radio limits with B=1 μG, D0=3e26 cm^2/s; solid: MWA; dashed/dotted: FL/CR."}
+# - {status:           "done"}
+# schema : astropy -2.0
+
+mass sigmav
+2.4136e+02 1.1282e-23
+2.7574e+02 1.1201e-23
+3.7774e+02 6.7933e-24
+4.7543e+02 4.9428e-24
+5.9118e+02 3.5730e-24
+7.3868e+02 2.7997e-24
+9.6610e+02 2.7581e-24
+1.2297e+03 2.8441e-24
+1.5666e+03 3.0190e-24
+2.0078e+03 3.2668e-24
+2.5579e+03 3.5775e-24
+3.2194e+03 4.6349e-24
+4.0519e+03 6.4167e-24
+5.0690e+03 8.7552e-24
+6.4187e+03 1.1637e-23
+8.0787e+03 1.5077e-23
+1.0046e+04 2.1674e-23
+1.2644e+04 3.0609e-23
+1.5627e+04 4.6275e-23
+1.8967e+04 7.4850e-23
+2.4017e+04 9.1351e-23
+2.9864e+04 1.3132e-22
+3.6247e+04 2.1739e-22
+4.2169e+04 3.9028e-22
