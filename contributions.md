@@ -16,6 +16,8 @@ part of the authorship of the software.
   git framework until mid-2023, and a large share of the original bound database.
 - Andrea Santarossa (BSc, Univ. Padova) — bounds added to the database.
 - Michela de Caria (MSc, Univ. Padova) — bounds added to the database.
+- Aleksandra Kravtsova (MSc, Univ. Padova) — bounds added to the database, and
+  fixes to the ECSV headers of existing ones.
 
 ## Break-down of contributions
 
@@ -24,7 +26,7 @@ part of the authorship of the software.
 - 2026 rebuild — schema, validation, packaging, CI: Michele Doro, Giacomo D'Amico
 - Casting and recasting methods: Michele Doro, Giacomo D'Amico
 - Database of bounds filled by Michele Doro, Moritz Hütten, Andrea Santarossa,
-  Michela de Caria
+  Michela de Caria, Aleksandra Kravtsova
 
 ## A note on citations
 
