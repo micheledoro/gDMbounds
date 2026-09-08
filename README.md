@@ -14,19 +14,19 @@ see [Roadmap](#roadmap).
 
 ## What is in it
 
-367 bounds, one ECSV file per published limit curve.
+385 bounds, one ECSV file per published limit curve.
 
 | Instrument | Bounds |  | Instrument | Bounds |
 |---|---:|---|---|---:|
-| H.E.S.S. | 121 | | LHAASO | 9 |
-| MAGIC | 74 | | DAMPE | 4 |
-| Fermi-LAT | 47 | | MWA | 4 |
-| CTA | 45 | | Collider searches | 3 |
+| H.E.S.S. | 121 | | HAWC | 19 |
+| MAGIC | 78 | | LHAASO | 9 |
+| Fermi-LAT | 47 | | DAMPE | 4 |
+| CTA | 45 | | MWA | 4 |
+| Multi-instrument | 26 | | Collider searches | 3 |
 | VERITAS | 25 | | Direct detection | 3 |
-| HAWC | 19 | | NuSTAR | 1 |
-| Multi-instrument | 12 | | | |
+| | | | NuSTAR | 1 |
 
-320 constrain annihilation, 47 decay. Most are gamma-ray, but the archive also
+338 constrain annihilation, 47 decay. Most are gamma-ray, but the archive also
 covers radio (MWA) and X-ray (NuSTAR) searches, the latter reaching down to
 keV-scale dark matter — twelve orders of magnitude below the gamma-ray range. Twenty annihilation channels are
 represented — `bb`, `WW`, `tautau`, `mumu`, `gammagamma`, `ee`, `ZZ`, `tt` and
