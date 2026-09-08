@@ -203,11 +203,15 @@ def main() -> int:
                    "a meaningful quantity for them, so a blank field is correct.",
         ))
 
+    blocking_count = (
+        sum(len(group) for group in duplicates) + len(contours) + len(bad_confidence)
+    )
+    misordered = {name for name, _ in unsorted} | {name for name, _ in duplicated_mass}
     parts.append(
         "| | |\n|---|---:|\n"
         f"| bounds checked | {len(tables)} |\n"
-        f"| needing a decision before use | {sum(len(g) for g in duplicates) + len(contours) + len(bad_confidence)} |\n"
-        f"| points out of order or repeated | {len({x for x, _ in unsorted} | {x for x, _ in duplicated_mass})} |\n"
+        f"| needing a decision before use | {blocking_count} |\n"
+        f"| points out of order or repeated | {len(misordered)} |\n"
         f"| missing a figure reference | {len(no_figure)} |\n"
     )
     parts += ["# Needs a decision before the data can be trusted\n", *blocking]
@@ -215,9 +219,7 @@ def main() -> int:
     parts += ["# Provenance gaps\n", *provenance]
 
     OUT.write_text("\n".join(parts))
-    n = sum(len(g) for g in duplicates) + len(contours) + len(bad_confidence)
-    print(f"{OUT.name}: {n} blocking, "
-          f"{len({x for x, _ in unsorted} | {x for x, _ in duplicated_mass})} ordering, "
+    print(f"{OUT.name}: {blocking_count} blocking, {len(misordered)} ordering, "
           f"{len(no_figure)} without a figure")
     return 0
 
