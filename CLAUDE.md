@@ -164,9 +164,18 @@ The quarantine is a ratchet: a new bad file fails the suite, and a quarantined f
 that gets fixed also fails until it is removed from the list. The same pattern guards
 against a bound duplicating another's curve.
 
-`DATA_REVIEW.md` collects everything that passes the schema but still needs a human
-to read a paper. It is **generated** by `tools/data_review.py` — re-run that rather
-than editing it, or it will drift from the data it describes.
+Two documents are **generated**, never hand-edited:
+
+- `VOCABULARY.md` — every classification axis and its members, from
+  `tools/vocabulary_reference.py`. The axes are defined in `schema.py` and their
+  membership in the legends; this joins the two so one file answers "what classes
+  exist and what is in them". `python -m gdmbounds` prints the same thing.
+- `DATA_REVIEW.md` — everything that passes the schema but still needs a human to
+  read a paper, from `tools/data_review.py`.
+
+`tests/test_generated_docs.py` fails if either is out of date, so a committed copy
+cannot quietly diverge from its source. Both tools are timestamp-free on purpose:
+regenerating must be a no-op when nothing changed, or the test could not exist.
 
 Built so far: `schema` (what a bound is), `quality` (whether its numbers are
 usable) and `catalog` (every header in one table, with composable selection).
