@@ -55,6 +55,7 @@
 # - {doi:              "10.3847/1538-4357/834/2/110"}
 # - {arxiv:            "1611.03184"}
 # - {instrument:       "lat"}
+# - {origin:           "collaboration"}
 # - {year:             "2017"}
 # - {source:           "multidsph-45"}
 # - {mode:             "ann"}

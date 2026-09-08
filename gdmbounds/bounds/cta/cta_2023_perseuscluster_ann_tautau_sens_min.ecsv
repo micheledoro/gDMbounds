@@ -12,6 +12,7 @@
 # - {doi:              "10.48550/arXiv.2309.03712"}
 # - {arxiv:            "2309.03712"}
 # - {instrument:       "cta"}
+# - {origin:           "collaboration"}
 # - {year:             "2023"}
 # - {source:           "perseuscluster"}
 # - {mode:             "ann"}

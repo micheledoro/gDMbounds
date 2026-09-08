@@ -24,10 +24,10 @@ __all__ = [
     "REQUIRED_META",
     "Issue",
     "Vocabulary",
+    "__version__",
     "check_database",
     "check_file",
     "iter_bound_files",
     "load_vocabulary",
     "parse_filename",
-    "__version__",
 ]

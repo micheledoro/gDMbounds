@@ -10,6 +10,7 @@
 # - {doi:              "10.1088/1475-7516/2018/11/037"}
 # - {arxiv:            "1810.00995"}
 # - {instrument:       "hess"}
+# - {origin:           "collaboration"}
 # - {year:             "2018"}
 # - {source:           "multidsph-4"}
 # - {mode:             "ann"}

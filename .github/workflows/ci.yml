@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      # Every bound file must parse and satisfy the schema. A single malformed
+      # legend entry once broke every import of this package for eleven months;
+      # this job exists so that cannot happen again.
+      - name: Validate the database
+        run: pytest tests/ -q
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install ruff
+      - run: ruff check gdmbounds tools
+
+  package:
+    name: Build and check the wheel
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install build twine
+      - run: python -m build
+      - run: twine check dist/*
+
+      # The database is the point of the package; a wheel that ships the code
+      # without the bounds would install and import cleanly while being useless.
+      - name: Verify the bounds ship inside the wheel
+        run: |
+          python - <<'PY'
+          import glob, zipfile
+          wheel = glob.glob("dist/*.whl")[0]
+          names = zipfile.ZipFile(wheel).namelist()
+          bounds = [n for n in names if n.startswith("gdmbounds/bounds/") and n.endswith(".ecsv")]
+          legends = [n for n in names if n.startswith("gdmbounds/legends/")]
+          print(f"{len(bounds)} bounds, {len(legends)} legends in {wheel}")
+          assert len(bounds) > 300, f"only {len(bounds)} bounds in the wheel"
+          assert len(legends) == 3, f"only {len(legends)} legends in the wheel"
+          PY

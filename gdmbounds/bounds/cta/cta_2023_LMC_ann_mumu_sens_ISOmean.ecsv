@@ -12,6 +12,7 @@
 # - {doi:              "10.1093/mnras/stad1576"}
 # - {arxiv:            "2305.16707"}
 # - {instrument:       "cta"}
+# - {origin:           "collaboration"}
 # - {year:             "2023"}
 # - {source:           "LMC"}
 # - {mode:             "ann"}

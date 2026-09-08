@@ -10,6 +10,7 @@
 # - {doi:              "10.1088/1475-7516/2020/02/012"}
 # - {arxiv:            "1812.06986"}
 # - {instrument:       "lat"}
+# - {origin:           "collaboration"}
 # - {year:             "2020"}
 # - {source:           "multidsph-27"}
 # - {mode:             "ann"}

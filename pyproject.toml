@@ -48,3 +48,7 @@ testpaths = ["tests"]
 
 [tool.ruff]
 line-length = 100
+
+[tool.ruff.lint]
+# Pinned explicitly so CI does not shift under us when ruff changes defaults.
+select = ["E", "F", "I", "UP", "B"]

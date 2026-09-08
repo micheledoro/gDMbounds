@@ -12,6 +12,7 @@
 # - {doi:              "10.1016/j.dark.2018.08.002"}
 # - {arxiv:            "1806.11063"}
 # - {instrument:       "magic"}
+# - {origin:           "collaboration"}
 # - {year:             "2018"}
 # - {source:           "perseuscluster"}
 # - {mode:             "dec"}

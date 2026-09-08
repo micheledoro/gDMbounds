@@ -12,6 +12,7 @@
 # - {doi:              "10.1016/j.dark.2021.100845"}
 # - {arxiv:            "2101.10003"}
 # - {instrument:       "cta"}
+# - {origin:           "collaboration"}
 # - {year:             "2021"}
 # - {source:           "darksubhalos"}
 # - {mode:             "ann"}

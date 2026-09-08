@@ -10,6 +10,7 @@
 # - {doi:              "10.1103/PhysRevD.93.103009"}
 # - {arxiv:            "1510.00389"}
 # - {instrument:       "lat"}
+# - {origin:           "collaboration"}
 # - {year:             "2016"}
 # - {source:           "multidsph-19"}
 # - {mode:             "dec"}

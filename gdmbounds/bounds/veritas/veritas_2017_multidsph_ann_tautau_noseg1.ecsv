@@ -12,6 +12,7 @@
 # - {doi:              "10.1103/PhysRevD.95.082001"}
 # - {arxiv:            "1703.04937"}
 # - {instrument:       "veritas"}
+# - {origin:           "collaboration"}
 # - {year:             "2017"}
 # - {source:           "multidsph-3-booetes1-draco-ursaminor"}
 # - {mode:             "ann"}

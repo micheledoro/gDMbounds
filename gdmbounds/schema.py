@@ -33,6 +33,7 @@ REQUIRED_META = (
     "doi",
     "arxiv",
     "instrument",
+    "origin",
     "year",
     "source",
     "mode",
@@ -47,6 +48,14 @@ REQUIRED_META = (
 
 #: Recognised but not mandatory.
 OPTIONAL_META = ("authors", "journalref")
+
+#: Who produced a bound. A forecast or reinterpretation published by individual
+#: authors is not the same kind of result as a collaboration measurement, and
+#: users need to be able to include or exclude them deliberately.
+ORIGINS = {
+    "collaboration": "published by the experiment collaboration",
+    "author": "forecast or reinterpretation by individual authors",
+}
 
 #: DM process a bound constrains, and the observable each one limits.
 MODES = {
@@ -185,6 +194,10 @@ def check_file(path: Path, vocabulary: Vocabulary | None = None) -> list[Issue]:
     mode = str(meta.get("mode", ""))
     if mode and mode not in MODES:
         report("bad-value", f"mode '{mode}' is not one of {sorted(MODES)}")
+
+    origin = str(meta.get("origin", ""))
+    if origin and origin not in ORIGINS:
+        report("bad-value", f"origin '{origin}' is not one of {sorted(ORIGINS)}")
 
     if vocabulary is not None:
         instrument = base_instrument(str(meta.get("instrument", "")))

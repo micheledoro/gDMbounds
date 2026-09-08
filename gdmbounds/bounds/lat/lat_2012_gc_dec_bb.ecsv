@@ -10,6 +10,7 @@
 # - {doi:              "10.1088/0004-637X/761/2/91"}
 # - {arxiv:            "1205.6474"}
 # - {instrument:       "lat"}
+# - {origin:           "collaboration"}
 # - {year:             "2012"}
 # - {source:           "gc"}
 # - {mode:             "dec"}

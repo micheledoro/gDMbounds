@@ -53,7 +53,11 @@ description of what exists today.
   `LICENSE-legacy-CC-BY-NC-SA-3.0` and still governs `legacy/`.
 - **Instrument and target classes** (IACT / satellite / shower-front; dSph /
   cluster / ...) belong in the legend ECSV files as an extra column, not in a
-  Python dictionary — data stays data.
+  Python dictionary — data stays data. *Not yet added.*
+- **Every bound sits under the instrument its header declares.** There is no
+  `authors/` directory: a forecast by individual authors lives under its
+  instrument and is marked `origin: "author"`, so it can be included or excluded
+  by query rather than by directory. The author surname is a filename qualifier.
 
 ## Layout
 
@@ -64,6 +68,9 @@ gdmbounds/          the package
   legends/          controlled vocabularies: instruments, channels, targets
   modelpredictions/ theory curves (thermal relic, GAMBIT scan)
 tests/              schema validation; run with pytest
+tools/              one-off migration scripts, kept as a record
+unconverted/        raw digitised material not yet transcribed into bounds
+.github/workflows/  CI: schema validation, lint, and wheel contents
 legacy/             pre-2026 code, not shipped, reference only
 templates/          blank ECSV headers for adding a new bound
 sandbox/<name>/     per-person scratch work; nothing in the package imports from it
@@ -72,9 +79,9 @@ sandbox/<name>/     per-person scratch work; nothing in the package imports from
 ## Data model
 
 363 bound files under `gdmbounds/bounds/<instrument>/`. Instrument directories:
-`askap`, `authors`, `collider`, `cta`, `dampe`, `directsearches`, `hawc`, `hess`,
-`lat`, `lhaaso`, `magic`, `multi-inst`, `veritas`. (`authors` holds
-theory/phenomenology curves rather than one experiment.)
+`collider`, `cta`, `dampe`, `directsearches`, `hawc`, `hess`, `lat`, `lhaaso`,
+`magic`, `multi-inst`, `veritas`. ASKAP appears in the legend but has no bounds:
+its directory held four raw text files and no ECSV, now in `unconverted/`.
 
 **Filename convention:**
 
@@ -93,30 +100,30 @@ target sample is `multi<class>[-<n>][-<member>...]`, e.g. `multidsph-4-booetes1-
 for grouping.
 
 **Header metadata** (`REQUIRED_META` in `schema.py`): `reference`, `doi`, `arxiv`,
-`instrument`, `year`, `source`, `mode`, `channel`, `confidence`, `dmfraction`,
-`obs_time`, `figure`, `comment`, `status`. Optional: `authors`, `journalref`.
+`instrument`, `origin`, `year`, `source`, `mode`, `channel`, `confidence`,
+`dmfraction`, `obs_time`, `figure`, `comment`, `status`. Optional: `authors`,
+`journalref`.
 
-`mode` is **new**: no historical file carries it, so annihilation-vs-decay lived
-only in the filename. Adding it is part of the pending migration.
+`mode` (`ann`/`dec`) and `origin` (`collaboration`/`author`) were both added in
+the 2026 migration. Neither existed before: annihilation-vs-decay lived only in
+the filename, and provenance only in which directory a file happened to sit in.
 
 **Table columns:** `mass` (GeV or TeV) always; `sigmav` (cm3s-1) for annihilation,
-`tau` (s) for decay. Some files add containment bands; some stacked-dSph files
-carry one column per member galaxy.
+`tau` (s) for decay. A sensitivity curve may give only a band (`sigmav_lo` /
+`sigmav_hi`) with no central value, and that satisfies the schema. Some stacked-dSph
+files carry one column per member galaxy.
 
-## Pending data migration
+## State
 
-`pytest` currently fails on 8 tests — deliberately. The failures are the real
-defect list, not noise, and each needs fixing before the catalogue layer is built:
+All 363 bounds satisfy the schema; `pytest tests/ -q` is green (366 tests). CI runs
+that check, `ruff`, and a wheel build that asserts the bounds are actually inside
+the package.
 
-- **356** files missing `mode`; **351** missing `confidence` (written as
-  `{confidence  "0.95" }`, no colon, so it never parsed as a key).
-- **7** unreadable: band columns present in the data but not declared in the
-  `datatype` block.
-- **19** filename/header mismatches, and **3** filenames in `authors/` that do not
-  follow the convention at all.
-- **10** values outside the controlled vocabularies.
-
-Run `pytest tests/ -q` for the current list.
+Built so far: the schema layer only. **Not yet written** — catalogue loading and
+metadata search, selection by criterion, plotting, and recasting. `legacy/dmbounds_old.py`
+shows what the old API offered (`plot`, `metadata`, `filter_metadata`, `get_data`,
+`PlottingStyle`, `interactive_selection`) and is worth reading before designing
+the replacement.
 
 ## Conventions
 

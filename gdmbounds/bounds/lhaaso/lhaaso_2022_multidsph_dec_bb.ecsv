@@ -10,6 +10,7 @@
 # - {doi:              "10.1103/PhysRevLett.129.261103"}
 # - {arxiv:            "2210.15989"}
 # - {instrument:       "lhaaso"}
+# - {origin:           "collaboration"}
 # - {year:             "2022"}
 # - {source:           "multidsph"}
 # - {mode:             "dec"}

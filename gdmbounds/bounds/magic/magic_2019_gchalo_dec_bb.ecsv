@@ -12,6 +12,7 @@
 # - {doi:              "10.22323/1.358.0538"}
 # - {arxiv:            "https://pos.sissa.it/358/538/"}
 # - {instrument:       "magic"}
+# - {origin:           "collaboration"}
 # - {year:             "2019"}
 # - {source:           "gchalo"}
 # - {mode:             "dec"}

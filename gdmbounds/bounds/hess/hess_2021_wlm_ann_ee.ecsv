@@ -10,6 +10,7 @@
 # - {doi:              "10.1103/PhysRevD.103.102002"}
 # - {arxiv:            "2105.04325"}
 # - {instrument:       "hess"}
+# - {origin:           "collaboration"}
 # - {year:             "2021"}
 # - {source:           "wlm"}
 # - {mode:             "ann"}

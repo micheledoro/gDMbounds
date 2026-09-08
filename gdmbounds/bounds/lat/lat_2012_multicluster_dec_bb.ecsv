@@ -10,6 +10,7 @@
 # - {doi:              "10.1088/1475-7516/2012/01/042"}
 # - {arxiv:            "1110.1529"}
 # - {instrument:       "lat"}
+# - {origin:           "collaboration"}
 # - {year:             "2012"}
 # - {source:           "multicluster-8"}
 # - {mode:             "dec"}

@@ -10,6 +10,7 @@
 # - {doi:              "10.48550/arXiv.2311.04982"}
 # - {arxiv:            "2311.04982"}
 # - {instrument:       "lat"}
+# - {origin:           "collaboration"}
 # - {year:             "2023"}
 # - {source:           "multidsph-50"}
 # - {mode:             "ann"}

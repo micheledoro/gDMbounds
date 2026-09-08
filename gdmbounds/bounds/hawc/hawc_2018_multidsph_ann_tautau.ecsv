@@ -10,6 +10,7 @@
 # - {doi:              "10.3847/1538-4357/aaa6d8"}
 # - {arxiv:            "1706.01277"}
 # - {instrument:       "hawc"}
+# - {origin:           "collaboration"}
 # - {year:             "2018"}
 # - {source:           "multidsph-15"}
 # - {mode:             "ann"}

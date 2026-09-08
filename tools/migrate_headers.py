@@ -49,7 +49,7 @@ def mode_from_columns(lines: list[str]) -> str | None:
 
     More trustworthy than the filename: the column is the physics.
     """
-    names = {m.group("name") for m in (COLUMN_RE.match(l) for l in lines) if m}
+    names = {m.group("name") for m in (COLUMN_RE.match(line) for line in lines) if m}
     if "sigmav" in names:
         return "ann"
     if "tau" in names:
@@ -80,7 +80,7 @@ def migrate(path: Path) -> tuple[list[str], list[str]]:
             in_meta = True
             out.append(line)
             continue
-        if line.startswith("# schema") or line.startswith("# ---"):
+        if line.startswith(("# schema", "# ---")):
             in_meta = False
         # Licence preamble: two fixed lines following the %ECSV marker.
         if line.startswith("# %Part of"):

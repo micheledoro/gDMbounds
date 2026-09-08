@@ -10,6 +10,7 @@
 # - {doi:              "10.1103/PhysRevLett.114.081301"}
 # - {arxiv:            "1502.03244"}
 # - {instrument:       "hess"}
+# - {origin:           "collaboration"}
 # - {year:             "2015"}
 # - {source:           "gc"}
 # - {mode:             "ann"}
