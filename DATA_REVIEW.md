@@ -101,6 +101,6 @@ Each still carries the other identifier, so the source is reachable.
   - `mwa_2019_booetes1_ann_bb_cosmicrays.ecsv`
   - `mwa_2019_booetes1_ann_tautau_FermiLAT.ecsv`
   - `mwa_2019_booetes1_ann_tautau_cosmicrays.ecsv`
-- `h` — 46 file(s)
+- `h` — 26 file(s)
 
 Exposure is part of what makes a limit comparable to another, and `h` states a unit with no quantity. Collider and direct-detection bounds are excluded: an exposure in hours is not a meaningful quantity for them, so a blank field is correct.
