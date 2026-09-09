@@ -74,12 +74,14 @@ reviewed:
       against the median's 48.
     decisions:
       magic_2022_multidsph_ann_mumu.ecsv: >
-        Wrong file of the identical pair. It is weaker than Segue 1 alone at every
-        mass, and a combination containing Segue 1 cannot be. It holds the Coma
-        Berenices curve; the combined mumu limit is missing from the archive and
-        must be re-transcribed from the mu+mu- panel of Fig. 4.
+        Was the wrong file of an identical pair — it held the Coma Berenices curve,
+        being weaker than Segue 1 alone at every mass, which a combination
+        containing Segue 1 cannot be. Re-digitised from the mu+mu- panel of Fig. 4
+        on 2026-09-09. The new curve sits below Segue 1 over 98% of the range and
+        below Draco and Coma Berenices everywhere, and its ratio to Segue 1
+        matches the other channels.
       magic_2022_comaberenices_ann_mumu.ecsv: >
-        The correct file of the identical pair. Keep as it is.
+        The correct file of what was an identical pair. Kept unchanged.
       magic_2022_segue1_ann_WW.ecsv: >
         Stronger than the combined WW limit at every mass, by 1.5 to 3.5 — the
         combination includes Segue 1, so this cannot be. It is also stronger than

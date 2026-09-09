@@ -255,10 +255,10 @@ revisit. What the data showed, so it need not be rediscovered:
 
 In `DATA_REVIEW.md`, and none of it is a CI failure:
 
-- `magic_2022_comaberenices_ann_mumu` and `magic_2022_multidsph_ann_mumu` hold the
-  **same curve**. Across other channels the combined analysis is more constraining
-  than the single target, as physics requires; for mumu it is not, in none of the
-  100 shared mass points, because it is the same data. One file is wrong.
+- Two MAGIC 2022 Segue 1 curves are impossible as they stand: `..._ann_WW` is
+  stronger than the combined limit at every mass, and `..._ann_tautau` crosses it.
+  A combination containing Segue 1 cannot be weaker than Segue 1 alone. Both want
+  re-digitising from Fig. 4 of arXiv:2111.15009.
 - Five H.E.S.S. 2014 bounds record no `figure`, so nothing checks the transcription.
 - The 2026 joint-analysis files describe `sv_lo_95` as a 3σ bound and `sv_hi_95` as
   2σ. The numeric suffixes were used; the prose contradicts itself. **Raise with

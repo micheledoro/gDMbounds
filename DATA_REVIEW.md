@@ -10,7 +10,7 @@ Everything listed here passes the schema. These are questions the schema cannot 
 | papers behind them | 57 |
 | papers read against their source | 1 of 57 |
 | bounds those readings cover | 34 |
-| needing a decision before use | 3 |
+| needing a decision before use | 1 |
 | points out of order or repeated | 22 |
 | missing a figure reference | 5 |
 
@@ -123,14 +123,6 @@ Heaviest first: the number of bounds a single reading settles.
 | 1 | `2509.08506` | 2025 | nustar | Search for a photon peak from keV-scale dark matter annihilation with… |
 
 # Needs a decision before the data can be trusted
-
-## Identical curves in different files
-
-- `magic_2022_comaberenices_ann_mumu.ecsv` == `magic_2022_multidsph_ann_mumu.ecsv`
-  - `magic_2022_comaberenices_ann_mumu.ecsv` reviewed: The correct file of the identical pair. Keep as it is.
-  - `magic_2022_multidsph_ann_mumu.ecsv` reviewed: Wrong file of the identical pair. It is weaker than Segue 1 alone at every mass, and a combination containing Segue 1 cannot be. It holds the Coma Berenices curve; the combined mumu limit is missing from the archive and must be re-transcribed from the mu+mu- panel of Fig. 4.
-
-Two independent measurements do not produce the same numbers. One file in each group carries data copied from the other, and the paper decides which.
 
 ## Closed contours stored as limits
 

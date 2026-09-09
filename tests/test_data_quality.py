@@ -123,12 +123,10 @@ def test_summary_of_outstanding_problems(capsys):
 #: Bounds whose curves are byte-identical to another's. Two measurements do not
 #: produce the same numbers, so each pair is a copy-paste that needs a paper to
 #: resolve. Listed here so a *new* duplicate fails the suite.
-KNOWN_IDENTICAL = {
-    frozenset({
-        "magic_2022_comaberenices_ann_mumu.ecsv",
-        "magic_2022_multidsph_ann_mumu.ecsv",
-    }),
-}
+#:
+#: Empty since the MAGIC 2022 pair was resolved: the combined mumu file held the
+#: Coma Berenices curve and was re-digitised from Fig. 4 of arXiv:2111.15009.
+KNOWN_IDENTICAL = set()
 
 
 def test_no_new_bound_duplicates_another():
