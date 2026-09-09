@@ -14,12 +14,17 @@ heaviest — MAGIC 2022, arXiv:2111.15009, 41 of the 391 bounds — and it produ
 four real errors, all fixed. See *The paper-by-paper review* below and
 `review_log.yaml` for what it found.
 
-Everything lives on **`data_fix`**, eleven commits ahead of `main`, pushed. It
-carries a merge of `repo_fix`, deliberately: the rename of the four MAGIC median
-files and the log entry naming them are one change, and splitting them would have
-left whichever branch merged first with a failing suite. **No pull request is
-open yet** — `data_fix` should go to `main` before the next paper is read, so the
-review does not accumulate on a long-lived branch.
+All of it is in `main` — pull request #66, merged — and `repo_dev`, `repo_fix`
+and `data_fix` are level with it again. That work crossed two branches once:
+`repo_fix` was merged into `data_fix` before the four MAGIC median files were
+renamed, because the rename and the log entry naming them are one change and
+splitting them would have left whichever branch merged first with a failing
+suite. Worth repeating when it happens again: **a review that touches both the
+data and the tooling belongs on one branch**, and the shortest way there is to
+merge the other into it.
+
+Keep the habit that made #66 easy — take a paper to `main` before starting the
+next one, so the review does not accumulate on a long-lived branch.
 
 Next in the queue, and both worth doing early: H.E.S.S. Fornax **1202.5494** (25
 bounds, and its erratum question is open — four of its qualifiers still say "to
