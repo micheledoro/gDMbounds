@@ -255,10 +255,10 @@ revisit. What the data showed, so it need not be rediscovered:
 
 In `DATA_REVIEW.md`, and none of it is a CI failure:
 
-- Two MAGIC 2022 Segue 1 curves are impossible as they stand: `..._ann_WW` is
-  stronger than the combined limit at every mass, and `..._ann_tautau` crosses it.
-  A combination containing Segue 1 cannot be weaker than Segue 1 alone. Both want
-  re-digitising from Fig. 4 of arXiv:2111.15009.
+- `magic_2014_segue1_ann_bb` and `..._dec_bb` carry mass in **TeV** where the
+  paper's twelve other files use GeV. Legal, and a trap: a comparison that reads
+  the column without its unit is wrong by a thousand. Worth settling when
+  arXiv:1312.1535 is reviewed.
 - Five H.E.S.S. 2014 bounds record no `figure`, so nothing checks the transcription.
 - The 2026 joint-analysis files describe `sv_lo_95` as a 3σ bound and `sv_hi_95` as
   2σ. The numeric suffixes were used; the prose contradicts itself. **Raise with

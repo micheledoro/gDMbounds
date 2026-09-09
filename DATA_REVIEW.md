@@ -11,7 +11,7 @@ Everything listed here passes the schema. These are questions the schema cannot 
 | papers read against their source | 1 of 57 |
 | bounds those readings cover | 34 |
 | needing a decision before use | 1 |
-| points out of order or repeated | 22 |
+| points out of order or repeated | 21 |
 | missing a figure reference | 5 |
 
 # Review progress
@@ -20,44 +20,48 @@ Everything listed here passes the schema. These are questions the schema cannot 
 
 ## Papers read
 
-### 2022 — `2111.15009` — open
+### 2022 — `2111.15009` — corrected
 
 Combined searches for dark matter in dwarf spheroidal galaxies observed with the MAGIC telescopes, including new data from Coma Berenices and Draco  
-34 bound(s), read by Claude, for MD on 2026-09-09.
+34 bound(s), read by Claude and MD on 2026-09-09.
 
-Read by Claude at MD's request; the findings below still want MD's
-confirmation before the files are touched, and the reviewer field should
-become his once he has checked them.
+MAGIC combined dSph search, Phys. Dark Univ. 35 (2022) 100912, read against
+all 34 bounds. Claude read the paper and ran the checks; MD re-digitised the
+three curves that had to be replaced.
 
-MAGIC combined dSph search, Phys. Dark Univ. 35 (2022) 100912. Read against
-all 34 bounds. Confirmed correct: `figure: "Fig. 4"` on the per-target files
-— Fig. 4 draws Segue 1, Ursa Major II, Draco and Coma Berenices inside each
-of its nine panels, so a per-target curve does come from it; `confidence`
-0.95; `mode`; `year`; `source: multidsph-4`; and the mass range 70 GeV to
-100 TeV (the paper's 0.07-100 TeV). Two numbers in the text corroborate the
-curves: Draco's tautau minimum, 7.4e-24 at 1.2 TeV, and the combined tautau
-reaching ~1e-24 in the TeV range.
+Confirmed correct: `figure: "Fig. 4"` on the per-target files — Fig. 4 draws
+Segue 1, Ursa Major II, Draco and Coma Berenices inside each of its nine
+panels, so a per-target curve does come from it; `confidence` 0.95; `mode`;
+`year`; `source: multidsph-4`; and the mass range 70 GeV to 100 TeV. Two
+numbers in the text corroborate the curves: Draco's tautau minimum, 7.4e-24
+at 1.2 TeV, and the combined tautau reaching ~1e-24 in the TeV range.
 
-Two curves are physically impossible as they stand and want re-digitising
-from Fig. 4; that is why this is `open`. Both are Segue 1, and the
-combined curves they contradict are the ones the paper's own text confirms.
-A swap of the two files was tested and rejected: it repairs 500 GeV - 2 TeV
-and fails at both ends.
+The check that did the work was not on the headers: every Segue 1 curve must
+lie above the combined limit, because the combination contains it. All seven
+channels now sit between 1.48 and 1.60 above it at the median — a tight band
+that made the two outliers obvious and, once fixed, corroborates the rest.
 
-Not errors, but the archive is not complete for this paper: the combined
+A warning for the next reader, learned here. Two of these files are still in
+the out-of-order quarantine, and `numpy.interp` on an unsorted array returns
+nonsense without complaining. Reading `magic_2022_segue1_ann_tautau` that way
+produced an apparent impossible crossing that does not exist. Sort by mass,
+and convert the unit, before comparing anything: `magic_2014_segue1_ann_bb`
+and `..._dec_bb` carry mass in TeV where their twelve siblings use GeV.
+
+Not errors, but the archive is not complete for this paper. The combined
 analysis covers 9 channels and only 7 are held — `tt` and `gammagamma` are
 absent for every target. Ursa Major II has 2 of the 9 where the other three
 targets have 7. Draco's H0 median curves (Fig. 2) are not transcribed while
-Coma Berenices' (Fig. 3) are.
+Coma Berenices' (Fig. 3) are. And `profile` is empty on all 34 though the
+paper states NFW, which is a policy question for the archive rather than a
+fault in these files.
 
-One inconsistency belongs to the paper, not to us: the caption of Fig. 3
-says 49.8 h of Coma Berenices data, while Table 1, the abstract and Sec. 4
-all say 49.5 h.
+One inconsistency belongs to the paper: the caption of Fig. 3 says 49.8 h of
+Coma Berenices data, while Table 1, the abstract and Sec. 4 say 49.5 h.
 
-Watch when re-digitising: the four median curves run above the observed
-limits by a factor growing to 2.3 at tens of TeV, where Fig. 3 shows the two
-nearly touching. The observed Coma Berenices bb curve carries 13 points
-against the median's 48.
+Left for a later eye: the four median curves run above the observed limits by
+a factor growing to 2.3 at tens of TeV, where Fig. 3 shows the two nearly
+touching.
 
 ## The queue
 
@@ -153,8 +157,6 @@ The curve climbs in mass, turns, and returns to near its starting point. That is
 - `magic_2022_multidsph_ann_WW.ecsv`
 - `magic_2022_segue1_ann_ZZ.ecsv`
 - `magic_2022_segue1_ann_mumu.ecsv`
-- `magic_2022_segue1_ann_tautau.ecsv`
-  - reviewed: Crosses the combined tautau curve: 5 times weaker at 500 GeV, 6 times stronger at 50 TeV. The combined curve is corroborated by the paper's text, so this one is the suspect. Re-digitise from Fig. 4.
 - `multi-inst-magic-lat_2016_multidsph_ann_mumu.ecsv`
 - `veritas_2012_comacluster_ann_WW.ecsv`
 

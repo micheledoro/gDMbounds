@@ -35,70 +35,79 @@
 
 reviewed:
   2111.15009:
-    reviewer: Claude, for MD
+    reviewer: Claude and MD
     date: 2026-09-09
-    verdict: open
+    verdict: corrected
     notes: |
-      Read by Claude at MD's request; the findings below still want MD's
-      confirmation before the files are touched, and the reviewer field should
-      become his once he has checked them.
+      MAGIC combined dSph search, Phys. Dark Univ. 35 (2022) 100912, read against
+      all 34 bounds. Claude read the paper and ran the checks; MD re-digitised the
+      three curves that had to be replaced.
 
-      MAGIC combined dSph search, Phys. Dark Univ. 35 (2022) 100912. Read against
-      all 34 bounds. Confirmed correct: `figure: "Fig. 4"` on the per-target files
-      — Fig. 4 draws Segue 1, Ursa Major II, Draco and Coma Berenices inside each
-      of its nine panels, so a per-target curve does come from it; `confidence`
-      0.95; `mode`; `year`; `source: multidsph-4`; and the mass range 70 GeV to
-      100 TeV (the paper's 0.07-100 TeV). Two numbers in the text corroborate the
-      curves: Draco's tautau minimum, 7.4e-24 at 1.2 TeV, and the combined tautau
-      reaching ~1e-24 in the TeV range.
+      Confirmed correct: `figure: "Fig. 4"` on the per-target files — Fig. 4 draws
+      Segue 1, Ursa Major II, Draco and Coma Berenices inside each of its nine
+      panels, so a per-target curve does come from it; `confidence` 0.95; `mode`;
+      `year`; `source: multidsph-4`; and the mass range 70 GeV to 100 TeV. Two
+      numbers in the text corroborate the curves: Draco's tautau minimum, 7.4e-24
+      at 1.2 TeV, and the combined tautau reaching ~1e-24 in the TeV range.
 
-      Two curves are physically impossible as they stand and want re-digitising
-      from Fig. 4; that is why this is `open`. Both are Segue 1, and the
-      combined curves they contradict are the ones the paper's own text confirms.
-      A swap of the two files was tested and rejected: it repairs 500 GeV - 2 TeV
-      and fails at both ends.
+      The check that did the work was not on the headers: every Segue 1 curve must
+      lie above the combined limit, because the combination contains it. All seven
+      channels now sit between 1.48 and 1.60 above it at the median — a tight band
+      that made the two outliers obvious and, once fixed, corroborates the rest.
 
-      Not errors, but the archive is not complete for this paper: the combined
+      A warning for the next reader, learned here. Two of these files are still in
+      the out-of-order quarantine, and `numpy.interp` on an unsorted array returns
+      nonsense without complaining. Reading `magic_2022_segue1_ann_tautau` that way
+      produced an apparent impossible crossing that does not exist. Sort by mass,
+      and convert the unit, before comparing anything: `magic_2014_segue1_ann_bb`
+      and `..._dec_bb` carry mass in TeV where their twelve siblings use GeV.
+
+      Not errors, but the archive is not complete for this paper. The combined
       analysis covers 9 channels and only 7 are held — `tt` and `gammagamma` are
       absent for every target. Ursa Major II has 2 of the 9 where the other three
       targets have 7. Draco's H0 median curves (Fig. 2) are not transcribed while
-      Coma Berenices' (Fig. 3) are.
+      Coma Berenices' (Fig. 3) are. And `profile` is empty on all 34 though the
+      paper states NFW, which is a policy question for the archive rather than a
+      fault in these files.
 
-      One inconsistency belongs to the paper, not to us: the caption of Fig. 3
-      says 49.8 h of Coma Berenices data, while Table 1, the abstract and Sec. 4
-      all say 49.5 h.
+      One inconsistency belongs to the paper: the caption of Fig. 3 says 49.8 h of
+      Coma Berenices data, while Table 1, the abstract and Sec. 4 say 49.5 h.
 
-      Watch when re-digitising: the four median curves run above the observed
-      limits by a factor growing to 2.3 at tens of TeV, where Fig. 3 shows the two
-      nearly touching. The observed Coma Berenices bb curve carries 13 points
-      against the median's 48.
+      Left for a later eye: the four median curves run above the observed limits by
+      a factor growing to 2.3 at tens of TeV, where Fig. 3 shows the two nearly
+      touching.
     decisions:
       magic_2022_multidsph_ann_mumu.ecsv: >
-        Was the wrong file of an identical pair — it held the Coma Berenices curve,
-        being weaker than Segue 1 alone at every mass, which a combination
-        containing Segue 1 cannot be. Re-digitised from the mu+mu- panel of Fig. 4
-        on 2026-09-09. The new curve sits below Segue 1 over 98% of the range and
-        below Draco and Coma Berenices everywhere, and its ratio to Segue 1
-        matches the other channels.
+        Held the Coma Berenices curve, byte-identical to that target's own file and
+        weaker than Segue 1 alone at every mass, which a combination containing
+        Segue 1 cannot be. Re-digitised from the mu+mu- panel of Fig. 4. The new
+        curve lies below Segue 1 over 98% of the range and below Draco and Coma
+        Berenices everywhere.
       magic_2022_comaberenices_ann_mumu.ecsv: >
         The correct file of what was an identical pair. Kept unchanged.
       magic_2022_segue1_ann_WW.ecsv: >
-        Stronger than the combined WW limit at every mass, by 1.5 to 3.5 — the
-        combination includes Segue 1, so this cannot be. It is also stronger than
-        Segue 1's own tautau limit, which no channel ordering allows. Re-digitise
-        from Fig. 4.
+        Was stronger than the combined WW limit at every mass, by 1.3 to 3.6, which
+        the combination containing it forbids. Re-digitised from Fig. 4; the new
+        curve sits 1.58 above the combined at the median, in line with the other
+        six channels. The containment-band columns were dropped with the old curve:
+        they were digitised beside it and cannot be trusted apart from it.
       magic_2022_segue1_ann_tautau.ecsv: >
-        Crosses the combined tautau curve: 5 times weaker at 500 GeV, 6 times
-        stronger at 50 TeV. The combined curve is corroborated by the paper's
-        text, so this one is the suspect. Re-digitise from Fig. 4.
+        Sound, and kept with its containment bands. Its lowest-mass point sat as the
+        last row of the file, which is the whole of what was wrong; an independent
+        re-digitisation during this review agreed with it to within 20%, so the rows
+        were sorted and no value changed. An earlier reading of this file as an
+        impossible curve was an artefact of interpolating it unsorted.
+      magic_2022_segue1_ann_bb.ecsv: >
+        Kept as it is, with its containment bands. An independent re-digitisation
+        agrees to within 16% above 300 GeV and diverges only below it, where the
+        archived file stops at 122 GeV. Not enough to justify discarding the bands.
       magic_2022_comaberenices_ann_WW_sens_median.ecsv: >
         `confidence: "Median"` is not a confidence level: Fig. 3 plots the 95% CL
-        upper limit, so 0.95. And `statement` must be `sensitivity` — this is the
-        median of 300 realisations of the null hypothesis, which is what a
-        sensitivity is. The two corrections go together.
+        upper limit, so 0.95. And `statement` is `sensitivity` — this is the median
+        of 300 realisations of the null hypothesis. Renamed to carry `_sens`.
       magic_2022_comaberenices_ann_bb_sens_median.ecsv: >
-        Same as the WW median: confidence 0.95, statement sensitivity.
+        Same as the WW median: confidence 0.95, statement sensitivity, renamed.
       magic_2022_comaberenices_ann_mumu_sens_median.ecsv: >
-        Same as the WW median: confidence 0.95, statement sensitivity.
+        Same as the WW median: confidence 0.95, statement sensitivity, renamed.
       magic_2022_comaberenices_ann_tautau_sens_median.ecsv: >
-        Same as the WW median: confidence 0.95, statement sensitivity.
+        Same as the WW median: confidence 0.95, statement sensitivity, renamed.

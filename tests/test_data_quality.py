@@ -34,9 +34,11 @@ NEEDS_ADJUDICATION = {
 #: changing any value, but it still edits a published curve, so it waits for a
 #: decision on each file.
 #:
-#: One is already settled: ``magic_2022_segue1_ann_bb`` had three rows permuted,
-#: and upstream had independently sorted the same file. Reordering it changed no
-#: value and it has left the quarantine.
+#: Two are already settled. ``magic_2022_segue1_ann_bb`` had three rows permuted,
+#: and upstream had independently sorted the same file. ``magic_2022_segue1_ann_tautau``
+#: carried its lowest-mass point as the last row; an independent re-digitisation of
+#: the same curve during the review of arXiv:2111.15009 agreed with it to within
+#: 20%, so the order was the only thing wrong. Neither reordering changed a value.
 NEEDS_RESORTING = {
     "ctao_2021_gc_ann_WW_sens_mstonly.ecsv": "unsorted-mass",
     "dampe_2022_gc_ann_gammagamma_r16einasto.ecsv": "unsorted-mass",
@@ -57,7 +59,6 @@ NEEDS_RESORTING = {
     "magic_2022_multidsph_ann_WW.ecsv": "unsorted-mass",
     "magic_2022_segue1_ann_ZZ.ecsv": "unsorted-mass",
     "magic_2022_segue1_ann_mumu.ecsv": "unsorted-mass",
-    "magic_2022_segue1_ann_tautau.ecsv": "unsorted-mass",
     "multi-inst-magic-lat_2016_multidsph_ann_mumu.ecsv": "unsorted-mass",
     "veritas_2012_comacluster_ann_WW.ecsv": "unsorted-mass",
 }
