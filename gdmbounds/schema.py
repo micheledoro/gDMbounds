@@ -160,20 +160,6 @@ CHANNEL_SPECTRA = {
     "benchmark": "individual benchmark points rather than a curve",
 }
 
-#: What a qualifier after the channel varies. The qualifiers were free-form
-#: until they were collected into ``legends/legend_qualifiers.ecsv``; the first
-#: pass through them found ``inital`` for ``initial``, which is the kind of thing
-#: an uncontrolled vocabulary hides.
-QUALIFIER_CLASSES = {
-    "profile": "the halo density profile assumed for the J-factor",
-    "statement": "a measurement against a projection",
-    "band": "which member of a family of curves this is",
-    "sample": "which targets a stacked analysis contains",
-    "analysis": "how the limit was computed",
-    "setup": "the observation, the instrument configuration, the region",
-    "provenance": "whose assumption it is, or which revision",
-}
-
 #: ``<instrument>_<year>_<source>_<mode>_<channel>`` plus qualifiers such as
 #: ``_sens``, ``_einasto``, ``_measured``. The channel is the fifth token, never
 #: simply the last one.
@@ -220,7 +206,11 @@ class Vocabulary:
     instrument_class: dict[str, str] = field(default_factory=dict)
     target_class: dict[str, str] = field(default_factory=dict)
     channel_spectrum: dict[str, str] = field(default_factory=dict)
-    qualifier_class: dict[str, str] = field(default_factory=dict)
+    #: Qualifier -> the halo profile it names, "--" where it names none. The
+    #: qualifiers carry no class of their own: nothing selects on one, and a
+    #: taxonomy nobody queries only grows and argues with itself. This mapping
+    #: exists because a test uses it.
+    qualifier_profile: dict[str, str] = field(default_factory=dict)
 
     def instruments_in(self, klass: str) -> list[str]:
         """Every instrument using a given detection technique."""
@@ -241,7 +231,6 @@ class Vocabulary:
             ("Instrument classes", INSTRUMENT_CLASSES, self.instrument_class),
             ("Target classes", TARGET_CLASSES, self.target_class),
             ("Channel spectra", CHANNEL_SPECTRA, self.channel_spectrum),
-            ("Qualifier classes", QUALIFIER_CLASSES, self.qualifier_class),
         ):
             lines = [title, "-" * len(title)]
             for key, description in classes.items():
@@ -268,8 +257,8 @@ def load_vocabulary() -> Vocabulary:
         "channels", "shortname", "latex", "spectrum"
     )
     targets, target_class = _read_legend("targets", "shortname", "longname", "class")
-    qualifiers, qualifier_class = _read_legend(
-        "qualifiers", "shortname", "comment", "class"
+    qualifiers, qualifier_profile = _read_legend(
+        "qualifiers", "shortname", "comment", "profile"
     )
     return Vocabulary(
         instruments=instruments,
@@ -279,7 +268,7 @@ def load_vocabulary() -> Vocabulary:
         instrument_class=instrument_class,
         target_class=target_class,
         channel_spectrum=channel_spectrum,
-        qualifier_class=qualifier_class,
+        qualifier_profile=qualifier_profile,
     )
 
 
@@ -454,7 +443,6 @@ def check_vocabulary(vocabulary: Vocabulary | None = None) -> list[Issue]:
         ("instruments", vocabulary.instrument_class, INSTRUMENT_CLASSES, "class"),
         ("targets", vocabulary.target_class, TARGET_CLASSES, "class"),
         ("channels", vocabulary.channel_spectrum, CHANNEL_SPECTRA, "spectrum"),
-        ("qualifiers", vocabulary.qualifier_class, QUALIFIER_CLASSES, "class"),
     ):
         path = LEGENDS_DIR / f"legend_{legend}.ecsv"
         for term, value in sorted(membership.items()):
@@ -468,6 +456,24 @@ def check_vocabulary(vocabulary: Vocabulary | None = None) -> list[Issue]:
                         f"'{term}' has {label} '{value}', not one of {sorted(allowed)}",
                     )
                 )
+
+    # Qualifiers carry no class. What they may carry is the name of a halo
+    # profile, and "--" — meaning this one names none — is a legitimate value
+    # rather than an omission, so the check differs from the loop above.
+    path = LEGENDS_DIR / "legend_qualifiers.ecsv"
+    for term, value in sorted(vocabulary.qualifier_profile.items()):
+        if not value:
+            issues.append(
+                Issue(path, "unclassified", f"'{term}' has a blank profile; use '--'")
+            )
+        elif value != "--" and value not in PROFILES:
+            issues.append(
+                Issue(
+                    path,
+                    "unknown-class",
+                    f"'{term}' names profile '{value}', not one of {sorted(PROFILES)}",
+                )
+            )
     return issues
 
 

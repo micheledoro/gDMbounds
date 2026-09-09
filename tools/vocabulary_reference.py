@@ -62,6 +62,38 @@ def per_entity_axis(
     return body
 
 
+def qualifiers(v) -> str:
+    """The filename qualifiers, which are controlled but are not an axis.
+
+    Nothing selects on a qualifier class, so there is none. What the legend does
+    carry is which qualifiers name a halo profile, because that mapping is what
+    keeps a file called `_nfw` from declaring something else.
+    """
+    families = {}
+    for term, profile in sorted(v.qualifier_profile.items()):
+        if profile != "--":
+            families.setdefault(profile, []).append(term)
+    rows = [
+        (f"`{profile}`", str(len(terms)), ", ".join(f"`{t}`" for t in terms))
+        for profile, terms in sorted(families.items())
+    ]
+    unmapped = sorted(t for t, p in v.qualifier_profile.items() if p == "--")
+    return (
+        "## Filename qualifiers\n\n"
+        f"The {len(v.qualifiers)} qualifiers a filename may carry after the channel, "
+        "listed in `gdmbounds/legends/legend_qualifiers.ecsv`. `pytest` rejects one "
+        "that is not there, and one there that no file uses.\n\n"
+        "They carry no class: nothing selects on a qualifier, and a taxonomy nobody "
+        "queries only grows and argues with itself. The one mapping the legend does "
+        "carry is to a halo profile, because a test uses it — a file whose name "
+        "says `_nfw` may not declare something else.\n\n"
+        + table(rows, ("profile", "n", "qualifiers naming it"))
+        + f"\nThe remaining {len(unmapped)} name no profile: "
+        + ", ".join(f"`{t}`" for t in unmapped)
+        + ".\n"
+    )
+
+
 def main() -> int:
     v = schema.load_vocabulary()
 
@@ -111,10 +143,7 @@ def main() -> int:
             "Channel spectra", "legend_channels.ecsv", "spectrum",
             schema.CHANNEL_SPECTRA, v.channel_spectrum, v.channels,
         ),
-        per_entity_axis(
-            "Qualifier classes", "legend_qualifiers.ecsv", "class",
-            schema.QUALIFIER_CLASSES, v.qualifier_class, v.qualifiers,
-        ),
+        qualifiers(v),
         "---\n",
         "# Adding a value\n",
         "A new class goes in `schema.py`, beside the set it joins, with a sentence "
@@ -126,7 +155,7 @@ def main() -> int:
     print(f"{OUT.name}: {len(schema.INSTRUMENT_CLASSES)} instrument classes, "
           f"{len(schema.TARGET_CLASSES)} target classes, "
           f"{len(schema.CHANNEL_SPECTRA)} channel spectra, "
-          f"{len(schema.QUALIFIER_CLASSES)} qualifier classes")
+          f"{len(v.qualifiers)} qualifiers")
     return 0
 
 

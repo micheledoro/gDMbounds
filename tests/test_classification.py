@@ -21,6 +21,11 @@ def metadata():
     ]
 
 
+@pytest.fixture(scope="module")
+def vocabulary():
+    return schema.load_vocabulary()
+
+
 def test_statement_agrees_with_the_filename(metadata):
     """`_sens` in the name and `statement` in the header must not disagree."""
     wrong = []
@@ -33,39 +38,29 @@ def test_statement_agrees_with_the_filename(metadata):
     assert not wrong, "\n  ".join(wrong)
 
 
-#: Fragment of a filename -> the profile it names.
-PROFILE_TOKENS = {
-    "nfw": "nfw",
-    "eina": "einasto",
-    "burk": "burkert",
-    "iso": "isothermal",
-    "core": "cored",
-    "cusp": "cusped",
-}
-
-#: Filenames naming two profiles at once, for a halo built from both. The
-#: vocabulary has no single term for the combination, so the header stays empty
-#: and these are exempt until it does.
-COMBINED_PROFILES = {
-    "hess_2012_fornaxcluster_ann_KK_nfwburkertsr10a10.ecsv",
-    "hess_2012_fornaxcluster_ann_bb_nfwburkertsr10a10.ecsv",
-}
-
-
-def test_profile_agrees_with_the_filename(metadata):
+def test_profile_agrees_with_the_filename(metadata, vocabulary):
     """Where the filename names a profile, the header must say the same one.
 
     The implication runs one way only. A filename that says nothing about the
     halo does not mean none was assumed — every J-factor rests on one — so a
     profile read from the paper may be recorded even when the name is silent.
     What must never happen is a file called `_nfw` declaring something else.
+
+    Which qualifier names which profile comes from `legend_qualifiers.ecsv`, not
+    from matching the first four letters of the stem: `iso` is a substring of
+    plenty that has nothing to do with an isothermal halo, and
+    `nfwburkertsr10a10` names two profiles and so, correctly, maps to neither.
     """
     wrong = []
     for path, meta in metadata:
-        if path.name in COMBINED_PROFILES:
+        parts = schema.parse_filename(path)
+        if not parts:
             continue
-        stem = path.stem.lower()
-        named = {full for token, full in PROFILE_TOKENS.items() if token in stem}
+        named = {
+            vocabulary.qualifier_profile.get(q, "--")
+            for q in parts["qualifiers"].split("_")
+            if q
+        } - {"--"}
         if not named:
             continue
         declared = str(meta.get("profile", ""))

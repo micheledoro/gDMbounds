@@ -116,9 +116,17 @@ follow it and may contain hyphens. Tokens are not all lowercase — `LMC` and `W
 are correct as written.
 
 **Qualifiers are a controlled vocabulary**, in `legends/legend_qualifiers.ecsv`:
-62 of them in seven classes, and `pytest` rejects a filename carrying one that is
-not listed. They were free-form until 2026, and the first pass through them found
-`inital` sitting beside three files spelled `initial`.
+62 of them, and `pytest` rejects a filename carrying one that is not listed, or a
+listed one no file uses. They were free-form until 2026, and the first pass
+through them found `inital` sitting beside three files spelled `initial`.
+
+They carry **no class**, deliberately. Nothing selects on a qualifier the way a
+selection picks out every IACT or every dSph, and a taxonomy nobody queries only
+grows and argues with itself at each new paper. The one mapping the legend does
+carry is to a halo profile — `nfwrb02` to `nfw`, `zhaocored` to `cored`, and
+`nfwburkertsr10a10` to neither, naming two — because `tests/test_classification.py`
+uses it to keep a file called `_nfw` from declaring something else. That replaced
+matching the first four letters of the stem, which caught `iso` inside any word.
 
 A qualifier's job is to **distinguish** — `nfwrb02` from `nfwdw01`, the stack with
 Segue 1 from the stack without. What is merely *true* of a curve belongs in the

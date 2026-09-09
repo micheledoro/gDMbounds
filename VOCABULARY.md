@@ -109,20 +109,22 @@ Assigned in `gdmbounds/legends/legend_channels.ecsv` in the `spectrum` column, a
 | `benchmark` | individual benchmark points rather than a curve | 1 | `points` |
 
 
-## Qualifier classes
+## Filename qualifiers
 
-Assigned in `gdmbounds/legends/legend_qualifiers.ecsv` in the `class` column, and validated against the set below.
+The 62 qualifiers a filename may carry after the channel, listed in `gdmbounds/legends/legend_qualifiers.ecsv`. `pytest` rejects one that is not there, and one there that no file uses.
 
-| class | meaning | n | members |
-|---|---|---|---|
-| `profile` | the halo density profile assumed for the J-factor | 24 | `ISOmax`, `ISOmean`, `NFWmax`, `NFWmean`, `acnfw`, `burkert`, `burkertsr10a6`, `core`, `cored`, `cusp`, `cusped`, `einasto`, `iso`, `nfw`, `nfwburkertsr10a10`, `nfwdw01`, `nfwrb02`, `nfwrs08`, `nfwsr10a6`, `r150nfw`, `r16einasto`, `r40nfw`, `r86isothermal`, `zhaocored` |
-| `statement` | a measurement against a projection | 1 | `sens` |
-| `band` | which member of a family of curves this is | 6 | `lo`, `max`, `med`, `median`, `min`, `up` |
-| `sample` | which targets a stacked analysis contains | 3 | `nosagittarius`, `noseg1`, `notri2` |
-| `analysis` | how the limit was computed | 11 | `benchmark`, `frequentist`, `ib`, `measured`, `noJerror`, `nobck`, `oneD`, `sigmaveff`, `sommerfeld`, `statreach`, `unbinned` |
-| `setup` | the observation, the instrument configuration, the region | 9 | `FermiLAT`, `cosmicrays`, `expo`, `lstonly`, `mstonly`, `substructure-high`, `substructure-med`, `theta01deg`, `theta1deg` |
-| `provenance` | whose assumption it is, or which revision | 8 | `ando`, `blazquezdoro`, `bonnivard`, `final`, `funk`, `geringersameth`, `initial`, `v1` |
+They carry no class: nothing selects on a qualifier, and a taxonomy nobody queries only grows and argues with itself. The one mapping the legend does carry is to a halo profile, because a test uses it — a file whose name says `_nfw` may not declare something else.
 
+| profile | n | qualifiers naming it |
+|---|---|---|
+| `burkert` | 2 | `burkert`, `burkertsr10a6` |
+| `cored` | 3 | `core`, `cored`, `zhaocored` |
+| `cusped` | 2 | `cusp`, `cusped` |
+| `einasto` | 2 | `einasto`, `r16einasto` |
+| `isothermal` | 4 | `ISOmax`, `ISOmean`, `iso`, `r86isothermal` |
+| `nfw` | 10 | `NFWmax`, `NFWmean`, `acnfw`, `nfw`, `nfwdw01`, `nfwrb02`, `nfwrs08`, `nfwsr10a6`, `r150nfw`, `r40nfw` |
+
+The remaining 39 name no profile: `FermiLAT`, `ando`, `benchmark`, `blazquezdoro`, `bonnivard`, `cosmicrays`, `expo`, `final`, `frequentist`, `funk`, `geringersameth`, `ib`, `initial`, `lo`, `lstonly`, `max`, `measured`, `med`, `median`, `min`, `mstonly`, `nfwburkertsr10a10`, `noJerror`, `nobck`, `nosagittarius`, `noseg1`, `notri2`, `oneD`, `sens`, `sigmaveff`, `sommerfeld`, `statreach`, `substructure-high`, `substructure-med`, `theta01deg`, `theta1deg`, `unbinned`, `up`, `v1`.
 
 ---
 
