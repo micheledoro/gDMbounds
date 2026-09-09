@@ -7,6 +7,24 @@ limits on DM annihilation and decay, the means to select and plot them, and
 Successor to `moritzhuetten/dmbounds`; the canonical repo is `micheledoro/gDMbounds`
 and the package is `gdmbounds` — repo, package and PyPI name are deliberately aligned.
 
+## Where we left off (9 September 2026)
+
+The paper-by-paper data review has started. **One paper of 57 is read**, the
+heaviest — MAGIC 2022, arXiv:2111.15009, 41 of the 391 bounds — and it produced
+four real errors, all fixed. See *The paper-by-paper review* below and
+`review_log.yaml` for what it found.
+
+Everything lives on **`data_fix`**, eleven commits ahead of `main`, pushed. It
+carries a merge of `repo_fix`, deliberately: the rename of the four MAGIC median
+files and the log entry naming them are one change, and splitting them would have
+left whichever branch merged first with a failing suite. **No pull request is
+open yet** — `data_fix` should go to `main` before the next paper is read, so the
+review does not accumulate on a long-lived branch.
+
+Next in the queue, and both worth doing early: H.E.S.S. Fornax **1202.5494** (25
+bounds, and its erratum question is open — four of its qualifiers still say "to
+confirm against the paper") and VERITAS **1703.04937** (22).
+
 ## Picking up on another machine
 
 ```bash
@@ -183,11 +201,14 @@ All 391 bounds satisfy the schema. `pytest tests/ -q` is green — 863 passing, 
 skipped. CI runs that, `ruff`, and a wheel build asserting the shipped file set
 matches the source tree exactly.
 
-The 23 skips are quarantined in `tests/test_data_quality.py`: bounds whose *numbers*
-are unusable though the file is well-formed. Twenty-two have points out of order or
+The 22 skips are quarantined in `tests/test_data_quality.py`: bounds whose *numbers*
+are unusable though the file is well-formed. Twenty-one have points out of order or
 repeated. One, `magic_2018_perseuscluster_dec_WW`, is a **closed contour** — it
 climbs in mass, turns, and returns near its start, which is a region and not an
 upper limit. Its paper needs checking.
+
+`KNOWN_IDENTICAL` is empty: the one pair of files holding the same curve was
+resolved during the MAGIC review.
 
 Every quarantine here is a **ratchet**: a newly broken file fails the suite, and a
 fixed one fails until it is delisted. The same pattern guards against a bound
@@ -217,7 +238,7 @@ is why the default colours by legend entry rather than by instrument.
 
 `Catalog.select` matches the publishing instrument; `Catalog.involves` matches
 participation, so a joint MAGIC+LAT analysis is found by the second and not the
-first — 86 bounds involve MAGIC, 74 are MAGIC's own.
+first — 110 bounds involve MAGIC, 84 are MAGIC's own.
 
 ## The paper-by-paper review
 
@@ -242,11 +263,44 @@ steep — the heaviest paper accounts for 34 bounds, the heaviest five for 113 �
 - A verdict of `open` **must** carry notes: the log is then the only record of
   what is still wrong.
 
-One finding already: the H.E.S.S. Fornax bounds cite two DOIs, and the second is
-the paper's **2014 erratum** — legitimate, and the six files taking their curve
-from it say `figure: "Fig. 5 erratum"`. What it opens is which of the other
-Fornax curves come from figures the erratum superseded; arXiv v2 says figures 5
-and 7 were corrected.
+### What the first reading found, and how
+
+MAGIC 2022 (arXiv:2111.15009), verdict `corrected`. The headers were the easy
+part; **what found the errors was a physical consistency test between curves**,
+and that is the method to repeat:
+
+> every curve of a single target must lie **above** the combined limit, because
+> the combination contains it.
+
+Six of the seven channels did. Two did not, and both were wrong. Afterwards all
+seven sit between 1.48 and 1.60 above the combination at the median — a band
+tight enough that it corroborates the curves that were never in doubt. Where a
+paper has no combined analysis, the same idea applies across channels: tau tau is
+the strongest, tt the weakest, and a violation is a transcription error.
+
+Fixed: the combined mumu file held the Coma Berenices curve; the Segue 1 WW curve
+was stronger than the combination everywhere; the exposures were wrong on all 34
+files; four median curves were marked `limit` with "Median" in `confidence`. Then
+`tt` was digitised for all five subjects and `gammagamma` for the combination, and
+`profile: nfw` recorded from Sec. 8.
+
+**Two traps, both of which cost a wrong diagnosis before being noticed:**
+
+- `numpy.interp` on an **unsorted** mass column returns nonsense and does not
+  complain. Twenty-one files are still in the resorting quarantine. Sort first.
+- Units differ **within one paper**: `magic_2014_segue1_ann_bb` is in TeV where
+  its twelve siblings are in GeV. Convert before comparing.
+
+Still open on this paper, and not errors: Ursa Major II holds three of the nine
+channels where the others hold eight — mumu, WW, ZZ, hh and bb are in Fig. 4 and
+were never transcribed. The four per-target `gammagamma` curves were deliberately
+skipped, MD judging a noise-dominated line search not worth the transcription.
+
+The other finding, unresolved: the H.E.S.S. Fornax bounds cite two DOIs, and the
+second is the paper's **2014 erratum** — legitimate, and the six files taking
+their curve from it say `figure: "Fig. 5 erratum"`. What it opens is which of the
+other Fornax curves come from figures the erratum superseded; arXiv v2 says
+figures 5 and 7 were corrected.
 
 ## Open: a "most constraining" selector
 
@@ -283,6 +337,14 @@ In `DATA_REVIEW.md`, and none of it is a CI failure:
   the column without its unit is wrong by a thousand. Worth settling when
   arXiv:1312.1535 is reviewed.
 - Five H.E.S.S. 2014 bounds record no `figure`, so nothing checks the transcription.
+- Six qualifiers are in the legend with their meaning marked **"to confirm against
+  the paper"**: `expo`, `v1`, the H.E.S.S. Fornax suffixes (`nfwrb02`, `nfwdw01`,
+  `nfwrs08`, `nfwsr10a6`) and the two MWA backgrounds (`FermiLAT`, `cosmicrays`).
+  Each falls out of the review of its own paper.
+- `lo` and `up` are H.E.S.S. spellings of `min` and `max`, two files, and could be
+  normalised. `med` and `median` must **not** be: HAWC's `med` is the middle of a
+  range of J-factor assumptions, MAGIC's `median` is the expected limit under the
+  null hypothesis. Different things, one word apart.
 - The 2026 joint-analysis files describe `sv_lo_95` as a 3σ bound and `sv_hi_95` as
   2σ. The numeric suffixes were used; the prose contradicts itself. **Raise with
   whoever produced them.**
