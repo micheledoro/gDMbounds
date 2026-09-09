@@ -92,6 +92,19 @@ def section(title, body):
     return f"## {title}\n\n{body}\n"
 
 
+def decided(names, decisions, name_each=False):
+    """The `reviewed:` lines for whichever of these files the log has settled.
+
+    `name_each` where the bullet above covers several files, so that a decision
+    cannot be read against the wrong one.
+    """
+    return [
+        f"  - `{n}` reviewed: {decisions[n]}" if name_each else f"  - reviewed: {decisions[n]}"
+        for n in sorted(names)
+        if n in decisions
+    ]
+
+
 def bullet_files(names, note="", decisions=None):
     """A list of files, each carrying whatever the review log decided about it.
 
@@ -204,10 +217,13 @@ def main() -> int:
             "in each group carries data copied from the other, and the paper decides "
             "which."
         )
+        lines = []
+        for group in duplicates:
+            lines.append("- " + " == ".join(f"`{n}`" for n in group))
+            lines += decided(group, decisions, name_each=True)
         blocking.append(section(
             "Identical curves in different files",
-            "\n".join("- " + " == ".join(f"`{n}`" for n in group) for group in duplicates)
-            + f"\n\n{note}",
+            "\n".join(lines) + f"\n\n{note}",
         ))
 
     contours = curve_issues.get("closed-contour", [])
@@ -227,9 +243,13 @@ def main() -> int:
 
     bad_confidence = non_numeric_confidence(tables)
     if bad_confidence:
+        lines = []
+        for name, value in sorted(bad_confidence):
+            lines.append(f"- `{name}` — `{value}`")
+            lines += decided([name], decisions)
         blocking.append(section(
             "`confidence` is not a confidence level",
-            "\n".join(f"- `{n}` — `{v}`" for n, v in sorted(bad_confidence))
+            "\n".join(lines)
             + "\n\nThese files describe a median expected curve, and the word landed "
               "in the confidence field. They are also marked `statement: \"limit\"`, "
               "which an expected curve is not. Both need correcting together, and "

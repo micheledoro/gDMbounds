@@ -8,8 +8,8 @@ Everything listed here passes the schema. These are questions the schema cannot 
 |---|---:|
 | bounds checked | 385 |
 | papers behind them | 57 |
-| papers read against their source | 0 of 57 |
-| bounds those readings cover | 0 |
+| papers read against their source | 1 of 57 |
+| bounds those readings cover | 34 |
 | needing a decision before use | 7 |
 | points out of order or repeated | 22 |
 | missing a figure reference | 5 |
@@ -18,7 +18,46 @@ Everything listed here passes the schema. These are questions the schema cannot 
 
 *The outcome of reading each paper against its bounds. Merged from `review_log.yaml`, which is kept by hand — record a review there and it appears here.*
 
-No paper has been recorded as read yet. Nothing below has been checked against its source.
+## Papers read
+
+### 2022 — `2111.15009` — open
+
+Combined searches for dark matter in dwarf spheroidal galaxies observed with the MAGIC telescopes, including new data from Coma Berenices and Draco  
+34 bound(s), read by Claude, for MD on 2026-09-09.
+
+Read by Claude at MD's request; the findings below still want MD's
+confirmation before the files are touched, and the reviewer field should
+become his once he has checked them.
+
+MAGIC combined dSph search, Phys. Dark Univ. 35 (2022) 100912. Read against
+all 34 bounds. Confirmed correct: `figure: "Fig. 4"` on the per-target files
+— Fig. 4 draws Segue 1, Ursa Major II, Draco and Coma Berenices inside each
+of its nine panels, so a per-target curve does come from it; `confidence`
+0.95; `mode`; `year`; `source: multidsph-4`; and the mass range 70 GeV to
+100 TeV (the paper's 0.07-100 TeV). Two numbers in the text corroborate the
+curves: Draco's tautau minimum, 7.4e-24 at 1.2 TeV, and the combined tautau
+reaching ~1e-24 in the TeV range.
+
+Two curves are physically impossible as they stand and want re-digitising
+from Fig. 4; that is why this is `open`. Both are Segue 1, and the
+combined curves they contradict are the ones the paper's own text confirms.
+A swap of the two files was tested and rejected: it repairs 500 GeV - 2 TeV
+and fails at both ends.
+
+Not errors, but the archive is not complete for this paper: the combined
+analysis covers 9 channels and only 7 are held — `tt` and `gammagamma` are
+absent for every target. Ursa Major II has 2 of the 9 where the other three
+targets have 7. Draco's H0 median curves (Fig. 2) are not transcribed while
+Coma Berenices' (Fig. 3) are.
+
+One inconsistency belongs to the paper, not to us: the caption of Fig. 3
+says 49.8 h of Coma Berenices data, while Table 1, the abstract and Sec. 4
+all say 49.5 h.
+
+Watch when re-digitising: the four median curves run above the observed
+limits by a factor growing to 2.3 at tens of TeV, where Fig. 3 shows the two
+nearly touching. The observed Coma Berenices bb curve carries 13 points
+against the median's 48.
 
 ## The queue
 
@@ -26,7 +65,6 @@ Heaviest first: the number of bounds a single reading settles.
 
 | bounds | identifier | year | in | paper |
 |---:|---|---:|---|---|
-| 34 | `2111.15009` | 2022 | magic | Combined searches for dark matter in dwarf spheroidal galaxies observ… |
 | 25 | `1202.5494` | 2012 | hess | Search for Dark Matter Annihilation Signals From the Fornax Galaxy Cl… |
 | 22 | `1703.04937` | 2017 | veritas | Dark Matter Constraints from a Joint Analysis of Dwarf Spheroidal Gal… |
 | 20 | `1410.2589` | 2014 | hess | Search for dark matter annihilation signatures in H.E.S.S. observatio… |
@@ -89,6 +127,8 @@ Heaviest first: the number of bounds a single reading settles.
 ## Identical curves in different files
 
 - `magic_2022_comaberenices_ann_mumu.ecsv` == `magic_2022_multidsph_ann_mumu.ecsv`
+  - `magic_2022_comaberenices_ann_mumu.ecsv` reviewed: The correct file of the identical pair. Keep as it is.
+  - `magic_2022_multidsph_ann_mumu.ecsv` reviewed: Wrong file of the identical pair. It is weaker than Segue 1 alone at every mass, and a combination containing Segue 1 cannot be. It holds the Coma Berenices curve; the combined mumu limit is missing from the archive and must be re-transcribed from the mu+mu- panel of Fig. 4.
 
 Two independent measurements do not produce the same numbers. One file in each group carries data copied from the other, and the paper decides which.
 
@@ -101,9 +141,13 @@ The curve climbs in mass, turns, and returns to near its starting point. That is
 ## `confidence` is not a confidence level
 
 - `magic_2022_comaberenices_ann_WW_median.ecsv` — `Median`
+  - reviewed: `confidence: "Median"` is not a confidence level: Fig. 3 plots the 95% CL upper limit, so 0.95. And `statement` must be `sensitivity` — this is the median of 300 realisations of the null hypothesis, which is what a sensitivity is. The two corrections go together.
 - `magic_2022_comaberenices_ann_bb_median.ecsv` — `Median`
+  - reviewed: Same as the WW median: confidence 0.95, statement sensitivity.
 - `magic_2022_comaberenices_ann_mumu_median.ecsv` — `Median`
+  - reviewed: Same as the WW median: confidence 0.95, statement sensitivity.
 - `magic_2022_comaberenices_ann_tautau_median.ecsv` — `Median`
+  - reviewed: Same as the WW median: confidence 0.95, statement sensitivity.
 
 These files describe a median expected curve, and the word landed in the confidence field. They are also marked `statement: "limit"`, which an expected curve is not. Both need correcting together, and the actual confidence level has to come from the paper.
 
@@ -131,6 +175,7 @@ These files describe a median expected curve, and the word landed in the confide
 - `magic_2022_segue1_ann_ZZ.ecsv`
 - `magic_2022_segue1_ann_mumu.ecsv`
 - `magic_2022_segue1_ann_tautau.ecsv`
+  - reviewed: Crosses the combined tautau curve: 5 times weaker at 500 GeV, 6 times stronger at 50 TeV. The combined curve is corroborated by the paper's text, so this one is the suspect. Re-digitise from Fig. 4.
 - `multi-inst-magic-lat_2016_multidsph_ann_mumu.ecsv`
 - `veritas_2012_comacluster_ann_WW.ecsv`
 
