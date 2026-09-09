@@ -7,15 +7,128 @@ Everything listed here passes the schema. These are questions the schema cannot 
 | | |
 |---|---:|
 | bounds checked | 385 |
+| papers behind them | 57 |
+| papers read against their source | 1 of 57 |
+| bounds those readings cover | 34 |
 | needing a decision before use | 7 |
 | points out of order or repeated | 22 |
 | missing a figure reference | 5 |
+
+# Review progress
+
+*The outcome of reading each paper against its bounds. Merged from `review_log.yaml`, which is kept by hand — record a review there and it appears here.*
+
+## Papers read
+
+### 2022 — `2111.15009` — open
+
+Combined searches for dark matter in dwarf spheroidal galaxies observed with the MAGIC telescopes, including new data from Coma Berenices and Draco  
+34 bound(s), read by Claude, for MD on 2026-09-09.
+
+Read by Claude at MD's request; the findings below still want MD's
+confirmation before the files are touched, and the reviewer field should
+become his once he has checked them.
+
+MAGIC combined dSph search, Phys. Dark Univ. 35 (2022) 100912. Read against
+all 34 bounds. Confirmed correct: `figure: "Fig. 4"` on the per-target files
+— Fig. 4 draws Segue 1, Ursa Major II, Draco and Coma Berenices inside each
+of its nine panels, so a per-target curve does come from it; `confidence`
+0.95; `mode`; `year`; `source: multidsph-4`; and the mass range 70 GeV to
+100 TeV (the paper's 0.07-100 TeV). Two numbers in the text corroborate the
+curves: Draco's tautau minimum, 7.4e-24 at 1.2 TeV, and the combined tautau
+reaching ~1e-24 in the TeV range.
+
+Two curves are physically impossible as they stand and want re-digitising
+from Fig. 4; that is why this is `open`. Both are Segue 1, and the
+combined curves they contradict are the ones the paper's own text confirms.
+A swap of the two files was tested and rejected: it repairs 500 GeV - 2 TeV
+and fails at both ends.
+
+Not errors, but the archive is not complete for this paper: the combined
+analysis covers 9 channels and only 7 are held — `tt` and `gammagamma` are
+absent for every target. Ursa Major II has 2 of the 9 where the other three
+targets have 7. Draco's H0 median curves (Fig. 2) are not transcribed while
+Coma Berenices' (Fig. 3) are.
+
+One inconsistency belongs to the paper, not to us: the caption of Fig. 3
+says 49.8 h of Coma Berenices data, while Table 1, the abstract and Sec. 4
+all say 49.5 h.
+
+Watch when re-digitising: the four median curves run above the observed
+limits by a factor growing to 2.3 at tens of TeV, where Fig. 3 shows the two
+nearly touching. The observed Coma Berenices bb curve carries 13 points
+against the median's 48.
+
+## The queue
+
+Heaviest first: the number of bounds a single reading settles.
+
+| bounds | identifier | year | in | paper |
+|---:|---|---:|---|---|
+| 25 | `1202.5494` | 2012 | hess | Search for Dark Matter Annihilation Signals From the Fornax Galaxy Cl… |
+| 22 | `1703.04937` | 2017 | veritas | Dark Matter Constraints from a Joint Analysis of Dwarf Spheroidal Gal… |
+| 20 | `1410.2589` | 2014 | hess | Search for dark matter annihilation signatures in H.E.S.S. observatio… |
+| 18 | `2008.00688` | 2020 | hess | Search for dark matter signals towards a selection of recently-detect… |
+| 16 | `2007.16129` | 2021 | ctao | Sensitivity of the Cherenkov Telescope Array to a dark matter signal… |
+| 16 | `2305.16707` | 2023 | ctao | Sensitivity of the Cherenkov Telescope Array to TeV photon emission f… |
+| 15 | `1706.01277` | 2018 | hawc | Dark Matter Limits From Dwarf Spheroidal Galaxies with The HAWC Gamma… |
+| 14 | `1312.1535` | 2014 | magic | Optimized dark matter searches in deep observations of Segue 1 with M… |
+| 14 | `2508.20229` | 2026 | multi-inst | Combined dark matter search towards dwarf spheroidal galaxies with Fe… |
+| 12 | `1601.06590` | 2016 | multi-inst | Limits to dark matter annihilation cross-section from a combined anal… |
+| 10 | `1104.2548` | 2011 | hess | H.E.S.S. Observations of the Globular Clusters Ngc 6388 and M15 and S… |
+| 10 | `1810.00995` | 2018 | hess | Searches for gamma-ray lines and `pure WIMP' spectra from Dark Matter… |
+| 9 | `1812.06986` | 2020 | lat | A global analysis of dark matter signals from 27 dwarf spheroidal gal… |
+| 8 | `1012.5602` | 2011 | hess | H.E.S.S. constraints on Dark Matter annihilations towards the Sculpto… |
+| 8 | `1712.03095` | 2018 | magic | Indirect dark matter searches in the dwarf satellite galaxy Ursa Majo… |
+| 8 | `2003.05260` | 2020 | magic | A search for dark matter in Triangulum II with the MAGIC telescopes. |
+| 8 | `2105.04325` | 2021 | hess | Search for dark matter annihilation in the Wolf-Lundmark-Melotte dwar… |
+| 6 | `1009.5988` | 2010 | lat | Constraints on Decaying Dark Matter from Fermi Observations of Nearby… |
+| 6 | `1310.0828` | 2014 | lat | Dark matter constraints from observations of 25 Milky Way satellite g… |
+| 6 | `1305.1605` | 2015 | collider, directsearches | Dark matter in the coming decade: Complementary paths to discovery an… |
+| 6 | `1503.02641` | 2015 | lat | Searching for Dark Matter Annihilation from Milky Way Dwarf Spheroida… |
+| 6 | `1510.00389` | 2016 | lat | New Limits on the Dark Matter Lifetime from Dwarf Spheroidal Galaxies… |
+| 5 | `1110.1529` | 2012 | lat | Probing Dark Matter Decay and Annihilation with Fermi LAT Observation… |
+| 5 | `1607.08142` | 2016 | hess | Search for Dark Matter Annihilations towards the Inner Galactic Halo… |
+| 5 | `1806.11063` | 2018 | magic | Constraining dark matter lifetime with a deep gamma-ray survey of the… |
+| 5 | `2309.03712` | 2023 | ctao | Prospects for γ-ray observations of the Perseus galaxy cluster with t… |
+| 4 | `0711.2369` | 2008 | hess | Observations of the Sagittarius dwarf galaxy by the HESS experiment a… |
+| 4 | `1804.00628` | 2018 | hawc | Search for Dark Matter Gamma-ray Emission from the Andromeda Galaxy w… |
+| 4 | `1709.07997` | 2019 | ctao | Science with the Cherenkov Telescope Array |
+| 4 | `10.1103/PhysRevD.100.043002` | 2019 | mwa | Constraints on dark matter annihilation in dSphs from low-frequency r… |
+| 4 | `2112.08860` | 2022 | dampe | Search for gamma-ray spectral lines with the DArk Matter Particle Exp… |
+| 4 | `2212.10527` | 2023 | magic | Search for Gamma-ray Spectral Lines from Dark Matter Annihilation up… |
+| 4 | `2311.04982` | 2023 | lat | Legacy Analysis of Dark Matter Annihilation from the Milky Way Dwarf… |
+| 4 | `2406.08698` | 2024 | lhaaso | Constraints on Ultra Heavy Dark Matter Properties from Dwarf Spheroid… |
+| 3 | `1208.0676` | 2012 | veritas | Constraints on Cosmic Rays, Magnetic Fields, and Dark Matter from Gam… |
+| 2 | `0809.3894` | 2009 | hess | A search for a dark matter annihilation signal toward the Canis major… |
+| 2 | `1103.0477` | 2011 | magic | Searches for dark matter annihilation signatures in the Segue 1 satel… |
+| 2 | `1103.3266` | 2011 | hess | Search for a Dark Matter Annihilation Signal from the Galactic Center… |
+| 2 | `1205.6474` | 2012 | lat | Constraints on the Galactic Halo Dark Matter from Fermi-LAT Diffuse M… |
+| 2 | `1310.2695` | 2015 | ctao | Indirect detection of dark matter with γ rays |
+| 2 | `1502.03244` | 2015 | hess | Constraints on an Annihilation Signal from a Core of Constant Dark Ma… |
+| 2 | `1611.03184` | 2017 | lat | Searching for Dark Matter Annihilation in Recently Discovered Milky W… |
+| 2 | `1805.05741` | 2018 | hess | Search for gamma-ray line signals from dark matter annihilations in t… |
+| 2 | `1910.05017` | 2020 | lhaaso | Expected LHAASO sensitivity to decaying dark matter signatures from d… |
+| 2 | `2101.10003` | 2021 | ctao | Sensitivity of the Cherenkov Telescope Array to dark subhalos |
+| 2 | `2207.10471` | 2022 | hess | Search for dark matter annihilation signals in the H.E.S.S. Inner Gal… |
+| 2 | `2210.15989` | 2022 | lhaaso | Constraints on Heavy Decaying Dark Matter from 570 Days of LHAASO Obs… |
+| 1 | `0711.2574` | 2007 | magic | Upper limit for γ-ray emission above 140GeV from the dwarf spheroidal… |
+| 1 | `0810.3561` | 2009 | magic | UPPER LIMITS ON THE VHE GAMMA-RAY EMISSION FROM THE WILLMAN 1 SATELLI… |
+| 1 | `1301.1173` | 2013 | hess | Search for photon line-like signatures from Dark Matter annihilations… |
+| 1 | `1502.02007` | 2015 | lat | Ando & Ishiwata Constraints on decaying dark matter from the extragal… |
+| 1 | `1609.08091` | 2016 | hess | H.E.S.S. Limits on Linelike Dark Matter Signatures in the 100 GeV to… |
+| 1 | `1903.11910` | 2019 | lhaaso | Prospect for dark matter annihilation signatures from gamma-ray obser… |
+| 1 | `10.22323/1.358.0538` | 2019 | magic | Searching for Dark Matter decay signals in the Galactic Halo with the… |
+| 1 | `2108.10302` | 2021 | hess | Search for dark matter annihilation signals from the Galactic Center… |
+| 1 | `2509.08506` | 2025 | nustar | Search for a photon peak from keV-scale dark matter annihilation with… |
 
 # Needs a decision before the data can be trusted
 
 ## Identical curves in different files
 
 - `magic_2022_comaberenices_ann_mumu.ecsv` == `magic_2022_multidsph_ann_mumu.ecsv`
+  - `magic_2022_comaberenices_ann_mumu.ecsv` reviewed: The correct file of the identical pair. Keep as it is.
+  - `magic_2022_multidsph_ann_mumu.ecsv` reviewed: Wrong file of the identical pair. It is weaker than Segue 1 alone at every mass, and a combination containing Segue 1 cannot be. It holds the Coma Berenices curve; the combined mumu limit is missing from the archive and must be re-transcribed from the mu+mu- panel of Fig. 4.
 
 Two independent measurements do not produce the same numbers. One file in each group carries data copied from the other, and the paper decides which.
 
@@ -28,9 +141,13 @@ The curve climbs in mass, turns, and returns to near its starting point. That is
 ## `confidence` is not a confidence level
 
 - `magic_2022_comaberenices_ann_WW_median.ecsv` — `Median`
+  - reviewed: `confidence: "Median"` is not a confidence level: Fig. 3 plots the 95% CL upper limit, so 0.95. And `statement` must be `sensitivity` — this is the median of 300 realisations of the null hypothesis, which is what a sensitivity is. The two corrections go together.
 - `magic_2022_comaberenices_ann_bb_median.ecsv` — `Median`
+  - reviewed: Same as the WW median: confidence 0.95, statement sensitivity.
 - `magic_2022_comaberenices_ann_mumu_median.ecsv` — `Median`
+  - reviewed: Same as the WW median: confidence 0.95, statement sensitivity.
 - `magic_2022_comaberenices_ann_tautau_median.ecsv` — `Median`
+  - reviewed: Same as the WW median: confidence 0.95, statement sensitivity.
 
 These files describe a median expected curve, and the word landed in the confidence field. They are also marked `statement: "limit"`, which an expected curve is not. Both need correcting together, and the actual confidence level has to come from the paper.
 
@@ -58,6 +175,7 @@ These files describe a median expected curve, and the word landed in the confide
 - `magic_2022_segue1_ann_ZZ.ecsv`
 - `magic_2022_segue1_ann_mumu.ecsv`
 - `magic_2022_segue1_ann_tautau.ecsv`
+  - reviewed: Crosses the combined tautau curve: 5 times weaker at 500 GeV, 6 times stronger at 50 TeV. The combined curve is corroborated by the paper's text, so this one is the suspect. Re-digitise from Fig. 4.
 - `multi-inst-magic-lat_2016_multidsph_ann_mumu.ecsv`
 - `veritas_2012_comacluster_ann_WW.ecsv`
 
@@ -89,6 +207,14 @@ Each still carries the other identifier, so the source is reachable.
 - `mwa_2019_booetes1_ann_tautau_cosmicrays.ecsv`
 
 Each still carries the other identifier, so the source is reachable.
+
+## One paper cited under more than one DOI
+
+- arXiv `1202.5494` is cited under 2 DOIs:
+  - `10.1088/0004-637X/750/2/123`
+  - `10.1088/0004-637X/783/1/63`
+
+Not necessarily wrong: a paper and its erratum carry different DOIs, and a curve taken from a corrected figure should cite the correction. What it does mean is that the figures of that paper are not all being read from the same version, so a review has to establish which curves the erratum superseded and check that each file cites the version it was actually transcribed from. The alternative reading — that a DOI was mistyped — leads to the same place.
 
 ## `obs_time` without a number
 
