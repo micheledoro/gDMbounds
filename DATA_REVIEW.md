@@ -10,7 +10,7 @@ Everything listed here passes the schema. These are questions the schema cannot 
 | papers behind them | 57 |
 | papers read against their source | 1 of 57 |
 | bounds those readings cover | 34 |
-| needing a decision before use | 7 |
+| needing a decision before use | 3 |
 | points out of order or repeated | 22 |
 | missing a figure reference | 5 |
 
@@ -137,19 +137,6 @@ Two independent measurements do not produce the same numbers. One file in each g
 - `magic_2018_perseuscluster_dec_WW.ecsv`
 
 The curve climbs in mass, turns, and returns to near its starting point. That is a region in the plane, not an upper limit on a function of mass: it cannot be plotted or interpolated as one. Either the transcription is wrong, or the file should carry `statement: "detection"`.
-
-## `confidence` is not a confidence level
-
-- `magic_2022_comaberenices_ann_WW_median.ecsv` — `Median`
-  - reviewed: `confidence: "Median"` is not a confidence level: Fig. 3 plots the 95% CL upper limit, so 0.95. And `statement` must be `sensitivity` — this is the median of 300 realisations of the null hypothesis, which is what a sensitivity is. The two corrections go together.
-- `magic_2022_comaberenices_ann_bb_median.ecsv` — `Median`
-  - reviewed: Same as the WW median: confidence 0.95, statement sensitivity.
-- `magic_2022_comaberenices_ann_mumu_median.ecsv` — `Median`
-  - reviewed: Same as the WW median: confidence 0.95, statement sensitivity.
-- `magic_2022_comaberenices_ann_tautau_median.ecsv` — `Median`
-  - reviewed: Same as the WW median: confidence 0.95, statement sensitivity.
-
-These files describe a median expected curve, and the word landed in the confidence field. They are also marked `statement: "limit"`, which an expected curve is not. Both need correcting together, and the actual confidence level has to come from the paper.
 
 # Needs a decision, lower stakes
 

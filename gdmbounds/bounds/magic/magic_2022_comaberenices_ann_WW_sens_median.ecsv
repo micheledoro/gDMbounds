@@ -13,17 +13,17 @@
 # - {arxiv:            "2111.15009"}
 # - {instrument:       "magic"}
 # - {origin:           "collaboration"}
-# - {statement:        "limit"}
+# - {statement:        "sensitivity"}
 # - {year:             "2022"}
 # - {source:           "comaberenices"}
 # - {mode:             "ann"}
 # - {channel:          "WW"}
-# - {confidence:       "Median"}
+# - {confidence:       "0.95"}
 # - {dmfraction:       "1"}
 # - {obs_time:         "49.5h"}
-# - {figure:           "Fig3"}
-# - {comment:          "Any comments on the result"}
-# - {status:           "Status of file"}
+# - {figure:           "Fig. 3"}
+# - {comment:          "Median of 300 realisations of the null hypothesis (H0), the blue dashed line of Fig. 3; the expected 95% CL upper limit, not the observed one"}
+# - {status:           "Done"}
 # schema : astropy -2.0
 
 mass sigmav

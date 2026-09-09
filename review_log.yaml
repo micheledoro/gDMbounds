@@ -89,14 +89,14 @@ reviewed:
         Crosses the combined tautau curve: 5 times weaker at 500 GeV, 6 times
         stronger at 50 TeV. The combined curve is corroborated by the paper's
         text, so this one is the suspect. Re-digitise from Fig. 4.
-      magic_2022_comaberenices_ann_WW_median.ecsv: >
+      magic_2022_comaberenices_ann_WW_sens_median.ecsv: >
         `confidence: "Median"` is not a confidence level: Fig. 3 plots the 95% CL
         upper limit, so 0.95. And `statement` must be `sensitivity` — this is the
         median of 300 realisations of the null hypothesis, which is what a
         sensitivity is. The two corrections go together.
-      magic_2022_comaberenices_ann_bb_median.ecsv: >
+      magic_2022_comaberenices_ann_bb_sens_median.ecsv: >
         Same as the WW median: confidence 0.95, statement sensitivity.
-      magic_2022_comaberenices_ann_mumu_median.ecsv: >
+      magic_2022_comaberenices_ann_mumu_sens_median.ecsv: >
         Same as the WW median: confidence 0.95, statement sensitivity.
-      magic_2022_comaberenices_ann_tautau_median.ecsv: >
+      magic_2022_comaberenices_ann_tautau_sens_median.ecsv: >
         Same as the WW median: confidence 0.95, statement sensitivity.

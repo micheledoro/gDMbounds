@@ -142,7 +142,7 @@ members; `python -m gdmbounds` prints the same.
 |---|---|---|
 | annihilation vs decay | `mode` | 338 / 47 |
 | collaboration vs author | `origin` | 375 / 10 |
-| measured vs projected | `statement` | 337 limit / 48 sensitivity |
+| measured vs projected | `statement` | 333 limit / 52 sensitivity |
 | halo profile | `profile`, optional | 92 stated / 293 not |
 | detection technique | `class` in `legend_instruments` | iact, satellite, xray, sfd, radio, collider, direct, combined |
 | target type | `class` in `legend_targets` | dsph, cluster, globular, galaxy, gc, diffuse, subhalo, unid |
@@ -259,9 +259,6 @@ In `DATA_REVIEW.md`, and none of it is a CI failure:
   **same curve**. Across other channels the combined analysis is more constraining
   than the single target, as physics requires; for mumu it is not, in none of the
   100 shared mass points, because it is the same data. One file is wrong.
-- Four MAGIC files carry `confidence: "Median"` — not a confidence level. They are
-  median expected curves also marked `statement: "limit"`, which an expected curve
-  is not. Both need correcting together.
 - Five H.E.S.S. 2014 bounds record no `figure`, so nothing checks the transcription.
 - The 2026 joint-analysis files describe `sv_lo_95` as a 3σ bound and `sv_hi_95` as
   2σ. The numeric suffixes were used; the prose contradicts itself. **Raise with
