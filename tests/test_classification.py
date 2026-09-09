@@ -33,17 +33,46 @@ def test_statement_agrees_with_the_filename(metadata):
     assert not wrong, "\n  ".join(wrong)
 
 
+#: Fragment of a filename -> the profile it names.
+PROFILE_TOKENS = {
+    "nfw": "nfw",
+    "eina": "einasto",
+    "burk": "burkert",
+    "iso": "isothermal",
+    "core": "cored",
+    "cusp": "cusped",
+}
+
+#: Filenames naming two profiles at once, for a halo built from both. The
+#: vocabulary has no single term for the combination, so the header stays empty
+#: and these are exempt until it does.
+COMBINED_PROFILES = {
+    "hess_2012_fornaxcluster_ann_KK_nfwburkertsr10a10.ecsv",
+    "hess_2012_fornaxcluster_ann_bb_nfwburkertsr10a10.ecsv",
+}
+
+
 def test_profile_agrees_with_the_filename(metadata):
-    """A declared profile must appear in the filename it was taken from."""
+    """Where the filename names a profile, the header must say the same one.
+
+    The implication runs one way only. A filename that says nothing about the
+    halo does not mean none was assumed — every J-factor rests on one — so a
+    profile read from the paper may be recorded even when the name is silent.
+    What must never happen is a file called `_nfw` declaring something else.
+    """
     wrong = []
     for path, meta in metadata:
-        profile = str(meta.get("profile", ""))
-        if not profile:
+        if path.name in COMBINED_PROFILES:
             continue
         stem = path.stem.lower()
-        token = "iso" if profile == "isothermal" else profile[:4]
-        if token not in stem:
-            wrong.append(f"{path.name}: declares profile {profile!r}")
+        named = {full for token, full in PROFILE_TOKENS.items() if token in stem}
+        if not named:
+            continue
+        declared = str(meta.get("profile", ""))
+        if declared not in named:
+            wrong.append(
+                f"{path.name}: the name says {sorted(named)}, the header says {declared!r}"
+            )
     assert not wrong, "\n  ".join(wrong)
 
 

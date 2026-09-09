@@ -143,7 +143,7 @@ members; `python -m gdmbounds` prints the same.
 | annihilation vs decay | `mode` | 338 / 47 |
 | collaboration vs author | `origin` | 375 / 10 |
 | measured vs projected | `statement` | 333 limit / 52 sensitivity |
-| halo profile | `profile`, optional | 92 stated / 293 not |
+| halo profile | `profile`, optional | 126 stated / 259 not |
 | detection technique | `class` in `legend_instruments` | iact, satellite, xray, sfd, radio, collider, direct, combined |
 | target type | `class` in `legend_targets` | dsph, cluster, globular, galaxy, gc, diffuse, subhalo, unid |
 | line vs continuum | `spectrum` in `legend_channels` | continuum, line, model, benchmark |
@@ -151,8 +151,11 @@ members; `python -m gdmbounds` prints the same.
 Two things to hold on to. All 45 CTAO bounds are `sensitivity`, which is right —
 CTAO is not operating; treat a future CTAO bound claiming `limit` as suspect until
 checked. And **a missing `profile` means the filename never said, not that no
-profile was assumed** — every J-factor rests on one. Filtering on it drops 293
-bounds, and a selection doing so should say so.
+profile was assumed** — every J-factor rests on one. Filtering on it drops 259
+bounds, and a selection doing so should say so. The gap is being closed paper by
+paper as each is read: `tests/test_classification.py` requires only that a
+filename naming a profile agree with its header, not that a stated profile be
+named in the filename.
 
 ## State
 

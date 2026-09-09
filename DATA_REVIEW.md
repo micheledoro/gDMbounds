@@ -52,9 +52,13 @@ Not errors, but the archive is not complete for this paper. The combined
 analysis covers 9 channels and only 7 are held — `tt` and `gammagamma` are
 absent for every target. Ursa Major II has 2 of the 9 where the other three
 targets have 7. Draco's H0 median curves (Fig. 2) are not transcribed while
-Coma Berenices' (Fig. 3) are. And `profile` is empty on all 34 though the
-paper states NFW, which is a policy question for the archive rather than a
-fault in these files.
+Coma Berenices' (Fig. 3) are.
+
+`profile: nfw` was recorded on all 34, from Sec. 8 — the J-factors of [15]
+assume Navarro-Frenk-White, and the paper names Einasto and Burkert as the
+alternatives it did not take. Filling it meant loosening the filename rule:
+the archive's convention had been that a stated profile must appear in the
+name, which made a profile read from a paper impossible to record.
 
 One inconsistency belongs to the paper: the caption of Fig. 3 says 49.8 h of
 Coma Berenices data, while Table 1, the abstract and Sec. 4 say 49.5 h.
