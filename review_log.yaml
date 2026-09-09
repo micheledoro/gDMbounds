@@ -1,0 +1,36 @@
+# Paper-by-paper review log.
+#
+# WRITE HERE, READ IN DATA_REVIEW.md. This file is kept by hand; DATA_REVIEW.md
+# is generated from the data *and* from this log, so anything written directly
+# into that document is erased the next time the tool runs.
+#
+# The unit is the paper, not the bound file: one entry settles every curve
+# transcribed from that paper. Key an entry by the paper's arXiv id where it has
+# one and by its DOI otherwise — exactly the identifier DATA_REVIEW.md prints in
+# the review queue.
+#
+#   <identifier>:
+#     reviewer: initials or name
+#     date: YYYY-MM-DD          # when the paper was read, not when this was typed
+#     verdict: ok | corrected | open
+#     notes: what was checked, and anything the next reader should know
+#     decisions:                # optional, one line per file the review settled
+#       <filename>.ecsv: what was decided and why
+#
+# verdict
+#   ok         read against the paper, every curve matches, nothing to change
+#   corrected  read, something was wrong, and the fix is committed
+#   open       read, something is wrong, and it is not fixed yet — `notes` must
+#              say what, because this is the only record of it
+#
+# What a review checks, per paper:
+#   - the reference, DOI, arXiv id and year name the work actually cited
+#   - each file's `figure` points at the figure the curve came from
+#   - channel, mode, target and confidence agree with that figure
+#   - `statement` distinguishes a measurement from a projection
+#   - `profile` is filled in if the paper states one, and left empty only if it
+#     genuinely does not
+#   - `obs_time` carries a number, not a bare unit
+#   - the curve itself: monotone in mass, no repeated points, no closed contour
+
+reviewed: {}

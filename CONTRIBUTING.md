@@ -59,3 +59,18 @@ CI enforces what can be decided mechanically. It cannot tell you that a curve wa
 transcribed from the wrong figure, or that two files hold the same data because
 one was copied from the other. `DATA_REVIEW.md` collects what is currently known
 to need a human; it is generated, so it is never out of date.
+
+Closing those questions means reading the paper, and that is done one paper at a
+time — 385 bounds come from 57 papers, and one reading settles every curve taken
+from that paper.
+
+```bash
+python tools/fetch_papers.py --list     # the papers, into a gitignored papers/
+python tools/fetch_papers.py
+```
+
+`DATA_REVIEW.md` carries the queue, heaviest paper first. Record what you find in
+`review_log.yaml`, keyed by the paper's arXiv identifier — reviewer, date, verdict
+(`ok`, `corrected`, `open`) and notes — and regenerate. **Write in the log, read in
+the document:** `DATA_REVIEW.md` is rewritten from scratch every time the tool
+runs, so an outcome typed into it is lost.

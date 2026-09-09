@@ -14,7 +14,8 @@ git clone git@github.com:micheledoro/gDMbounds.git
 cd gDMbounds
 conda env create -f environment.yml     # or: pip install -e ".[dev]"
 conda activate gdmbounds
-pytest tests/ -q                        # expect 821 passed, 23 skipped
+pytest tests/ -q                        # expect 848 passed, 23 skipped
+python tools/fetch_papers.py            # the papers, into a gitignored papers/
 ```
 
 `environment.yml` installs the dependencies through **pip inside a conda
@@ -23,8 +24,7 @@ the one the tests run against. Letting conda solve them produced astropy 6.1
 beside numpy 2.5, a pair that cannot import — astropy 6.1 calls `np.in1d`, which
 numpy 2 removed.
 
-**Unmerged work lives on `repo_dev`.** The plotting layer and figure styles are
-there, three commits ahead of `main`, with no pull request opened yet.
+The plotting layer and figure styles are merged; `repo_dev` and `main` are level.
 
 ## People
 
@@ -82,8 +82,11 @@ gdmbounds/
   bounds/<inst>/    385 ECSV files, one per published limit curve
   legends/          controlled vocabularies: instruments, targets, channels
   modelpredictions/ theory curves (thermal relic, GAMBIT scan)
-tests/              run with pytest; 821 passing, 23 skipped
+tests/              run with pytest; 848 passing, 23 skipped
 tools/              migration scripts, the two document generators, the figure gallery
+                    paper_index.py groups the bounds by paper; fetch_papers.py fetches them
+review_log.yaml     hand-kept: which papers have been read against their data
+papers/             the publications themselves, gitignored — README.md is not
 templates/          blank ECSV headers for adding a new bound — with a README
 unconverted/        material the schema cannot hold, including ALP contours
 legacy/             pre-2026 code, not shipped, reference only
@@ -153,7 +156,7 @@ bounds, and a selection doing so should say so.
 
 ## State
 
-All 385 bounds satisfy the schema. `pytest tests/ -q` is green — 821 passing, 23
+All 385 bounds satisfy the schema. `pytest tests/ -q` is green — 848 passing, 23
 skipped. CI runs that, `ruff`, and a wheel build asserting the shipped file set
 matches the source tree exactly.
 
@@ -173,6 +176,12 @@ Two documents are **generated**, never hand-edited:
 - `DATA_REVIEW.md` — everything passing the schema that still needs a human to read
   a paper, from `tools/data_review.py`
 
+`DATA_REVIEW.md` is the one exception to *derived from the data alone*: it also
+merges `review_log.yaml`, which is hand-kept. That is deliberate — a review
+outcome exists only because someone read a paper, so it cannot be regenerated —
+and the split holds the line: **the log is where you write, the document is where
+you read.** Anything typed into the document is lost on the next run.
+
 `tests/test_generated_docs.py` fails if either is stale. Both tools are
 timestamp-free on purpose: regenerating must be a no-op when nothing changed, or
 that test could not exist.
@@ -186,6 +195,35 @@ is why the default colours by legend entry rather than by instrument.
 `Catalog.select` matches the publishing instrument; `Catalog.involves` matches
 participation, so a joint MAGIC+LAT analysis is found by the second and not the
 first — 86 bounds involve MAGIC, 74 are MAGIC's own.
+
+## The paper-by-paper review
+
+Under way, and the unit is **the paper, not the file**: 385 bounds come from **57
+papers**, and reading one settles every curve taken from it. The distribution is
+steep — the heaviest paper accounts for 34 bounds, the heaviest five for 113 — so
+`DATA_REVIEW.md` carries the queue in that order.
+
+- `papers/` holds the publications, gitignored: they are other people's work and
+  are not redistributed from here. `python tools/fetch_papers.py` refills it on a
+  new clone, arXiv only — two papers have no arXiv id and are placed by hand.
+  Files are named `<year>_<instrument>_<identifier>.pdf`, and the tools find one
+  by looking for the identifier anywhere in the name, so renaming is safe.
+- **Papers are keyed by arXiv id**, falling back to the DOI. arXiv first because
+  it is what can be fetched, and because the DOIs have already been seen to
+  disagree between files citing one work.
+- Record the outcome in `review_log.yaml`, keyed by that identifier: reviewer,
+  date, verdict (`ok`, `corrected`, `open`), notes, and optionally a line per file
+  the reading settled — those appear beside the finding they answer.
+  `tests/test_paper_review.py` fails on a malformed entry, on an identifier no
+  paper carries, and on a decision naming a file that paper did not produce.
+- A verdict of `open` **must** carry notes: the log is then the only record of
+  what is still wrong.
+
+One finding already: the H.E.S.S. Fornax bounds cite two DOIs, and the second is
+the paper's **2014 erratum** — legitimate, and the six files taking their curve
+from it say `figure: "Fig. 5 erratum"`. What it opens is which of the other
+Fornax curves come from figures the erratum superseded; arXiv v2 says figures 5
+and 7 were corrected.
 
 ## Open: a "most constraining" selector
 
