@@ -1,0 +1,61 @@
+# %ECSV 0.9
+# %Part of https://github.com/micheledoro/gDMbounds under the
+# %Creative Commons Attribution 4.0 International License, see LICENSE-DATA
+# ---
+# datatype:
+# - {name: mass      , unit: GeV     , datatype: float32 , description: DM mass              }
+# - {name: sigmav    , unit: cm3s-1  , datatype: float32 , description: <sigmav>             }
+# meta: !!omap
+# - {reference:        "Combined searches for dark matter in dwarf spheroidal galaxies observed with the MAGIC telescopes, including new data from Coma Berenices and Draco"}
+# - {authors:          "MAGIC Collaboration: V. A. Acciari  et al."}
+# - {journalref:       "Physics of the Dark Universe"}
+# - {doi:              "10.1016/j.dark.2021.100912"}
+# - {arxiv:            "2111.15009"}
+# - {instrument:       "magic"}
+# - {origin:           "collaboration"}
+# - {statement:        "limit"}
+# - {profile:          "nfw"}
+# - {year:             "2022"}
+# - {source:           "comaberenices"}
+# - {mode:             "ann"}
+# - {channel:          "tt"}
+# - {confidence:       "0.95"}
+# - {dmfraction:       "1"}
+# - {obs_time:         "49.5h"}
+# - {figure:           "Fig. 4"}
+# - {comment:          "Digitised in 2026 from the t-tbar panel of Fig. 4; the channel was absent from the archive though the paper reports all nine"}
+# - {status:           "Done"}
+# schema : astropy -2.0
+
+mass sigmav
+199.8000   9.78900e-22
+232.9000   4.06800e-22
+285.2000   2.26400e-22
+412.8000   1.46200e-22
+506.3000   1.27400e-22
+610.4000   1.13500e-22
+733.4000   1.02500e-22
+898.2000   9.38600e-23
+1100.0000   8.50500e-23
+1373.0000   7.78400e-23
+1682.0000   7.46000e-23
+2039.0000   7.25600e-23
+2481.0000   7.19800e-23
+3038.0000   7.24600e-23
+3721.0000   7.52700e-23
+4645.0000   7.76200e-23
+5689.0000   8.12000e-23
+6968.0000   8.49400e-23
+8488.0000   9.09200e-23
+10280.0000   9.73200e-23
+12590.0000   1.05100e-22
+15710.0000   1.16200e-22
+19250.0000   1.27700e-22
+23340.0000   1.43800e-22
+28890.0000   1.64400e-22
+35150.0000   1.85700e-22
+42380.0000   2.09000e-22
+51500.0000   2.39300e-22
+62960.0000   2.77500e-22
+76350.0000   3.21000e-22
+92250.0000   3.66000e-22

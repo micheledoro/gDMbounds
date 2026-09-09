@@ -62,11 +62,16 @@ reviewed:
       and convert the unit, before comparing anything: `magic_2014_segue1_ann_bb`
       and `..._dec_bb` carry mass in TeV where their twelve siblings use GeV.
 
-      Not errors, but the archive is not complete for this paper. The combined
-      analysis covers 9 channels and only 7 are held — `tt` and `gammagamma` are
-      absent for every target. Ursa Major II has 2 of the 9 where the other three
-      targets have 7. Draco's H0 median curves (Fig. 2) are not transcribed while
-      Coma Berenices' (Fig. 3) are.
+      The archive is being completed as the review goes. The paper reports nine
+      channels for five subjects — the combination and its four dSphs, all drawn
+      in Fig. 4 — which is 45 curves. Thirty were held at the start. `tt` was
+      digitised for all five during this review, and `gammagamma` for the
+      combination, bringing it to 36. Deliberately not taken: the four per-target
+      `gammagamma` curves, MD judging them not worth the transcription — it is a
+      line search and those curves are noise-dominated. Still absent for want of
+      the work: mumu, WW, ZZ, hh and bb for Ursa Major II, which holds three of
+      the nine. Draco's H0 median curves (Fig. 2) are not transcribed while Coma
+      Berenices' (Fig. 3) are.
 
       `profile: nfw` was recorded on all 34, from Sec. 8 — the J-factors of [15]
       assume Navarro-Frenk-White, and the paper names Einasto and Burkert as the
@@ -89,6 +94,21 @@ reviewed:
         Berenices everywhere.
       magic_2022_comaberenices_ann_mumu.ecsv: >
         The correct file of what was an identical pair. Kept unchanged.
+      magic_2022_multidsph_ann_tt.ecsv: >
+        New. Digitised from the t-tbar panel of Fig. 4, with the four dSph curves
+        of the same panel. The channel was absent for every subject though the
+        paper reports it. Each individual lies above this combined curve over the
+        whole range, and the ratios reproduce those of the channels already held:
+        Segue 1 1.61 against 1.59 in bb, Draco 11.2 against 12.7, Coma Berenices
+        9.5 against 9.4. The curves begin at 185-200 GeV, just above the top quark
+        mass, as the channel requires.
+      magic_2022_multidsph_ann_gammagamma.ecsv: >
+        New. Digitised from the gamma-gamma panel of Fig. 4. A line search, so the
+        curve is jagged where the others are smooth, and its limits are two orders
+        of magnitude stronger — which is why the paper sets this channel aside when
+        it names tautau as the one closest to the thermal relic. Two points came
+        out of the digitiser in the wrong order and were sorted into place; both
+        fall smoothly between their neighbours.
       magic_2022_segue1_ann_WW.ecsv: >
         Was stronger than the combined WW limit at every mass, by 1.3 to 3.6, which
         the combination containing it forbids. Re-digitised from Fig. 4; the new
