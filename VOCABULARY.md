@@ -109,8 +109,25 @@ Assigned in `gdmbounds/legends/legend_channels.ecsv` in the `spectrum` column, a
 | `benchmark` | individual benchmark points rather than a curve | 1 | `points` |
 
 
+## Filename qualifiers
+
+The 62 qualifiers a filename may carry after the channel, listed in `gdmbounds/legends/legend_qualifiers.ecsv`. `pytest` rejects one that is not there, and one there that no file uses.
+
+They carry no class: nothing selects on a qualifier, and a taxonomy nobody queries only grows and argues with itself. The one mapping the legend does carry is to a halo profile, because a test uses it — a file whose name says `_nfw` may not declare something else.
+
+| profile | n | qualifiers naming it |
+|---|---|---|
+| `burkert` | 2 | `burkert`, `burkertsr10a6` |
+| `cored` | 3 | `core`, `cored`, `zhaocored` |
+| `cusped` | 2 | `cusp`, `cusped` |
+| `einasto` | 2 | `einasto`, `r16einasto` |
+| `isothermal` | 4 | `ISOmax`, `ISOmean`, `iso`, `r86isothermal` |
+| `nfw` | 10 | `NFWmax`, `NFWmean`, `acnfw`, `nfw`, `nfwdw01`, `nfwrb02`, `nfwrs08`, `nfwsr10a6`, `r150nfw`, `r40nfw` |
+
+The remaining 39 name no profile: `FermiLAT`, `ando`, `benchmark`, `blazquezdoro`, `bonnivard`, `cosmicrays`, `expo`, `final`, `frequentist`, `funk`, `geringersameth`, `ib`, `initial`, `lo`, `lstonly`, `max`, `measured`, `med`, `median`, `min`, `mstonly`, `nfwburkertsr10a10`, `noJerror`, `nobck`, `nosagittarius`, `noseg1`, `notri2`, `oneD`, `sens`, `sigmaveff`, `sommerfeld`, `statreach`, `substructure-high`, `substructure-med`, `theta01deg`, `theta1deg`, `unbinned`, `up`, `v1`.
+
 ---
 
 # Adding a value
 
-A new class goes in `schema.py`, beside the set it joins, with a sentence saying what it means. A new instrument, target or channel goes in the matching legend file **with its class filled in** — `pytest` fails on a blank or misspelled one. Then re-run this tool.
+A new class goes in `schema.py`, beside the set it joins, with a sentence saying what it means. A new instrument, target, channel or qualifier goes in the matching legend file **with its class filled in** — `pytest` fails on a blank or misspelled one. Then re-run this tool.

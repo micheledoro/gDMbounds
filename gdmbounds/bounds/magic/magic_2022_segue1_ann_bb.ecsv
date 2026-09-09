@@ -18,13 +18,14 @@
 # - {instrument:       "magic"}
 # - {origin:           "collaboration"}
 # - {statement:        "limit"}
+# - {profile:          "nfw"}
 # - {year:             "2022"}
 # - {source:           "segue1"}
 # - {mode:             "ann"}
 # - {channel:          "bb"}
 # - {confidence:       "0.95"}
 # - {dmfraction:       "1"}
-# - {obs_time:         "h"}
+# - {obs_time:         "157.9h"}
 # - {figure:           "Fig. 4"}
 # - {comment:          "Added columns for ±1sigma, ±2sigma containment bands [unit: cm3s-1]."}
 # - {status:           "Done"}

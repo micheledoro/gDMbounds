@@ -20,3 +20,10 @@ sandbox/kumar/HDMSpectra/
 
 # Example figures are generated, never committed: see tools/example_figures.py
 figures/
+
+# The papers the bounds were transcribed from. Other people's publications:
+# fetched locally so the source can sit open beside the data during a review,
+# never redistributed from here. `python tools/fetch_papers.py` refills the
+# directory on a new clone.
+papers/*
+!papers/README.md

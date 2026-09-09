@@ -102,3 +102,35 @@ def test_legend_entries_are_distinguishable(legend):
     counts = collections.Counter(str(row[label]) for row in table)
     repeated = {name: n for name, n in counts.items() if n > 1}
     assert not repeated, f"legend_{legend} reuses these labels: {repeated}"
+
+
+def test_every_qualifier_in_a_filename_is_in_the_legend(vocabulary):
+    """The part of a filename that was free-form until it was written down.
+
+    Qualifiers were the one axis with no controlled vocabulary, and the first
+    pass through them turned up `inital` sitting beside three files spelled
+    `initial`. A legend turns that from something you have to notice into
+    something the suite refuses.
+    """
+    unknown = {}
+    for path in schema.iter_bound_files():
+        parts = schema.parse_filename(path)
+        if not parts:
+            continue
+        for qualifier in parts["qualifiers"].split("_"):
+            if qualifier and qualifier not in vocabulary.qualifiers:
+                unknown.setdefault(qualifier, []).append(path.name)
+    assert not unknown, "\n  ".join(
+        f"{q!r}: {len(f)} file(s), e.g. {f[0]}" for q, f in sorted(unknown.items())
+    )
+
+
+def test_no_qualifier_in_the_legend_is_unused(vocabulary):
+    """A legend that outlives its data stops describing it."""
+    used = set()
+    for path in schema.iter_bound_files():
+        parts = schema.parse_filename(path)
+        if parts:
+            used.update(q for q in parts["qualifiers"].split("_") if q)
+    stale = sorted(set(vocabulary.qualifiers) - used)
+    assert not stale, f"in the legend, in no filename: {stale}"

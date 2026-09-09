@@ -21,6 +21,11 @@ def metadata():
     ]
 
 
+@pytest.fixture(scope="module")
+def vocabulary():
+    return schema.load_vocabulary()
+
+
 def test_statement_agrees_with_the_filename(metadata):
     """`_sens` in the name and `statement` in the header must not disagree."""
     wrong = []
@@ -33,17 +38,36 @@ def test_statement_agrees_with_the_filename(metadata):
     assert not wrong, "\n  ".join(wrong)
 
 
-def test_profile_agrees_with_the_filename(metadata):
-    """A declared profile must appear in the filename it was taken from."""
+def test_profile_agrees_with_the_filename(metadata, vocabulary):
+    """Where the filename names a profile, the header must say the same one.
+
+    The implication runs one way only. A filename that says nothing about the
+    halo does not mean none was assumed — every J-factor rests on one — so a
+    profile read from the paper may be recorded even when the name is silent.
+    What must never happen is a file called `_nfw` declaring something else.
+
+    Which qualifier names which profile comes from `legend_qualifiers.ecsv`, not
+    from matching the first four letters of the stem: `iso` is a substring of
+    plenty that has nothing to do with an isothermal halo, and
+    `nfwburkertsr10a10` names two profiles and so, correctly, maps to neither.
+    """
     wrong = []
     for path, meta in metadata:
-        profile = str(meta.get("profile", ""))
-        if not profile:
+        parts = schema.parse_filename(path)
+        if not parts:
             continue
-        stem = path.stem.lower()
-        token = "iso" if profile == "isothermal" else profile[:4]
-        if token not in stem:
-            wrong.append(f"{path.name}: declares profile {profile!r}")
+        named = {
+            vocabulary.qualifier_profile.get(q, "--")
+            for q in parts["qualifiers"].split("_")
+            if q
+        } - {"--"}
+        if not named:
+            continue
+        declared = str(meta.get("profile", ""))
+        if declared not in named:
+            wrong.append(
+                f"{path.name}: the name says {sorted(named)}, the header says {declared!r}"
+            )
     assert not wrong, "\n  ".join(wrong)
 
 

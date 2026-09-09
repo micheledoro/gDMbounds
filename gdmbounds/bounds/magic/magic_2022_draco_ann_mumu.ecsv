@@ -14,13 +14,14 @@
 # - {instrument:       "magic"}
 # - {origin:           "collaboration"}
 # - {statement:        "limit"}
+# - {profile:          "nfw"}
 # - {year:             "2022"}
 # - {source:           "draco"}
 # - {mode:             "ann"}
 # - {channel:          "mumu"}
 # - {confidence:       "0.95"}
 # - {dmfraction:       "1"}
-# - {obs_time:         "h"}
+# - {obs_time:         "52.1h"}
 # - {figure:           "Fig. 4"}
 # - {comment:          ""}
 # - {status:           "Done"}

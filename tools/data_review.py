@@ -10,6 +10,11 @@ decided mechanically — a file parses, its keys are present, its filename agree
 with its header. What is collected here needs someone to read a paper or make a
 judgement, and a test suite cannot do either. The quarantine in
 tests/test_data_quality.py is the machine-enforced subset; this is the reasoning.
+
+Part of this document is not derived from the data at all: `review_log.yaml`
+records which papers have been read against their source, and that can only come
+from a person. It is merged in here so that there is one place to look. Write
+outcomes in the log — anything typed into this document is lost on the next run.
 """
 
 from __future__ import annotations
@@ -20,6 +25,8 @@ import re
 from pathlib import Path
 
 import numpy as np
+import paper_index
+import review_log
 from astropy.io import ascii
 
 from gdmbounds import quality, schema
@@ -85,13 +92,108 @@ def section(title, body):
     return f"## {title}\n\n{body}\n"
 
 
-def bullet_files(names, note=""):
-    body = "\n".join(f"- `{n}`" for n in sorted(names))
+def decided(names, decisions, name_each=False):
+    """The `reviewed:` lines for whichever of these files the log has settled.
+
+    `name_each` where the bullet above covers several files, so that a decision
+    cannot be read against the wrong one.
+    """
+    return [
+        f"  - `{n}` reviewed: {decisions[n]}" if name_each else f"  - reviewed: {decisions[n]}"
+        for n in sorted(names)
+        if n in decisions
+    ]
+
+
+def bullet_files(names, note="", decisions=None):
+    """A list of files, each carrying whatever the review log decided about it.
+
+    An entry that has been settled stays listed: the finding is still true of the
+    data until the file changes, and hiding it would make a decision look like a
+    fix.
+    """
+    decisions = decisions or {}
+    lines = []
+    for name in sorted(names):
+        lines.append(f"- `{name}`")
+        if name in decisions:
+            lines.append(f"  - reviewed: {decisions[name]}")
+    body = "\n".join(lines)
     return body + (f"\n\n{note}" if note else "")
+
+
+def escape(text: str) -> str:
+    """Make a value safe to drop into a table cell."""
+    return str(text).replace("|", "\\|").strip()
+
+
+def review_progress(papers, entries):
+    """The state of the paper-by-paper review: what has been read, what is left.
+
+    The queue is ordered by how many bounds each paper accounts for, because the
+    distribution is steep — the heaviest paper settles 34 of them — and reading
+    in that order clears the archive fastest.
+    """
+    parts = [
+        "# Review progress\n",
+        "*The outcome of reading each paper against its bounds. Merged from "
+        "`review_log.yaml`, which is kept by hand — record a review there and it "
+        "appears here.*\n",
+    ]
+
+    read = [
+        (paper, entries[paper.identifier])
+        for paper in paper_index.by_weight(papers)
+        if paper.identifier in entries
+    ]
+    if read:
+        rows = ["## Papers read\n"]
+        for paper, entry in read:
+            rows.append(
+                f"### {paper.year} — `{paper.identifier}` — {entry.verdict}\n"
+            )
+            rows.append(
+                f"{escape(paper.reference)}  \n"
+                f"{len(paper.files)} bound(s), read by {escape(entry.reviewer)} "
+                f"on {entry.date}.\n"
+            )
+            if entry.notes:
+                rows.append(entry.notes + "\n")
+        parts += rows
+    else:
+        parts.append(
+            "No paper has been recorded as read yet. Nothing below has been "
+            "checked against its source.\n"
+        )
+
+    queue = [p for p in paper_index.by_weight(papers) if p.identifier not in entries]
+    if queue:
+        table = [
+            "## The queue\n",
+            "Heaviest first: the number of bounds a single reading settles.\n",
+            "| bounds | identifier | year | in | paper |",
+            "|---:|---|---:|---|---|",
+        ]
+        for paper in queue:
+            reference = escape(paper.reference)
+            if len(reference) > 70:
+                reference = reference[:69].rstrip() + "…"
+            table.append(
+                f"| {len(paper.files)} | `{escape(paper.identifier)}` | {paper.year} "
+                f"| {', '.join(paper.instruments)} | {reference} |"
+            )
+        parts.append("\n".join(table) + "\n")
+    else:
+        parts.append("## The queue\n\nEvery paper in the database has been read.\n")
+
+    return parts
 
 
 def main() -> int:
     tables = load()
+    papers = paper_index.collect()
+    entries, complaints = review_log.load()
+    decisions = review_log.decisions_by_file(entries)
     curve_issues = collections.defaultdict(list)
     for issue in quality.check_all_curves():
         curve_issues[issue.kind].append((issue.path.name, issue.detail))
@@ -115,10 +217,13 @@ def main() -> int:
             "in each group carries data copied from the other, and the paper decides "
             "which."
         )
+        lines = []
+        for group in duplicates:
+            lines.append("- " + " == ".join(f"`{n}`" for n in group))
+            lines += decided(group, decisions, name_each=True)
         blocking.append(section(
             "Identical curves in different files",
-            "\n".join("- " + " == ".join(f"`{n}`" for n in group) for group in duplicates)
-            + f"\n\n{note}",
+            "\n".join(lines) + f"\n\n{note}",
         ))
 
     contours = curve_issues.get("closed-contour", [])
@@ -132,14 +237,19 @@ def main() -> int:
                 "function of mass: it cannot be plotted or interpolated as one. "
                 "Either the transcription is wrong, or the file should carry "
                 "`statement: \"detection\"`.",
+                decisions,
             ),
         ))
 
     bad_confidence = non_numeric_confidence(tables)
     if bad_confidence:
+        lines = []
+        for name, value in sorted(bad_confidence):
+            lines.append(f"- `{name}` — `{value}`")
+            lines += decided([name], decisions)
         blocking.append(section(
             "`confidence` is not a confidence level",
-            "\n".join(f"- `{n}` — `{v}`" for n, v in sorted(bad_confidence))
+            "\n".join(lines)
             + "\n\nThese files describe a median expected curve, and the word landed "
               "in the confidence field. They are also marked `statement: \"limit\"`, "
               "which an expected curve is not. Both need correcting together, and "
@@ -161,6 +271,7 @@ def main() -> int:
                 "`magic_2022_segue1_ann_bb` that fix was confirmed independently "
                 "upstream. It still edits a published curve, so each file wants a "
                 "decision rather than a sweep.",
+                decisions,
             ),
         ))
 
@@ -174,6 +285,7 @@ def main() -> int:
                 no_figure,
                 "Every bound is a transcription from a published plot or table. "
                 "Without the figure, the curve cannot be checked against its source.",
+                decisions,
             ),
         ))
 
@@ -183,8 +295,25 @@ def main() -> int:
             provenance.append(section(
                 title,
                 bullet_files(missing, "Each still carries the other identifier, so "
-                                      "the source is reachable."),
+                                      "the source is reachable.", decisions),
             ))
+
+    conflicts = paper_index.identifier_conflicts()
+    if conflicts:
+        rows = []
+        for arxiv, dois in conflicts:
+            rows.append(f"- arXiv `{arxiv}` is cited under {len(dois)} DOIs:")
+            rows += [f"  - `{doi}`" for doi in dois]
+        provenance.append(section(
+            "One paper cited under more than one DOI",
+            "\n".join(rows) + "\n\nNot necessarily wrong: a paper and its erratum "
+            "carry different DOIs, and a curve taken from a corrected figure should "
+            "cite the correction. What it does mean is that the figures of that "
+            "paper are not all being read from the same version, so a review has to "
+            "establish which curves the erratum superseded and check that each file "
+            "cites the version it was actually transcribed from. The alternative "
+            "reading — that a DOI was mistyped — leads to the same place.",
+        ))
 
     obs = obs_time_without_a_number(tables, schema.load_vocabulary())
     if obs:
@@ -206,20 +335,32 @@ def main() -> int:
         sum(len(group) for group in duplicates) + len(contours) + len(bad_confidence)
     )
     misordered = {name for name, _ in unsorted} | {name for name, _ in duplicated_mass}
+    reviewed = [p for p in papers.values() if p.identifier in entries]
+    covered = sum(len(p.files) for p in reviewed)
     parts.append(
         "| | |\n|---|---:|\n"
         f"| bounds checked | {len(tables)} |\n"
+        f"| papers behind them | {len(papers)} |\n"
+        f"| papers read against their source | {len(reviewed)} of {len(papers)} |\n"
+        f"| bounds those readings cover | {covered} |\n"
         f"| needing a decision before use | {blocking_count} |\n"
         f"| points out of order or repeated | {len(misordered)} |\n"
         f"| missing a figure reference | {len(no_figure)} |\n"
     )
+    parts += review_progress(papers, entries)
     parts += ["# Needs a decision before the data can be trusted\n", *blocking]
     parts += ["# Needs a decision, lower stakes\n", *ordering]
     parts += ["# Provenance gaps\n", *provenance]
 
     OUT.write_text("\n".join(parts))
     print(f"{OUT.name}: {blocking_count} blocking, {len(misordered)} ordering, "
-          f"{len(no_figure)} without a figure")
+          f"{len(no_figure)} without a figure; "
+          f"{len(reviewed)}/{len(papers)} papers read")
+
+    # Kept out of the document itself: a malformed log is a problem with the log,
+    # not a finding about the data. tests/test_review_log.py fails on these.
+    for complaint in complaints + review_log.check_against(entries, papers):
+        print(f"review_log.yaml: {complaint}")
     return 0
 
 

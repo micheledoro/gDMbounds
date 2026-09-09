@@ -1,0 +1,90 @@
+# %ECSV 0.9
+# %Part of https://github.com/micheledoro/gDMbounds under the
+# %Creative Commons Attribution 4.0 International License, see LICENSE-DATA
+# ---
+# datatype:
+# - {name: mass      , unit: GeV     , datatype: float32 , description: DM mass              }
+# - {name: sigmav    , unit: cm3s-1  , datatype: float32 , description: <sigmav>             }
+# meta: !!omap
+# - {reference:        "Combined searches for dark matter in dwarf spheroidal galaxies observed with the MAGIC telescopes, including new data from Coma Berenices and Draco"}
+# - {authors:          "MAGIC Collaboration: V. A. Acciari  et al."}
+# - {journalref:       "Physics of the Dark Universe"}
+# - {doi:              "10.1016/j.dark.2021.100912"}
+# - {arxiv:            "2111.15009"}
+# - {instrument:       "magic"}
+# - {origin:           "collaboration"}
+# - {statement:        "limit"}
+# - {profile:          "nfw"}
+# - {year:             "2022"}
+# - {source:           "multidsph-4"}
+# - {mode:             "ann"}
+# - {channel:          "gammagamma"}
+# - {confidence:       "0.95"}
+# - {dmfraction:       "1"}
+# - {obs_time:         "354.3h"}
+# - {figure:           "Fig. 4"}
+# - {comment:          "Digitised in 2026 from the gamma-gamma panel of Fig. 4. A line search, so the curve is jagged where the others are smooth. Two points came out of the digitiser in the wrong order and were sorted into place; no value changed"}
+# - {status:           "Done"}
+# schema : astropy -2.0
+
+mass sigmav
+71.6000   2.21800e-26
+80.0000   3.21800e-26
+87.9800   5.91600e-26
+99.3600   8.68800e-26
+109.8000   9.13100e-26
+121.3000   7.38200e-26
+134.0000   5.23400e-26
+148.1000   3.72600e-26
+163.6000   2.78600e-26
+180.7000   2.21600e-26
+199.7000   1.81300e-26
+220.6000   1.69200e-26
+243.8000   1.77800e-26
+269.4000   2.07900e-26
+297.7000   2.40100e-26
+329.0000   2.75100e-26
+363.5000   2.79700e-26
+401.7000   2.70900e-26
+443.8000   2.49700e-26
+490.4000   2.57100e-26
+541.9000   3.04300e-26
+598.9000   3.79900e-26
+661.8000   4.42300e-26
+731.3000   5.80000e-26
+808.2000   6.80900e-26
+893.1000   8.39700e-26
+991.8000   9.63500e-26
+1091.0000   1.19600e-25
+1205.0000   1.25700e-25
+1332.0000   1.18200e-25
+1471.0000   8.48700e-26
+1625.0000   8.45700e-26
+1796.0000   8.88800e-26
+1981.0000   8.54900e-26
+2219.0000   9.07400e-26
+2444.0000   1.00700e-25
+2723.0000   1.35300e-25
+3009.0000   1.81900e-25
+3326.0000   2.18800e-25
+3675.0000   2.25300e-25
+4067.0000   2.20700e-25
+4509.0000   2.52100e-25
+4917.0000   2.90900e-25
+5479.0000   2.91100e-25
+6054.0000   2.86500e-25
+6688.0000   2.27800e-25
+7391.0000   2.59900e-25
+8167.0000   2.89300e-25
+9026.0000   3.82500e-25
+9975.0000   5.55700e-25
+11020.0000   7.97600e-25
+12180.0000   1.15900e-24
+13460.0000   1.74700e-24
+14880.0000   2.27200e-24
+16440.0000   2.99200e-24
+17870.0000   4.07100e-24
+18460.0000   6.22400e-24
+19430.0000   9.80700e-24
+21840.0000   1.33800e-23
+23730.0000   1.69800e-23
