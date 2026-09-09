@@ -14,7 +14,7 @@ git clone git@github.com:micheledoro/gDMbounds.git
 cd gDMbounds
 conda env create -f environment.yml     # or: pip install -e ".[dev]"
 conda activate gdmbounds
-pytest tests/ -q                        # expect 861 passed, 22 skipped
+pytest tests/ -q                        # expect 863 passed, 22 skipped
 python tools/fetch_papers.py            # the papers, into a gitignored papers/
 ```
 
@@ -80,9 +80,9 @@ gdmbounds/
   plotting.py       draws a selection; refuses to mix modes, marks forecasts
   styles.py         palettes and rcParams, applied per call and then withdrawn
   bounds/<inst>/    391 ECSV files, one per published limit curve
-  legends/          controlled vocabularies: instruments, targets, channels
+  legends/          controlled vocabularies: instruments, targets, channels, qualifiers
   modelpredictions/ theory curves (thermal relic, GAMBIT scan)
-tests/              run with pytest; 861 passing, 22 skipped
+tests/              run with pytest; 863 passing, 22 skipped
 tools/              migration scripts, the two document generators, the figure gallery
                     paper_index.py groups the bounds by paper; fetch_papers.py fetches them
 review_log.yaml     hand-kept: which papers have been read against their data
@@ -114,6 +114,18 @@ alongside GeV and TeV.
 not the last: qualifiers such as `_sens`, `_nfw`, `_noJerror`, `_substructure-high`
 follow it and may contain hyphens. Tokens are not all lowercase — `LMC` and `WW`
 are correct as written.
+
+**Qualifiers are a controlled vocabulary**, in `legends/legend_qualifiers.ecsv`:
+62 of them in seven classes, and `pytest` rejects a filename carrying one that is
+not listed. They were free-form until 2026, and the first pass through them found
+`inital` sitting beside three files spelled `initial`.
+
+A qualifier's job is to **distinguish** — `nfwrb02` from `nfwdw01`, the stack with
+Segue 1 from the stack without. What is merely *true* of a curve belongs in the
+header: the MAGIC 2022 bounds all assume NFW and none is called `_nfw`, because
+naming it would separate nothing. `_sens` is the one deliberate exception, kept
+because measured-against-projected must be visible at a glance and is load-bearing
+in both the tests and the plotting.
 
 **Composite identifiers:** a joint analysis is `multi-inst-<a>-<b>`; a stacked
 sample is `multi<class>[-<n>][-<member>...]`. `schema.base_instrument` and
@@ -159,7 +171,7 @@ named in the filename.
 
 ## State
 
-All 391 bounds satisfy the schema. `pytest tests/ -q` is green — 861 passing, 22
+All 391 bounds satisfy the schema. `pytest tests/ -q` is green — 863 passing, 22
 skipped. CI runs that, `ruff`, and a wheel build asserting the shipped file set
 matches the source tree exactly.
 

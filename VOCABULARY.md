@@ -109,8 +109,23 @@ Assigned in `gdmbounds/legends/legend_channels.ecsv` in the `spectrum` column, a
 | `benchmark` | individual benchmark points rather than a curve | 1 | `points` |
 
 
+## Qualifier classes
+
+Assigned in `gdmbounds/legends/legend_qualifiers.ecsv` in the `class` column, and validated against the set below.
+
+| class | meaning | n | members |
+|---|---|---|---|
+| `profile` | the halo density profile assumed for the J-factor | 24 | `ISOmax`, `ISOmean`, `NFWmax`, `NFWmean`, `acnfw`, `burkert`, `burkertsr10a6`, `core`, `cored`, `cusp`, `cusped`, `einasto`, `iso`, `nfw`, `nfwburkertsr10a10`, `nfwdw01`, `nfwrb02`, `nfwrs08`, `nfwsr10a6`, `r150nfw`, `r16einasto`, `r40nfw`, `r86isothermal`, `zhaocored` |
+| `statement` | a measurement against a projection | 1 | `sens` |
+| `band` | which member of a family of curves this is | 6 | `lo`, `max`, `med`, `median`, `min`, `up` |
+| `sample` | which targets a stacked analysis contains | 3 | `nosagittarius`, `noseg1`, `notri2` |
+| `analysis` | how the limit was computed | 11 | `benchmark`, `frequentist`, `ib`, `measured`, `noJerror`, `nobck`, `oneD`, `sigmaveff`, `sommerfeld`, `statreach`, `unbinned` |
+| `setup` | the observation, the instrument configuration, the region | 9 | `FermiLAT`, `cosmicrays`, `expo`, `lstonly`, `mstonly`, `substructure-high`, `substructure-med`, `theta01deg`, `theta1deg` |
+| `provenance` | whose assumption it is, or which revision | 8 | `ando`, `blazquezdoro`, `bonnivard`, `final`, `funk`, `geringersameth`, `initial`, `v1` |
+
+
 ---
 
 # Adding a value
 
-A new class goes in `schema.py`, beside the set it joins, with a sentence saying what it means. A new instrument, target or channel goes in the matching legend file **with its class filled in** — `pytest` fails on a blank or misspelled one. Then re-run this tool.
+A new class goes in `schema.py`, beside the set it joins, with a sentence saying what it means. A new instrument, target, channel or qualifier goes in the matching legend file **with its class filled in** — `pytest` fails on a blank or misspelled one. Then re-run this tool.

@@ -111,17 +111,22 @@ def main() -> int:
             "Channel spectra", "legend_channels.ecsv", "spectrum",
             schema.CHANNEL_SPECTRA, v.channel_spectrum, v.channels,
         ),
+        per_entity_axis(
+            "Qualifier classes", "legend_qualifiers.ecsv", "class",
+            schema.QUALIFIER_CLASSES, v.qualifier_class, v.qualifiers,
+        ),
         "---\n",
         "# Adding a value\n",
         "A new class goes in `schema.py`, beside the set it joins, with a sentence "
-        "saying what it means. A new instrument, target or channel goes in the "
-        "matching legend file **with its class filled in** — `pytest` fails on a "
-        "blank or misspelled one. Then re-run this tool.\n",
+        "saying what it means. A new instrument, target, channel or qualifier goes "
+        "in the matching legend file **with its class filled in** — `pytest` fails "
+        "on a blank or misspelled one. Then re-run this tool.\n",
     ]
     OUT.write_text("\n".join(parts))
     print(f"{OUT.name}: {len(schema.INSTRUMENT_CLASSES)} instrument classes, "
           f"{len(schema.TARGET_CLASSES)} target classes, "
-          f"{len(schema.CHANNEL_SPECTRA)} channel spectra")
+          f"{len(schema.CHANNEL_SPECTRA)} channel spectra, "
+          f"{len(schema.QUALIFIER_CLASSES)} qualifier classes")
     return 0
 
 

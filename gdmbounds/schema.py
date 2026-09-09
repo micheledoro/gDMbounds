@@ -160,9 +160,23 @@ CHANNEL_SPECTRA = {
     "benchmark": "individual benchmark points rather than a curve",
 }
 
-#: ``<instrument>_<year>_<source>_<mode>_<channel>`` plus free-form qualifiers
-#: such as ``_sens``, ``_einasto``, ``_measured``. The channel is the fifth
-#: token, never simply the last one.
+#: What a qualifier after the channel varies. The qualifiers were free-form
+#: until they were collected into ``legends/legend_qualifiers.ecsv``; the first
+#: pass through them found ``inital`` for ``initial``, which is the kind of thing
+#: an uncontrolled vocabulary hides.
+QUALIFIER_CLASSES = {
+    "profile": "the halo density profile assumed for the J-factor",
+    "statement": "a measurement against a projection",
+    "band": "which member of a family of curves this is",
+    "sample": "which targets a stacked analysis contains",
+    "analysis": "how the limit was computed",
+    "setup": "the observation, the instrument configuration, the region",
+    "provenance": "whose assumption it is, or which revision",
+}
+
+#: ``<instrument>_<year>_<source>_<mode>_<channel>`` plus qualifiers such as
+#: ``_sens``, ``_einasto``, ``_measured``. The channel is the fifth token, never
+#: simply the last one.
 FILENAME_RE = re.compile(
     r"^(?P<instrument>[A-Za-z0-9-]+)"
     r"_(?P<year>\d{4})"
@@ -202,9 +216,11 @@ class Vocabulary:
     instruments: dict[str, str] = field(default_factory=dict)
     channels: dict[str, str] = field(default_factory=dict)
     targets: dict[str, str] = field(default_factory=dict)
+    qualifiers: dict[str, str] = field(default_factory=dict)
     instrument_class: dict[str, str] = field(default_factory=dict)
     target_class: dict[str, str] = field(default_factory=dict)
     channel_spectrum: dict[str, str] = field(default_factory=dict)
+    qualifier_class: dict[str, str] = field(default_factory=dict)
 
     def instruments_in(self, klass: str) -> list[str]:
         """Every instrument using a given detection technique."""
@@ -225,6 +241,7 @@ class Vocabulary:
             ("Instrument classes", INSTRUMENT_CLASSES, self.instrument_class),
             ("Target classes", TARGET_CLASSES, self.target_class),
             ("Channel spectra", CHANNEL_SPECTRA, self.channel_spectrum),
+            ("Qualifier classes", QUALIFIER_CLASSES, self.qualifier_class),
         ):
             lines = [title, "-" * len(title)]
             for key, description in classes.items():
@@ -251,13 +268,18 @@ def load_vocabulary() -> Vocabulary:
         "channels", "shortname", "latex", "spectrum"
     )
     targets, target_class = _read_legend("targets", "shortname", "longname", "class")
+    qualifiers, qualifier_class = _read_legend(
+        "qualifiers", "shortname", "comment", "class"
+    )
     return Vocabulary(
         instruments=instruments,
         channels=channels,
         targets=targets,
+        qualifiers=qualifiers,
         instrument_class=instrument_class,
         target_class=target_class,
         channel_spectrum=channel_spectrum,
+        qualifier_class=qualifier_class,
     )
 
 
@@ -432,6 +454,7 @@ def check_vocabulary(vocabulary: Vocabulary | None = None) -> list[Issue]:
         ("instruments", vocabulary.instrument_class, INSTRUMENT_CLASSES, "class"),
         ("targets", vocabulary.target_class, TARGET_CLASSES, "class"),
         ("channels", vocabulary.channel_spectrum, CHANNEL_SPECTRA, "spectrum"),
+        ("qualifiers", vocabulary.qualifier_class, QUALIFIER_CLASSES, "class"),
     ):
         path = LEGENDS_DIR / f"legend_{legend}.ecsv"
         for term, value in sorted(membership.items()):
